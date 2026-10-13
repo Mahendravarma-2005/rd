@@ -1,0 +1,27 @@
+{
+  "name": "vignan-rd-central-portal",
+  "version": "1.0.0",
+  "description": "VFSTR Vignan R&D Central Platform: Unified Portal for Student Publication Tracker, Guideship Management, and ProjectPi Proposals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chart.js": "^4.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.19.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.4.0",
+    "mysql2": "^3.9.7",
+    "nodemailer": "^6.9.13",
+    "remixicon": "^4.9.1",
+    "xlsx": "^0.18.5"
+  },
+  "author": "VFSTR R&D Office",
+  "license": "ISC"
+}

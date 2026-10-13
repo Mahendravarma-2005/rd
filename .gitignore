@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+*/node_modules/
+**/node_modules/
+
+# Environment Variables
+.env
+*.env
+**/.env
+!.env.example
+!**/.env.example
+
+# Uploaded Files and Proofs
+uploads/proofs/*
+!uploads/proofs/.gitkeep
+
+# Embedded Git Backups
+.git_backup
+**/.git_backup
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS Generated Files
+.DS_Store
+Thumbs.db

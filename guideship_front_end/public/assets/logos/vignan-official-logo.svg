@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 130" width="100%" height="100%">
+  <defs>
+    <!-- Gradients & Filters -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="wheelBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Left: Official Vignan Shield Crest -->
+  <g transform="translate(10, 10)" filter="url(#subtleGlow)">
+    <!-- Outer Shield Frame -->
+    <path d="M 12 12 Q 55 24 98 12 Q 94 65 55 102 Q 16 65 12 12 Z" 
+          fill="none" stroke="#8b5cf6" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 16 16 Q 55 26 94 16 Q 90 62 55 96 Q 20 62 16 16 Z" 
+          fill="#ffffff" fill-opacity="0.08"/>
+
+    <!-- Purple circular sector fill -->
+    <circle cx="55" cy="52" r="32" fill="url(#shieldGrad)" />
+
+    <!-- Blue 5-Spoke Wheel -->
+    <!-- Center Hub & Star -->
+    <circle cx="55" cy="52" r="14" fill="#0369a1" stroke="#ffffff" stroke-width="2"/>
+    <!-- 5-Point Star -->
+    <path d="M 55 43 L 57.5 49 L 63.5 49.5 L 59 53.5 L 60.5 59.5 L 55 56 L 49.5 59.5 L 51 53.5 L 46.5 49.5 L 52.5 49 Z" 
+          fill="#ffffff"/>
+
+    <!-- Wheel Spokes -->
+    <!-- Top Spoke -->
+    <path d="M 52 38 L 52 20 L 58 20 L 58 38 Z" fill="url(#wheelBlue)" stroke="#ffffff" stroke-width="1.2"/>
+    <!-- Top Right Spoke -->
+    <path d="M 66 43 L 83 31 L 87 36 L 69 48 Z" fill="url(#wheelBlue)" stroke="#ffffff" stroke-width="1.2"/>
+    <!-- Bottom Right Spoke -->
+    <path d="M 64 62 L 75 80 L 70 83 L 59 65 Z" fill="url(#wheelBlue)" stroke="#ffffff" stroke-width="1.2"/>
+    <!-- Bottom Left Spoke -->
+    <path d="M 46 62 L 35 80 L 40 83 L 51 65 Z" fill="url(#wheelBlue)" stroke="#ffffff" stroke-width="1.2"/>
+    <!-- Top Left Spoke -->
+    <path d="M 44 43 L 27 31 L 23 36 L 41 48 Z" fill="url(#wheelBlue)" stroke="#ffffff" stroke-width="1.2"/>
+
+    <!-- Spoke Outer Ring Rim -->
+    <circle cx="55" cy="52" r="32" fill="none" stroke="#0284c7" stroke-width="3"/>
+  </g>
+
+  <!-- Vertical Divider Line -->
+  <line x1="130" y1="18" x2="130" y2="108" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Right: VIGNAN'S UNIVERSITY Typography -->
+  <!-- "VIGNAN'S" in Iconic University Crimson Red -->
+  <text x="148" y="46" 
+        font-family="'Amazon Ember', 'Arial Black', -apple-system, sans-serif" 
+        font-size="38" 
+        font-weight="900" 
+        letter-spacing="2" 
+        fill="#e11d48">VIGNAN'S</text>
+
+  <!-- "Foundation for Science, Technology & Research" -->
+  <text x="150" y="66" 
+        font-family="'Amazon Ember', 'Plus Jakarta Sans', sans-serif" 
+        font-size="14.5" 
+        font-weight="600" 
+        letter-spacing="0.4" 
+        fill="#e2e8f0">Foundation for Science, Technology &amp; Research</text>
+
+  <!-- Horizontal Rule Line -->
+  <line x1="150" y1="74" x2="505" y2="74" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
+
+  <!-- "UNIVERSITY" -->
+  <text x="150" y="100" 
+        font-family="'Amazon Ember', 'Arial', sans-serif" 
+        font-size="28" 
+        font-weight="300" 
+        letter-spacing="9" 
+        fill="#f8fafc">UNIVERSITY</text>
+
+  <!-- UGC Act Subtext -->
+  <text x="325" y="118" 
+        text-anchor="middle"
+        font-family="'Amazon Ember', sans-serif" 
+        font-size="10.5" 
+        font-weight="500" 
+        letter-spacing="0.5" 
+        fill="#fbbf24">(Estd u/s 3 of UGC Act of 1956)</text>
+</svg>

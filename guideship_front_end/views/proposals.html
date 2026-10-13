@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFSTR Guideship - Supervisor Recognition Proposals</title>
+    <!-- Amazon Ember Font -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/amazon-ember">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Central Stylesheet -->
+    <link rel="stylesheet" href="/guideship-assets/css/style.css">
+    
+    <style>
+        .tabs-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.65rem 1.3rem;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+            border-color: var(--border-amber);
+            background-color: var(--bg-tertiary);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #ffffff;
+            border-color: var(--accent-light);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+        }
+
+        .proposal-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .proposal-detail-item {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.85rem 1.1rem;
+        }
+
+        .proposal-detail-item label {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .proposal-detail-item span {
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Sticky Glassmorphic Navbar -->
+        <!-- Left Sidebar Panel -->
+    <aside>
+        <!-- Logo Brand -->
+        <div class="logo-container">
+            <img src="/guideship-assets/assets/logos/vignan-logo.png" alt="Vignan's University" style="height: 38px; width: auto; object-fit: contain; background: #ffffff; padding: 2px 8px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);">
+            <div style="display: flex; flex-direction: column; line-height: 1.15;">
+                <span style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; background: linear-gradient(120deg, #ffffff 30%, #fde68a 85%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Guideship</span>
+                <span style="font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent-light);">Dean R&D</span>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <ul class="nav-menu">
+            <!-- 1. Research Guides -->
+            <li class="nav-link-item ">
+                <a href="/dashboard"><i class="fa-solid fa-users-gear"></i> <span>Research Guides</span></a>
+            </li>
+            
+            <!-- 2. Proposals -->
+            <li class="nav-link-item active">
+                <a href="/recognition/proposals">
+                    <i class="fa-solid fa-file-signature"></i> <span>Proposals</span>
+                    <% if (typeof pendingProposalsCount !== 'undefined' && pendingProposalsCount > 0) { %>
+                        <span class="badge badge-amber" style="margin-left: auto; padding: 0.15rem 0.5rem; font-size: 0.7rem;"><%= pendingProposalsCount %></span>
+                    <% } %>
+                </a>
+            </li>
+            
+            <!-- 3. R&D Analytics -->
+            <li class="nav-link-item ">
+                <a href="/analytics"><i class="fa-solid fa-chart-pie"></i> <span>R&D Analytics</span></a>
+            </li>
+            
+            <!-- 4. Settings -->
+            <li class="nav-link-item ">
+                <a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Settings</span></a>
+            </li>
+
+            <!-- 5. Central Portal Home -->
+            <li class="nav-link-item">
+                <a href="/" target="_blank"><i class="fa-solid fa-house"></i> <span>Central Portal</span></a>
+            </li>
+        </ul>
+
+        <!-- User Profile Section -->
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <%= admin ? admin.name.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'VF' %>
+            </div>
+            <div class="user-details">
+                <span class="user-name"><%= admin ? admin.name : 'Dean R&D' %></span>
+                <span class="user-role"><%= admin ? (admin.role.includes('Dean') ? 'Dean R&D' : admin.role) : 'Dean\'s Office' %></span>
+            </div>
+            <a href="/admin/logout" class="btn-logout" title="Log Out"><i class="fa-solid fa-power-off"></i></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <div class="univ-banner-tag">
+            <i class="fa-solid fa-building-columns"></i> VFSTR Academic Council • Ph.D. Supervisor Recognition
+        </div>
+
+        <header>
+            <div class="header-title">
+                <h1>Supervisor Recognition Proposals</h1>
+                <p>Audit and evaluate formal recognition applications submitted by faculty members.</p>
+            </div>
+        </header>
+
+        <!-- Status Filter Tabs -->
+        <div class="tabs-header">
+            <button class="tab-btn active" id="btn-pending" onclick="filterProposals('Pending')">
+                <i class="fa-solid fa-clock"></i> Pending Review (<%= (typeof proposals !== 'undefined') ? proposals.filter(p => p.status === 'Pending').length : 0 %>)
+            </button>
+            <button class="tab-btn" id="btn-approved" onclick="filterProposals('Approved')">
+                <i class="fa-solid fa-circle-check"></i> Approved Guides (<%= (typeof proposals !== 'undefined') ? proposals.filter(p => p.status === 'Approved').length : 0 %>)
+            </button>
+            <button class="tab-btn" id="btn-rejected" onclick="filterProposals('Rejected')">
+                <i class="fa-solid fa-circle-xmark"></i> Rejected Proposals (<%= (typeof proposals !== 'undefined') ? proposals.filter(p => p.status === 'Rejected').length : 0 %>)
+            </button>
+        </div>
+
+        <!-- Table Grid -->
+        <section class="table-container">
+            <table id="proposalsTable">
+                <thead>
+                    <tr>
+                        <th>Date Applied</th>
+                        <th>Emp. ID</th>
+                        <th>Faculty Name</th>
+                        <th>Designation</th>
+                        <th>Department</th>
+                        <th>Ph.D. Institute</th>
+                        <th>Score</th>
+                        <th>Dean Remarks</th>
+                        <th>Status</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (typeof proposals === 'undefined' || proposals.length === 0) { %>
+                        <tr>
+                            <td colspan="10" style="text-align: center; color: var(--text-secondary); padding: 3.5rem 0;">
+                                <i class="fa-solid fa-inbox" style="font-size: 2.2rem; display: block; margin-bottom: 0.75rem; color: var(--accent-light); opacity: 0.6;"></i>
+                                No supervisor recognition proposals found.
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <% proposals.forEach(p => { %>
+                            <tr class="proposal-row" data-status="<%= p.status %>" <% if (p.status !== 'Pending') { %>style="display: none;"<% } %>>
+                                <td><%= p.created_at ? new Date(p.created_at).toLocaleDateString('en-GB') : '-' %></td>
+                                <td><strong style="color: var(--accent-light);"><%= p.employee_id %></strong></td>
+                                <td style="font-weight: 600;"><%= p.faculty_name %></td>
+                                <td><%= p.designation %></td>
+                                <td><%= p.department %></td>
+                                <td><%= p.phd_institute %></td>
+                                <td><strong><%= p.status !== 'Pending' ? (p.score_points || '-') : '-' %></strong></td>
+                                <td>
+                                    <span style="font-size: 0.85rem;" title="<%= p.dean_remarks || '' %>">
+                                        <%= p.status !== 'Pending' ? (p.dean_remarks ? (p.dean_remarks.length > 25 ? p.dean_remarks.substring(0, 25) + '...' : p.dean_remarks) : 'None') : '-' %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <% if (p.status === 'Pending') { %>
+                                        <span class="badge badge-warning">Pending</span>
+                                    <% } else if (p.status === 'Approved') { %>
+                                        <span class="badge badge-success">Approved</span>
+                                    <% } else { %>
+                                        <span class="badge badge-danger">Rejected</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                        <button class="action-btn" title="View Proposal Dossier" 
+                                            data-proposal="<%= encodeURIComponent(JSON.stringify(p)) %>"
+                                            onclick="openProposalModal(JSON.parse(decodeURIComponent(this.dataset.proposal)))">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Details View Modal -->
+    <div class="modal" id="proposalModal">
+        <div class="modal-content" style="max-width: 820px;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-file-signature"></i> Supervisor Recognition Dossier</h2>
+                <button class="close-modal" onclick="closeProposalModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding-top: 1.5rem;">
+                <div class="scholar-section-title"><i class="fa-solid fa-user-tie"></i> Faculty Credentials</div>
+                
+                <div class="proposal-details-grid">
+                    <div class="proposal-detail-item">
+                        <label>Faculty Name</label>
+                        <span id="pName">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>Employee ID</label>
+                        <span id="pEmpId">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>E-Mail Address</label>
+                        <span id="pEmail">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>Designation</label>
+                        <span id="pDesignation">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>Grade Level</label>
+                        <span id="pLevel">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>Date of Joining</label>
+                        <span id="pJoiningDate">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>Department</label>
+                        <span id="pDepartment">-</span>
+                    </div>
+                </div>
+
+                <div class="scholar-section-title" style="margin-top: 2rem;"><i class="fa-solid fa-graduation-cap"></i> Ph.D. Information</div>
+                
+                <div class="proposal-details-grid" style="margin-bottom: 1.5rem;">
+                    <div class="proposal-detail-item">
+                        <label>Awarding University / Institute</label>
+                        <span id="pPhdInstitute">-</span>
+                    </div>
+                    <div class="proposal-detail-item">
+                        <label>Month & Year of Award</label>
+                        <span id="pPhdAwardDate">-</span>
+                    </div>
+                </div>
+
+                <div class="scholar-section-title"><i class="fa-solid fa-book-bookmark"></i> Enclosed Research Publications</div>
+                
+                <div id="pPublicationsList" style="display: flex; flex-direction: column; gap: 1rem; max-height: 350px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.5rem;">
+                    <!-- Publications cards populate here -->
+                </div>
+                
+                <!-- Evaluation Section -->
+                <div id="evaluationSection"></div>
+                
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                    <button class="btn btn-secondary" onclick="printProposalDetails()"><i class="fa-solid fa-print"></i> Print Application</button>
+                    <button class="btn btn-secondary" onclick="closeProposalModal()">Close</button>
+                    <span id="actionFormsContainer"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterProposals(status) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + status.toLowerCase()).classList.add('active');
+
+            const rows = document.querySelectorAll('.proposal-row');
+            rows.forEach(row => {
+                if (row.getAttribute('data-status') === status) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function openProposalModal(p) {
+            document.getElementById('pName').innerText = p.faculty_name;
+            document.getElementById('pEmpId').innerText = p.employee_id;
+            document.getElementById('pEmail').innerText = p.email;
+            document.getElementById('pDesignation').innerText = p.designation;
+            document.getElementById('pLevel').innerText = p.level || 'N/A';
+            document.getElementById('pJoiningDate').innerText = p.joining_date ? new Date(p.joining_date).toLocaleDateString('en-GB') : 'N/A';
+            document.getElementById('pDepartment').innerText = p.department;
+            document.getElementById('pPhdInstitute').innerText = p.phd_institute || 'N/A';
+            document.getElementById('pPhdAwardDate').innerText = p.phd_award_date || 'N/A';
+            
+            const pubListContainer = document.getElementById('pPublicationsList');
+            pubListContainer.innerHTML = '';
+            
+            if (p.publications && p.publications.length > 0) {
+                p.publications.forEach((pub, idx) => {
+                    const pubCard = document.createElement('div');
+                    pubCard.className = 'proposal-detail-item';
+                    pubCard.style.display = 'block';
+                    pubCard.style.backgroundColor = 'var(--bg-secondary)';
+                    pubCard.style.border = '1px solid var(--border-amber)';
+                    pubCard.style.borderRadius = '12px';
+                    pubCard.style.padding = '1.25rem';
+                    
+                    pubCard.innerHTML = `
+                        <div style="font-weight: 700; color: var(--accent-light); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem; font-size: 0.95rem;">
+                            <i class="fa-solid fa-file-lines"></i> Paper #${idx + 1}: ${pub.paper_title || 'Untitled'}
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem; text-align: left;">
+                            <div><strong>Authors:</strong> ${pub.authors || pub.authorship_type || 'N/A'}</div>
+                            <div><strong>Journal:</strong> ${pub.journal_name || pub.journal_title || 'N/A'}</div>
+                            <div><strong>DOI:</strong> ${pub.doi || 'N/A'}</div>
+                            <div><strong>Index:</strong> <span class="badge badge-amber" style="padding: 0.2rem 0.5rem;">${pub.indexing || pub.paper_index || 'SCI'}</span></div>
+                        </div>
+                    `;
+                    pubListContainer.appendChild(pubCard);
+                });
+            } else {
+                pubListContainer.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 1.5rem 0;">No publications enclosed.</div>`;
+            }
+
+            const actionContainer = document.getElementById('actionFormsContainer');
+            const evalContainer = document.getElementById('evaluationSection');
+            actionContainer.innerHTML = '';
+            evalContainer.innerHTML = '';
+            
+            if (p.status === 'Pending') {
+                evalContainer.innerHTML = `
+                    <div class="scholar-section-title" style="margin-top: 2rem;"><i class="fa-solid fa-square-poll-vertical"></i> Proposal Evaluation & Approval</div>
+                    <div class="form-row" style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 1; min-width: 140px;">
+                            <label for="evalScore">Score Points (0 - 100)</label>
+                            <input type="number" id="evalScore" placeholder="e.g. 85" min="0" max="100" value="85" required>
+                        </div>
+                        <div class="form-group" style="flex: 1; min-width: 160px;">
+                            <label for="evalAllocatedDate">Allocation Date</label>
+                            <input type="date" id="evalAllocatedDate" value="${new Date().toISOString().split('T')[0]}" required>
+                        </div>
+                        <div class="form-group" style="flex: 2; min-width: 240px;">
+                            <label for="evalRemarks">Dean R&D Assessment Remarks</label>
+                            <input type="text" id="evalRemarks" placeholder="e.g. Approved. Fulfills all criteria." value="Recommended for Guideship" required>
+                        </div>
+                    </div>
+                `;
+                actionContainer.innerHTML = `
+                    <form id="rejectForm" action="/recognition/proposal/evaluate" method="POST" style="display:inline;">
+                        <input type="hidden" name="application_id" value="${p.id}">
+                        <input type="hidden" name="action" value="reject">
+                        <input type="hidden" name="score_points" id="reject_score">
+                        <input type="hidden" name="remarks" id="reject_remarks">
+                        <button type="button" class="btn btn-danger" onclick="submitEval('reject')"><i class="fa-solid fa-xmark"></i> Reject</button>
+                    </form>
+                    <form id="acceptForm" action="/recognition/proposal/evaluate" method="POST" style="display:inline;">
+                        <input type="hidden" name="application_id" value="${p.id}">
+                        <input type="hidden" name="action" value="approve">
+                        <input type="hidden" name="score_points" id="accept_score">
+                        <input type="hidden" name="remarks" id="accept_remarks">
+                        <input type="hidden" name="allocated_date" id="accept_allocated_date">
+                        <button type="button" class="btn btn-primary" onclick="submitEval('approve')"><i class="fa-solid fa-check"></i> Accept & Recognize Guide</button>
+                    </form>
+                `;
+            } else {
+                evalContainer.innerHTML = `
+                    <div class="scholar-section-title" style="margin-top: 2rem;"><i class="fa-solid fa-square-poll-vertical"></i> Proposal Evaluation (Processed)</div>
+                    <div class="form-row" style="margin-bottom: 1.5rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Status</label>
+                            <input type="text" value="${p.status}" readonly>
+                        </div>
+                        <div class="form-group" style="flex: 2;">
+                            <label>Dean's Evaluation Remarks</label>
+                            <input type="text" value="${p.remarks || p.dean_remarks || 'Processed.'}" readonly>
+                        </div>
+                    </div>
+                `;
+                actionContainer.innerHTML = '';
+            }
+
+            document.getElementById('proposalModal').classList.add('active');
+        }
+
+        function submitEval(action) {
+            const scoreVal = document.getElementById('evalScore').value;
+            const remarksVal = document.getElementById('evalRemarks').value;
+            
+            if (!scoreVal) {
+                alert("Please enter the score points obtained.");
+                document.getElementById('evalScore').focus();
+                return;
+            }
+            if (parseInt(scoreVal) < 0 || parseInt(scoreVal) > 100) {
+                alert("Score points must be between 0 and 100.");
+                document.getElementById('evalScore').focus();
+                return;
+            }
+            if (!remarksVal.trim()) {
+                alert("Please enter the evaluation remarks.");
+                document.getElementById('evalRemarks').focus();
+                return;
+            }
+
+            if (action === 'approve') {
+                const allocDateEl = document.getElementById('evalAllocatedDate');
+                const allocDateVal = allocDateEl ? allocDateEl.value : '';
+                document.getElementById('accept_allocated_date').value = allocDateVal || new Date().toISOString().split('T')[0];
+                if (confirm('Are you sure you want to approve this faculty member as a Research Guide?')) {
+                    document.getElementById('accept_score').value = scoreVal;
+                    document.getElementById('accept_remarks').value = remarksVal;
+                    document.getElementById('acceptForm').submit();
+                }
+            } else if (action === 'reject') {
+                if (confirm('Are you sure you want to reject this supervisor application?')) {
+                    document.getElementById('reject_score').value = scoreVal;
+                    document.getElementById('reject_remarks').value = remarksVal;
+                    document.getElementById('rejectForm').submit();
+                }
+            }
+        }
+
+        function printProposalDetails() {
+            window.print();
+        }
+
+        function closeProposalModal() {
+            document.getElementById('proposalModal').classList.remove('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('proposalModal');
+            if (e.target === modal) {
+                closeProposalModal();
+            }
+        });
+    </script>
+</body>
+</html>

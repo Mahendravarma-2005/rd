@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFSTR Guideship - Research Guides Directory</title>
+    <!-- Amazon Ember Font -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/amazon-ember">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Central Stylesheet -->
+    <link rel="stylesheet" href="/guideship-assets/css/style.css">
+</head>
+<body>
+
+    <!-- Top Sticky Glassmorphic Navbar -->
+        <!-- Left Sidebar Panel -->
+    <aside>
+        <!-- Logo Brand -->
+        <div class="logo-container">
+            <img src="/guideship-assets/assets/logos/vignan-logo.png" alt="Vignan's University" style="height: 38px; width: auto; object-fit: contain; background: #ffffff; padding: 2px 8px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);">
+            <div style="display: flex; flex-direction: column; line-height: 1.15;">
+                <span style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; background: linear-gradient(120deg, #ffffff 30%, #fde68a 85%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Guideship</span>
+                <span style="font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent-light);">Dean R&D</span>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <ul class="nav-menu">
+            <!-- 1. Research Guides -->
+            <li class="nav-link-item active">
+                <a href="/dashboard"><i class="fa-solid fa-users-gear"></i> <span>Research Guides</span></a>
+            </li>
+            
+            <!-- 2. Proposals -->
+            <li class="nav-link-item ">
+                <a href="/recognition/proposals">
+                    <i class="fa-solid fa-file-signature"></i> <span>Proposals</span>
+                    <% if (typeof pendingProposalsCount !== 'undefined' && pendingProposalsCount > 0) { %>
+                        <span class="badge badge-amber" style="margin-left: auto; padding: 0.15rem 0.5rem; font-size: 0.7rem;"><%= pendingProposalsCount %></span>
+                    <% } %>
+                </a>
+            </li>
+            
+            <!-- 3. R&D Analytics -->
+            <li class="nav-link-item ">
+                <a href="/analytics"><i class="fa-solid fa-chart-pie"></i> <span>R&D Analytics</span></a>
+            </li>
+            
+            <!-- 4. Settings -->
+            <li class="nav-link-item ">
+                <a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Settings</span></a>
+            </li>
+
+            <!-- 5. Central Portal Home -->
+            <li class="nav-link-item">
+                <a href="/" target="_blank"><i class="fa-solid fa-house"></i> <span>Central Portal</span></a>
+            </li>
+        </ul>
+
+        <!-- User Profile Section -->
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <%= admin ? admin.name.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'VF' %>
+            </div>
+            <div class="user-details">
+                <span class="user-name"><%= admin ? admin.name : 'Dean R&D' %></span>
+                <span class="user-role"><%= admin ? (admin.role.includes('Dean') ? 'Dean R&D' : admin.role) : 'Dean\'s Office' %></span>
+            </div>
+            <a href="/admin/logout" class="btn-logout" title="Log Out"><i class="fa-solid fa-power-off"></i></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <div class="univ-banner-tag">
+            <i class="fa-solid fa-building-columns"></i> VFSTR Deemed to be University • Doctoral Research Wing
+        </div>
+
+        <header>
+            <div class="header-title">
+                <h1>Research Supervisors Directory</h1>
+                <p>Manage approved Ph.D. research guides, allocated scholar quotas, and academic disciplines.</p>
+            </div>
+            <div class="actions-group">
+                <a href="/guide/register" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Register Guide</a>
+            </div>
+        </header>
+
+        <!-- Stats Overview Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Recognized Guides</p>
+                    <p class="stat-value"><%= (typeof stats !== 'undefined' && stats.totalGuides) ? stats.totalGuides : (typeof guides !== 'undefined' ? guides.length : 0) %></p>
+                </div>
+                <div class="stat-icon amber">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Full-time Scholars</p>
+                    <p class="stat-value"><%= (typeof stats !== 'undefined' && stats.totalFt) ? stats.totalFt : 0 %></p>
+                </div>
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Part-time Scholars</p>
+                    <p class="stat-value"><%= (typeof stats !== 'undefined' && stats.totalPt) ? stats.totalPt : 0 %></p>
+                </div>
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-user-clock"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Active in Service</p>
+                    <p class="stat-value"><%= (typeof stats !== 'undefined' && stats.activeGuides) ? stats.activeGuides : 0 %></p>
+                </div>
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Table Section -->
+        <section class="table-container">
+            <div class="table-header">
+                <h2 class="table-title"><i class="fa-solid fa-id-card"></i> Recognized Supervisors Roster</h2>
+                                <div class="filter-group" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Search by name, employee ID, dept..." oninput="filterTable()">
+                    </div>
+                    
+                    <div class="filter-select-wrapper" style="display: flex; gap: 0.5rem; align-items: center;">
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; white-space: nowrap;"><i class="fa-solid fa-user-graduate"></i> FT Scholars:</label>
+                        <select id="ftOperator" onchange="filterTable()" style="background-color: var(--bg-tertiary, #1e2942); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; padding: 0.5rem; outline: none; font-size: 0.85rem; cursor: pointer;">
+                            <option value="all">All</option>
+                            <option value="gt">&gt;</option>
+                            <option value="lt">&lt;</option>
+                            <option value="eq">=</option>
+                        </select>
+                        <input type="number" id="ftLimitVal" value="4" min="0" oninput="filterTable()" style="width: 55px; background-color: var(--bg-tertiary, #1e2942); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; padding: 0.5rem; outline: none; font-size: 0.85rem; text-align: center; transition: opacity 0.2s;">
+                    </div>
+
+                    <div class="filter-select-wrapper" style="display: flex; gap: 0.5rem; align-items: center;">
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; white-space: nowrap;"><i class="fa-solid fa-user-graduate"></i> PT Scholars:</label>
+                        <select id="ptOperator" onchange="filterTable()" style="background-color: var(--bg-tertiary, #1e2942); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; padding: 0.5rem; outline: none; font-size: 0.85rem; cursor: pointer;">
+                            <option value="all">All</option>
+                            <option value="gt">&gt;</option>
+                            <option value="lt">&lt;</option>
+                            <option value="eq">=</option>
+                        </select>
+                        <input type="number" id="ptLimitVal" value="5" min="0" oninput="filterTable()" style="width: 55px; background-color: var(--bg-tertiary, #1e2942); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; padding: 0.5rem; outline: none; font-size: 0.85rem; text-align: center; transition: opacity 0.2s;">
+                    </div>
+                </div>
+            </div>
+            
+            <table id="guidesTable">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Supervisor Name</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>FT Scholars</th>
+                        <th>PT Scholars</th>
+                        <th>In Service</th>
+                        <th>Allocation Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (typeof guides !== 'undefined' && guides.length > 0) { %>
+                        <% guides.forEach(function(guide) { %>
+                            <tr data-dept="<%= guide.department %>" data-service="<%= guide.in_service %>" data-ft="<%= guide.ft_count || 0 %>" data-pt="<%= guide.pt_count || 0 %>">
+                                <td><strong style="color: var(--accent-light);"><%= guide.employee_id %></strong></td>
+                                <td style="font-weight: 600;"><%= guide.guide_name %></td>
+                                <td><%= guide.department %></td>
+                                <td><%= guide.designation %></td>
+                                <td><span class="badge badge-count"><%= guide.ft_count || 0 %> FT</span></td>
+                                <td><span class="badge badge-count"><%= guide.pt_count || 0 %> PT</span></td>
+                                <td>
+                                    <% if (guide.in_service === 'Yes') { %>
+                                        <span class="badge badge-success"><i class="fa-solid fa-check"></i> Active</span>
+                                    <% } else { %>
+                                        <span class="badge badge-danger"><i class="fa-solid fa-xmark"></i> Inactive</span>
+                                    <% } %>
+                                </td>
+                                <td><%= guide.allocated_date ? new Date(guide.allocated_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A' %></td>
+                                <td class="actions-cell">
+                                    <button class="action-btn" title="View Guide Profile" onclick="openGuideModal('<%= guide.employee_id %>')">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <a href="/guide/edit/<%= guide.employee_id %>" class="action-btn" title="Edit Guide Profile">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 3rem 0;">
+                                <i class="fa-solid fa-users" style="font-size: 2rem; display: block; margin-bottom: 0.5rem; color: var(--accent-light); opacity: 0.5;"></i>
+                                No research guides currently found in database.
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>No research supervisors match your search filter.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Guide Details Modal Dialog -->
+    <div class="modal" id="guideModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-user-doctor"></i> Research Guide Dossier</h2>
+                <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-light);"></i>
+                    <p style="margin-top: 1rem; color: var(--text-secondary);">Loading supervisor profile...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast Alert -->
+    <div class="toast" id="saveToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-content">
+            <span class="toast-title">Operation Successful</span>
+            <span class="toast-message">Database record saved successfully.</span>
+        </div>
+    </div>
+
+        <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('success') === 'true') {
+                const toast = document.getElementById('saveToast');
+                if (toast) {
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 3500);
+                }
+            }
+        });
+
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const ftOperator = document.getElementById('ftOperator').value;
+            const ftLimitVal = parseInt(document.getElementById('ftLimitVal').value || '0');
+            const ptOperator = document.getElementById('ptOperator').value;
+            const ptLimitVal = parseInt(document.getElementById('ptLimitVal').value || '0');
+            
+            // Toggle input disable state based on operator select value
+            const ftLimitInput = document.getElementById('ftLimitVal');
+            if (ftLimitInput) {
+                if (ftOperator === 'all') {
+                    ftLimitInput.disabled = true;
+                    ftLimitInput.style.opacity = '0.35';
+                    ftLimitInput.style.cursor = 'not-allowed';
+                } else {
+                    ftLimitInput.disabled = false;
+                    ftLimitInput.style.opacity = '1';
+                    ftLimitInput.style.cursor = 'text';
+                }
+            }
+
+            const ptLimitInput = document.getElementById('ptLimitVal');
+            if (ptLimitInput) {
+                if (ptOperator === 'all') {
+                    ptLimitInput.disabled = true;
+                    ptLimitInput.style.opacity = '0.35';
+                    ptLimitInput.style.cursor = 'not-allowed';
+                } else {
+                    ptLimitInput.disabled = false;
+                    ptLimitInput.style.opacity = '1';
+                    ptLimitInput.style.cursor = 'text';
+                }
+            }
+
+            const rows = document.querySelectorAll('#guidesTable tbody tr');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                if (row.cells.length === 1 && row.cells[0].colSpan > 1) return;
+                
+                const text = row.innerText.toLowerCase();
+                const ftVal = parseInt(row.getAttribute('data-ft') || '0');
+                const ptVal = parseInt(row.getAttribute('data-pt') || '0');
+
+                // 1. Search text filter
+                const matchesSearch = text.includes(search);
+
+                // 2. FT filter
+                let matchesFt = true;
+                if (ftOperator === 'gt') matchesFt = ftVal > ftLimitVal;
+                else if (ftOperator === 'lt') matchesFt = ftVal < ftLimitVal;
+                else if (ftOperator === 'eq') matchesFt = ftVal === ftLimitVal;
+
+                // 3. PT filter
+                let matchesPt = true;
+                if (ptOperator === 'gt') matchesPt = ptVal > ptLimitVal;
+                else if (ptOperator === 'lt') matchesPt = ptVal < ptLimitVal;
+                else if (ptOperator === 'eq') matchesPt = ptVal === ptLimitVal;
+
+                // Combined visibility check
+                if (matchesSearch && matchesFt && matchesPt) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const table = document.getElementById('guidesTable');
+            const emptyState = document.getElementById('emptyState');
+
+            if (visibleCount === 0) {
+                table.style.display = 'none';
+                emptyState.style.display = 'flex';
+            } else {
+                table.style.display = 'table';
+                emptyState.style.display = 'none';
+            }
+        }
+
+        async function openGuideModal(id) {
+            const modal = document.getElementById('guideModal');
+            const modalBody = document.getElementById('modalBody');
+            modal.classList.add('active');
+
+            modalBody.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-light);"></i>
+                    <p style="margin-top: 1rem; color: var(--text-secondary);">Loading supervisor profile...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(`/api/guide/${id}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    modalBody.innerHTML = `<p style="color: var(--danger);">Failed to retrieve guide information.</p>`;
+                    return;
+                }
+
+                const guide = data.guide;
+
+                modalBody.innerHTML = `
+                    <div class="guide-profile-summary">
+                        <div class="profile-field">
+                            <span class="label">Supervisor Name</span>
+                            <span class="value">${guide.guide_name}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Employee ID</span>
+                            <span class="value">${guide.employee_id}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Department</span>
+                            <span class="value">${guide.department}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Designation</span>
+                            <span class="value">${guide.designation}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Active Service Status</span>
+                            <span class="value">${guide.in_service === 'Yes' ? '<span class="badge badge-success"><i class="fa-solid fa-check"></i> In-Service</span>' : '<span class="badge badge-danger">Inactive</span>'}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Allocation Date</span>
+                            <span class="value">${guide.allocated_date ? new Date(guide.allocated_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A'}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Domain Expertise / Remarks</span>
+                            <span class="value">${guide.remarks || 'Standard UGC Guideship'}</span>
+                        </div>
+                    </div>
+
+                    <div class="scholar-section" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                        <h3 class="scholar-section-title" style="margin-bottom: 1rem;"><i class="fa-solid fa-graduation-cap"></i> Scholar Allocations Summary</h3>
+                        <div style="display: flex; gap: 1rem; justify-content: space-around; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 120px; background-color: var(--bg-tertiary, #1e2942); border-radius: 12px; padding: 1rem; text-align: center; border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600;">ACTIVE FULL-TIME</div>
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent-light, #fbbf24);">${guide.ft_count || 0}</div>
+                            </div>
+                            <div style="flex: 1; min-width: 120px; background-color: var(--bg-tertiary, #1e2942); border-radius: 12px; padding: 1rem; text-align: center; border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600;">ACTIVE PART-TIME</div>
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent-light, #fbbf24);">${guide.pt_count || 0}</div>
+                            </div>
+                            <div style="flex: 1; min-width: 120px; background-color: var(--bg-tertiary, #1e2942); border-radius: 12px; padding: 1rem; text-align: center; border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600;">PH.D.S AWARDED</div>
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--success, #10b981);">${guide.awarded_count || 0}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 1.5rem;">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                        <a href="/guide/edit/${guide.employee_id}" class="btn btn-primary"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+                    </div>
+                `;
+            } catch (err) {
+                console.error(err);
+                modalBody.innerHTML = `<p style="color: var(--danger);">Communication error reading server data.</p>`;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('guideModal').classList.remove('active');
+        }
+
+        document.getElementById('guideModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFSTR Guideship - Edit Guide Profile</title>
+    <!-- Amazon Ember Font -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/amazon-ember">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Central Stylesheet -->
+    <link rel="stylesheet" href="/guideship-assets/css/style.css">
+    
+    <style>
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.25rem;
+            margin-bottom: 2.5rem;
+            align-items: start;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: var(--accent-light);
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1.1rem;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .scholars-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .mini-btn {
+            padding: 0.45rem 0.95rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            background-color: rgba(245, 158, 11, 0.12);
+            color: var(--accent-light);
+            border: 1px solid var(--border-amber);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .mini-btn:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        .scholar-item {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .scholar-item:hover {
+            border-color: var(--border-amber);
+        }
+
+        .scholar-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            max-width: 80%;
+        }
+
+        .scholar-name-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scholar-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #ffffff;
+        }
+
+        .scholar-reg {
+            font-size: 0.75rem;
+            font-family: monospace;
+            background-color: var(--bg-secondary);
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            color: var(--accent-light);
+            font-weight: 700;
+        }
+
+        .scholar-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .scholar-actions {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .icon-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        .icon-btn.delete-btn:hover {
+            color: #ffffff;
+            background-color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .form-submit-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.25rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.75rem;
+        }
+
+        @media (max-width: 1100px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Sticky Glassmorphic Navbar -->
+        <!-- Left Sidebar Panel -->
+    <aside>
+        <!-- Logo Brand -->
+        <div class="logo-container">
+            <img src="/guideship-assets/assets/logos/vignan-logo.png" alt="Vignan's University" style="height: 38px; width: auto; object-fit: contain; background: #ffffff; padding: 2px 8px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);">
+            <div style="display: flex; flex-direction: column; line-height: 1.15;">
+                <span style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; background: linear-gradient(120deg, #ffffff 30%, #fde68a 85%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Guideship</span>
+                <span style="font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent-light);">Dean R&D</span>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <ul class="nav-menu">
+            <!-- 1. Research Guides -->
+            <li class="nav-link-item active">
+                <a href="/dashboard"><i class="fa-solid fa-users-gear"></i> <span>Research Guides</span></a>
+            </li>
+            
+            <!-- 2. Proposals -->
+            <li class="nav-link-item ">
+                <a href="/recognition/proposals">
+                    <i class="fa-solid fa-file-signature"></i> <span>Proposals</span>
+                    <% if (typeof pendingProposalsCount !== 'undefined' && pendingProposalsCount > 0) { %>
+                        <span class="badge badge-amber" style="margin-left: auto; padding: 0.15rem 0.5rem; font-size: 0.7rem;"><%= pendingProposalsCount %></span>
+                    <% } %>
+                </a>
+            </li>
+            
+            <!-- 3. R&D Analytics -->
+            <li class="nav-link-item ">
+                <a href="/analytics"><i class="fa-solid fa-chart-pie"></i> <span>R&D Analytics</span></a>
+            </li>
+            
+            <!-- 4. Settings -->
+            <li class="nav-link-item ">
+                <a href="/settings"><i class="fa-solid fa-sliders"></i> <span>Settings</span></a>
+            </li>
+
+            <!-- 5. Central Portal Home -->
+            <li class="nav-link-item">
+                <a href="/" target="_blank"><i class="fa-solid fa-house"></i> <span>Central Portal</span></a>
+            </li>
+        </ul>
+
+        <!-- User Profile Section -->
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <%= admin ? admin.name.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'VF' %>
+            </div>
+            <div class="user-details">
+                <span class="user-name"><%= admin ? admin.name : 'Dean R&D' %></span>
+                <span class="user-role"><%= admin ? (admin.role.includes('Dean') ? 'Dean R&D' : admin.role) : 'Dean\'s Office' %></span>
+            </div>
+            <a href="/admin/logout" class="btn-logout" title="Log Out"><i class="fa-solid fa-power-off"></i></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <div class="univ-banner-tag">
+            <i class="fa-solid fa-building-columns"></i> VFSTR Guide Profile Editor
+        </div>
+
+        <header>
+            <a href="/dashboard" class="back-btn" title="Back to Guides"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="header-title">
+                <h1>Edit Research Guide Profile</h1>
+                <p>Modify supervisor credentials, active inservice status, and allocate scholars.</p>
+            </div>
+        </header>
+
+        <div class="details-grid">
+            <!-- Left Card: Guide Details -->
+            <form id="guideEditForm" action="/guide/update" method="POST" class="card">
+                <h2 class="card-title"><i class="fa-solid fa-user-tie"></i> Guide Profile Details</h2>
+                    
+                <div class="form-group">
+                    <label for="employee_id"><i class="fa-regular fa-id-badge"></i> Employee ID (Permanent ID)</label>
+                    <input type="number" name="employee_id" id="employee_id" value="<%= guide.employee_id %>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="guide_name"><i class="fa-solid fa-user-doctor"></i> Guide Full Name</label>
+                    <input type="text" name="guide_name" id="guide_name" value="<%= guide.guide_name %>" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department"><i class="fa-solid fa-building"></i> Department</label>
+                        <select name="department" id="department" required>
+                            <option value="Agriculture Engineering" <%= guide.department === 'Agriculture Engineering' ? 'selected' : '' %>>Agriculture Engineering</option>
+                            <option value="Automobile Engineering" <%= guide.department === 'Automobile Engineering' ? 'selected' : '' %>>Automobile Engineering</option>
+                            <option value="B. Sc. - Actuarial Science" <%= guide.department === 'B. Sc. - Actuarial Science' ? 'selected' : '' %>>B. Sc. - Actuarial Science</option>
+                            <option value="B. Sc. - Data Science" <%= guide.department === 'B. Sc. - Data Science' ? 'selected' : '' %>>B. Sc. - Data Science</option>
+                            <option value="B. Sc. - Mathematics, Statistics and Computer Science" <%= guide.department === 'B. Sc. - Mathematics, Statistics and Computer Science' ? 'selected' : '' %>>B. Sc. - Mathematics, Statistics and Computer Science</option>
+                            <option value="B. Sc. - Psychology" <%= guide.department === 'B. Sc. - Psychology' ? 'selected' : '' %>>B. Sc. - Psychology</option>
+                            <option value="B.A. (Hons.) Political Science" <%= guide.department === 'B.A. (Hons.) Political Science' ? 'selected' : '' %>>B.A. (Hons.) Political Science</option>
+                            <option value="B.Sc. (Hons.) Agriculture" <%= guide.department === 'B.Sc. (Hons.) Agriculture' ? 'selected' : '' %>>B.Sc. (Hons.) Agriculture</option>
+                            <option value="B.Sc. (Hons.) Data Science" <%= guide.department === 'B.Sc. (Hons.) Data Science' ? 'selected' : '' %>>B.Sc. (Hons.) Data Science</option>
+                            <option value="Bachelor of Business Administration" <%= guide.department === 'Bachelor of Business Administration' ? 'selected' : '' %>>Bachelor of Business Administration</option>
+                            <option value="Bachelor of Computer Applications" <%= guide.department === 'Bachelor of Computer Applications' ? 'selected' : '' %>>Bachelor of Computer Applications</option>
+                            <option value="Bachelor of Pharmacy" <%= guide.department === 'Bachelor of Pharmacy' ? 'selected' : '' %>>Bachelor of Pharmacy</option>
+                            <option value="BBM" <%= guide.department === 'BBM' ? 'selected' : '' %>>BBM</option>
+                            <option value="Bioinformatics" <%= guide.department === 'Bioinformatics' ? 'selected' : '' %>>Bioinformatics</option>
+                            <option value="Biomedical Engineering" <%= guide.department === 'Biomedical Engineering' ? 'selected' : '' %>>Biomedical Engineering</option>
+                            <option value="Biotechnology" <%= guide.department === 'Biotechnology' ? 'selected' : '' %>>Biotechnology</option>
+                            <option value="Chemical Engineering" <%= guide.department === 'Chemical Engineering' ? 'selected' : '' %>>Chemical Engineering</option>
+                            <option value="Civil Engineering" <%= guide.department === 'Civil Engineering' ? 'selected' : '' %>>Civil Engineering</option>
+                            <option value="Computer Science & Engineering" <%= guide.department === 'Computer Science & Engineering' ? 'selected' : '' %>>Computer Science & Engineering</option>
+                            <option value="Computer Science and Business System & IOT" <%= guide.department === 'Computer Science and Business System & IOT' ? 'selected' : '' %>>Computer Science and Business System & IOT</option>
+                            <option value="Computer Science and Engineering (Artificial Intelligence and Machine Learning)" <%= guide.department === 'Computer Science and Engineering (Artificial Intelligence and Machine Learning)' ? 'selected' : '' %>>Computer Science and Engineering (Artificial Intelligence and Machine Learning)</option>
+                            <option value="Computer Science and Engineering (Cyber Security & Data Science)" <%= guide.department === 'Computer Science and Engineering (Cyber Security & Data Science)' ? 'selected' : '' %>>Computer Science and Engineering (Cyber Security & Data Science)</option>
+                            <option value="Electrical and Electronics Engineering" <%= guide.department === 'Electrical and Electronics Engineering' ? 'selected' : '' %>>Electrical and Electronics Engineering</option>
+                            <option value="Electronics & Computer Engineering" <%= guide.department === 'Electronics & Computer Engineering' ? 'selected' : '' %>>Electronics & Computer Engineering</option>
+                            <option value="Electronics and Communication Engineering" <%= guide.department === 'Electronics and Communication Engineering' ? 'selected' : '' %>>Electronics and Communication Engineering</option>
+                            <option value="Electronics Engineering (VLSI Design and Technology)" <%= guide.department === 'Electronics Engineering (VLSI Design and Technology)' ? 'selected' : '' %>>Electronics Engineering (VLSI Design and Technology)</option>
+                            <option value="Food Technology" <%= guide.department === 'Food Technology' ? 'selected' : '' %>>Food Technology</option>
+                            <option value="Information Technology" <%= guide.department === 'Information Technology' ? 'selected' : '' %>>Information Technology</option>
+                            <option value="M.Sc - Agricultural Economics" <%= guide.department === 'M.Sc - Agricultural Economics' ? 'selected' : '' %>>M.Sc - Agricultural Economics</option>
+                            <option value="M.Sc - Agronomy" <%= guide.department === 'M.Sc - Agronomy' ? 'selected' : '' %>>M.Sc - Agronomy</option>
+                            <option value="M.Sc - Chemistry" <%= guide.department === 'M.Sc - Chemistry' ? 'selected' : '' %>>M.Sc - Chemistry</option>
+                            <option value="M.Sc - Data Science" <%= guide.department === 'M.Sc - Data Science' ? 'selected' : '' %>>M.Sc - Data Science</option>
+                            <option value="M.Sc - Entomology" <%= guide.department === 'M.Sc - Entomology' ? 'selected' : '' %>>M.Sc - Entomology</option>
+                            <option value="M.Sc - Floriculture and Landscaping" <%= guide.department === 'M.Sc - Floriculture and Landscaping' ? 'selected' : '' %>>M.Sc - Floriculture and Landscaping</option>
+                            <option value="M.Sc - Genetics & Plant Breeding" <%= guide.department === 'M.Sc - Genetics & Plant Breeding' ? 'selected' : '' %>>M.Sc - Genetics & Plant Breeding</option>
+                            <option value="M.Sc - Organic Chemistry" <%= guide.department === 'M.Sc - Organic Chemistry' ? 'selected' : '' %>>M.Sc - Organic Chemistry</option>
+                            <option value="M.Sc - Pharmaceutical Chemistry" <%= guide.department === 'M.Sc - Pharmaceutical Chemistry' ? 'selected' : '' %>>M.Sc - Pharmaceutical Chemistry</option>
+                            <option value="M.Sc - Plant Pathology" <%= guide.department === 'M.Sc - Plant Pathology' ? 'selected' : '' %>>M.Sc - Plant Pathology</option>
+                            <option value="M.Sc - Psychology" <%= guide.department === 'M.Sc - Psychology' ? 'selected' : '' %>>M.Sc - Psychology</option>
+                            <option value="M.Sc - Soil Science" <%= guide.department === 'M.Sc - Soil Science' ? 'selected' : '' %>>M.Sc - Soil Science</option>
+                            <option value="M.Sc - Vegetable Science" <%= guide.department === 'M.Sc - Vegetable Science' ? 'selected' : '' %>>M.Sc - Vegetable Science</option>
+                            <option value="MBA - Finance" <%= guide.department === 'MBA - Finance' ? 'selected' : '' %>>MBA - Finance</option>
+                            <option value="MBA - Human Resource" <%= guide.department === 'MBA - Human Resource' ? 'selected' : '' %>>MBA - Human Resource</option>
+                            <option value="MCA - Master of Computer Applications" <%= guide.department === 'MCA - Master of Computer Applications' ? 'selected' : '' %>>MCA - Master of Computer Applications</option>
+                            <option value="Mechanical Engineering" <%= guide.department === 'Mechanical Engineering' ? 'selected' : '' %>>Mechanical Engineering</option>
+                            <option value="Mechatronics" <%= guide.department === 'Mechatronics' ? 'selected' : '' %>>Mechatronics</option>
+                            <option value="Petroleum Engineering" <%= guide.department === 'Petroleum Engineering' ? 'selected' : '' %>>Petroleum Engineering</option>
+                            <option value="Robotics and Automation" <%= guide.department === 'Robotics and Automation' ? 'selected' : '' %>>Robotics and Automation</option>
+                            <option value="Technical Textiles" <%= guide.department === 'Technical Textiles' ? 'selected' : '' %>>Technical Textiles</option>
+                            <option value="Textile & Fashion Technology" <%= guide.department === 'Textile & Fashion Technology' ? 'selected' : '' %>>Textile & Fashion Technology</option>
+                            <option value="Textile Technology" <%= guide.department === 'Textile Technology' ? 'selected' : '' %>>Textile Technology</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="designation"><i class="fa-solid fa-briefcase"></i> Designation</label>
+                        <select name="designation" id="designation" required>
+                            <option value="Professor" <%= guide.designation === 'Professor' ? 'selected' : '' %>>Professor</option>
+                            <option value="Associate Professor" <%= guide.designation === 'Associate Professor' ? 'selected' : '' %>>Associate Professor</option>
+                            <option value="Assistant Professor" <%= guide.designation === 'Assistant Professor' ? 'selected' : '' %>>Assistant Professor</option>
+                            <option value="officiating Associate Professor" <%= guide.designation === 'officiating Associate Professor' ? 'selected' : '' %>>officiating Associate Professor</option>
+                            <option value="officiating Professor" <%= guide.designation === 'officiating Professor' ? 'selected' : '' %>>officiating Professor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="allocated_date"><i class="fa-regular fa-calendar-check"></i> Allocation Date</label>
+                    <input type="date" name="allocated_date" id="allocated_date" value="<%= guide.allocated_date ? new Date(guide.allocated_date).toISOString().split('T')[0] : '' %>"
+                        style="width: 100%; padding: 0.85rem 1.25rem; background-color: var(--bg-input, rgba(255,255,255,0.03)); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 0.95rem;">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-signal"></i> Active In-Service Status</label>
+                    <div class="toggle-group">
+                        <span class="toggle-label">Active / In-Service</span>
+                        <label class="switch">
+                            <input type="checkbox" name="in_service" value="Yes" id="inserviceCheck" <%= guide.in_service === 'Yes' ? 'checked' : '' %>>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="remarks"><i class="fa-regular fa-comment-dots"></i> Remarks / Domain Expertise</label>
+                    <textarea name="remarks" id="remarks" rows="4"><%= guide.remarks || '' %></textarea>
+                </div>
+            </form>
+
+                            <!-- Right Card: Scholar Allocations -->
+                <div class="card">
+                    <h2 class="card-title"><i class="fa-solid fa-graduation-cap"></i> Scholar Allocations</h2>
+                    
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">
+                        Modify active allocation counts and award completed doctorates.
+                    </p>
+
+                    <!-- FT Count Group -->
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label for="ft_count"><i class="fa-solid fa-user-graduate"></i> Active Full-Time Scholars Count</label>
+                        <div style="display: flex; gap: 0.75rem; align-items: center;">
+                            <input type="number" name="ft_count" id="ft_count" value="<%= guide.ft_count || 0 %>" min="0" required form="guideEditForm"
+                                style="flex: 1; padding: 0.85rem 1.25rem; background-color: var(--bg-input, rgba(255,255,255,0.03)); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 0.95rem;">
+                            <button type="button" onclick="awardPhD('ft')" class="btn" style="background-color: var(--warning-bg); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.85rem; font-weight: 600;" title="Complete FT candidate and increment Awarded count">
+                                <i class="fa-solid fa-award"></i> Award Ph.D.
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PT Count Group -->
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label for="pt_count"><i class="fa-solid fa-user-graduate"></i> Active Part-Time Scholars Count</label>
+                        <div style="display: flex; gap: 0.75rem; align-items: center;">
+                            <input type="number" name="pt_count" id="pt_count" value="<%= guide.pt_count || 0 %>" min="0" required form="guideEditForm"
+                                style="flex: 1; padding: 0.85rem 1.25rem; background-color: var(--bg-input, rgba(255,255,255,0.03)); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 0.95rem;">
+                            <button type="button" onclick="awardPhD('pt')" class="btn" style="background-color: var(--warning-bg); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.85rem; font-weight: 600;" title="Complete PT candidate and increment Awarded count">
+                                <i class="fa-solid fa-award"></i> Award Ph.D.
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Awarded Count Group -->
+                    <div class="form-group">
+                        <label for="awarded_count"><i class="fa-solid fa-graduation-cap"></i> Ph.D.s Awarded / Completed</label>
+                        <input type="number" name="awarded_count" id="awarded_count" value="<%= guide.awarded_count || 0 %>" min="0" required form="guideEditForm"
+                            style="width: 100%; padding: 0.85rem 1.25rem; background-color: var(--bg-input, rgba(255,255,255,0.03)); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 0.95rem;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Form Submit actions -->
+        <div class="form-submit-actions">
+            <button type="button" class="btn btn-secondary" onclick="location.href='/dashboard'">Cancel</button>
+            
+            <form action="/guide/delete/<%= guide.employee_id %>" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to permanently delete this Research Guide profile? This action cannot be undone.');">
+                <button type="submit" class="btn" style="background-color: var(--danger, #ef4444); color: white; border: none; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#dc2626'; this.style.transform='translateY(-2px)'" onmouseout="this.style.backgroundColor='var(--danger, #ef4444)'; this.style.transform='translateY(0)'">
+                    <i class="fa-solid fa-trash-can"></i> Delete Profile
+                </button>
+            </form>
+            
+            <button type="submit" form="guideEditForm" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Guide Profile</button>
+        </div>
+    </main>
+
+    
+
+    <!-- Success Toast Alert -->
+    <div class="toast" id="notifyToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-content">
+            <span class="toast-title" id="toastTitle">Success</span>
+            <span class="toast-message" id="toastMsg">Operation completed.</span>
+        </div>
+    </div>
+
+        <script>
+        function awardPhD(type) {
+            const activeInput = document.getElementById(type + '_count');
+            const awardedInput = document.getElementById('awarded_count');
+            
+            let activeVal = parseInt(activeInput.value || '0');
+            let awardedVal = parseInt(awardedInput.value || '0');
+            
+            if (activeVal > 0) {
+                activeInput.value = activeVal - 1;
+                awardedInput.value = awardedVal + 1;
+                
+                // Highlight update success
+                activeInput.style.borderColor = 'var(--success)';
+                awardedInput.style.borderColor = 'var(--success)';
+                setTimeout(() => {
+                    activeInput.style.borderColor = 'var(--border-color)';
+                    awardedInput.style.borderColor = 'var(--border-color)';
+                }, 1000);
+            } else {
+                alert(`No active ${type === 'ft' ? 'Full-Time' : 'Part-Time'} scholars remaining to award!`);
+            }
+        }
+    </script>
+</body>
+</html>

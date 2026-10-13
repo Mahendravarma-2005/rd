@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research & Development Portals | Vignan's University</title>
+  <meta name="description"
+    content="Centralized Research and Development Portals for Vignan University. Direct access portals for students, research scholars, and faculty members.">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome 6 Pro / Free CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- ====================================================================
+         MAIN CONTENT AREA (Full Width - No Left Panel)
+         ==================================================================== -->
+    <main class="main-wrapper">
+
+      <!-- ================================================================
+           TOP BRAND & ACCREDITATION BAR (Official Institutional Header)
+           ================================================================ -->
+      <header class="top-brand-bar">
+
+        <!-- Left: Official Vignan University Logo -->
+        <div class="top-bar-left">
+          <img src="vignan-header-logo.png"
+            alt="Vignan's Foundation for Science, Technology & Research (Deemed to be University)"
+            class="univ-brand-logo-left">
+        </div>
+
+        <!-- Center: VRD Brand (Centered on the bar) -->
+        <div class="top-bar-center">
+          <div class="vrd-brand-center">
+            <span class="vrd-acronym-bold">VRD</span>
+            <div class="vrd-vertical-divider"></div>
+            <div class="vrd-stacked-titles">
+              <span class="vrd-title-line">VIGNAN</span>
+              <span class="vrd-title-line">RESEARCH AND</span>
+              <span class="vrd-title-line">DEVELOPMENT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Accreditations (Matching reference image) -->
+        <div class="top-bar-right">
+          <div class="accreditations-strip-wrapper"
+            title="Approved by AICTE | UGC 12(B) Status | ISO Certified | NAAC A+ Grade">
+            <img src="accreditations-strip.png" alt="Accreditations: AICTE, UGC 12(B), ISO, NAAC A+"
+              class="accreditations-strip-img">
+          </div>
+        </div>
+
+      </header>
+
+      <!-- ================================================================
+           SECTION 1: HERO & CENTERED HEADING
+           ================================================================ -->
+      <section class="hero-section" id="heroSection">
+        <!-- Centered Heading with Gradient Accent -->
+        <h2 class="hero-title" id="sectionHeadingTitle">
+          Research & Development <span class="gradient-text">Portals</span>
+        </h2>
+
+        <!-- Centered Subtitle -->
+        <p class="hero-subtitle" id="sectionHeadingSubtitle">
+          Direct access portals for students, research scholars, and faculty members
+        </p>
+
+        <!-- Admin Mode Controls (Only visible to authenticated Super Admin) -->
+        <div class="admin-mode-controls" id="adminModeControls" style="display: none; margin-top: 14px;">
+          <div class="view-switcher-toggle">
+            <button class="toggle-btn active" data-view="admin" id="toggleAdminBtn">
+              <i class="fa-solid fa-shield-halved"></i> Admin View (Active)
+            </button>
+            <button class="toggle-btn" data-view="user" id="toggleUserBtn">
+              <i class="fa-solid fa-user-group"></i> Preview User View
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           RESEARCH & DEVELOPMENT PORTALS (Role-Based Dynamic View)
+           ================================================================ -->
+      <section class="section-dual-grid" id="dualSection">
+        <!-- Portals Container -->
+        <div class="dual-split-container" id="dualSplitContainer">
+
+          <!-- LEFT COLUMN: ADMIN (Super Login Required) -->
+          <div class="dual-column column-admin" id="adminColumn">
+            <!-- Injected Admin Cards -->
+            <div class="portal-cards-grid" id="adminCardsContainer">
+              <!-- Dynamically populated from portals-config.js -->
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: USER (Public / Student View) -->
+          <div class="dual-column column-user" id="userColumn">
+            <!-- Injected User Cards -->
+            <div class="portal-cards-grid" id="userCardsContainer">
+              <!-- Dynamically populated from portals-config.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================================================================
+           SITE FOOTER: INSTITUTIONAL ATTRIBUTION & SMALL ADMIN LOGIN
+           ================================================================ -->
+      <footer class="portal-site-footer">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <p class="footer-copy">
+              &copy; 2026 <strong>Vignan's Foundation for Science, Technology &amp; Research</strong> (Deemed to be
+              University). All rights reserved.
+            </p>
+            <p class="footer-dept">Research &amp; Development Department &bull; Deployed Portals Gateway</p>
+          </div>
+          <div class="footer-right">
+            <button class="btn-footer-login" id="footerSuperLoginBtn" title="Super Admin Login"
+              aria-label="Super Admin Login">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- ====================================================================
+       SUPER ADMIN SINGLE SIGN-ON (SSO) MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop" id="ssoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modalTitle">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span id="modalHeaderTitle">Super Admin SSO Gateway</span>
+        </h3>
+        <p id="modalHeaderSubtitle">Unified Single Sign-On for all internal R&D application admin consoles</p>
+        <button class="modal-close-btn" id="closeSsoModal" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- In-Modal Alert Box for Instant Feedback -->
+        <div class="auth-alert-message" id="authAlertBox"></div>
+
+        <!-- ============================================================
+             VIEW 1: SUPER ADMIN LOGIN (Default)
+             ============================================================ -->
+        <div class="auth-modal-view" id="authLoginView">
+          <div class="sso-info-alert">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <strong>Dean / Super Admin Gateway:</strong> Authenticate with your administrative Employee ID to unlock
+              all unified R&D administration portals.
+            </div>
+          </div>
+
+          <form id="ssoLoginForm">
+            <div class="form-group">
+              <label for="ssoEmployeeId"><i class="fa-regular fa-id-badge"></i> Employee ID</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-id-badge"></i>
+                <input type="text" id="ssoEmployeeId" required placeholder="e.g. 1001" autocomplete="username">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-label-row">
+                <label for="ssoPassword"><i class="fa-solid fa-key"></i> Password</label>
+                <a href="javascript:void(0)" id="btnOpenForgot" class="forgot-link">Forgot Password?</a>
+              </div>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="ssoPassword" required placeholder="Enter administrative password"
+                  autocomplete="current-password">
+                <button type="button" class="toggle-eye" id="toggleSsoPassBtn" title="Toggle password visibility">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit-sso" id="ssoSubmitBtn">
+              <i class="fa-solid fa-right-to-bracket"></i> Authenticate & Unlock All Portals
+            </button>
+          </form>
+        </div>
+
+        <!-- ============================================================
+             VIEW 2: FORGOT PASSWORD (Temporary Access Code Dispatched)
+             ============================================================ -->
+        <div class="auth-modal-view" id="authForgotView" style="display: none;">
+          <div class="sso-info-alert" style="background: #eff6ff; border-color: #bfdbfe; color: #1e40af;">
+            <i class="fa-solid fa-envelope-circle-check" style="color: #2563eb;"></i>
+            <div>
+              <strong>Dean Password Recovery:</strong> Enter your registered Employee ID. A temporary access code will
+              be dispatched to your registered Outlook email.
+            </div>
+          </div>
+
+          <form id="ssoForgotForm">
+            <div class="form-group">
+              <label for="forgotEmployeeId"><i class="fa-regular fa-id-badge"></i> Employee ID</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-id-badge"></i>
+                <input type="text" id="forgotEmployeeId" required placeholder="Enter Employee ID (e.g. 1001)">
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit-sso" id="forgotSubmitBtn">
+              <i class="fa-solid fa-paper-plane"></i> Send Temporary Password
+            </button>
+
+            <a href="javascript:void(0)" id="btnBackToLoginFromForgot" class="back-link">
+              <i class="fa-solid fa-arrow-left"></i> Return to Super Admin Login
+            </a>
+          </form>
+        </div>
+
+        <!-- ============================================================
+             VIEW 3: RESET PASSWORD (Mandatory upon temp password login)
+             ============================================================ -->
+        <div class="auth-modal-view" id="authResetView" style="display: none;">
+          <div class="sso-info-alert" style="background: #fefce8; border-color: #fef08a; color: #854d0e;">
+            <i class="fa-solid fa-shield-exclamation" style="color: #ca8a04;"></i>
+            <div>
+              <strong>Temporary Password Detected:</strong> For university data protection, please set your new
+              permanent password before proceeding.
+            </div>
+          </div>
+
+          <form id="ssoResetForm">
+            <input type="hidden" id="resetEmployeeId">
+
+            <div class="form-group">
+              <label for="resetCurrentPassword"><i class="fa-solid fa-shield"></i> Temporary / Current Password</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="resetCurrentPassword" required placeholder="Enter temporary access code">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="resetNewPassword"><i class="fa-solid fa-key"></i> New Permanent Password</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="resetNewPassword" required placeholder="Enter new password (min 4 chars)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="resetConfirmPassword"><i class="fa-solid fa-check-double"></i> Confirm New Password</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="resetConfirmPassword" required placeholder="Re-enter new permanent password">
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit-sso" id="resetSubmitBtn">
+              <i class="fa-solid fa-circle-check"></i> Save New Password & Proceed
+            </button>
+
+            <a href="javascript:void(0)" id="btnSkipReset" class="back-link">
+              Continue to Dashboard with Temporary Session
+            </a>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/portals-config.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>

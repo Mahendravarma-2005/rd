@@ -1,0 +1,1233 @@
+===============================================================================
+           VFSTR R&D PORTALS - RECORD OF EDITED AND CREATED FILES             
+           Generated At: 28/9/2026, 9:28:10 am                       
+           Total Distinct Project Files: 85                      
+===============================================================================
+
+
+-------------------------------------------------------------------------------
+### 1. Ph.D Part-Time Scholars Tracking (New Application) (7 files)
+-------------------------------------------------------------------------------
+
+1. [PHD Part Time Scholar Tracking\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\app.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update header titles for Part Time Scholar Tracking in app.js"
+
+2. [PHD Part Time Scholar Tracking\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\index.html
+   Total Edits:   4
+   Summary of Modifications:
+     - "Update title and header to Part Time in index.html"
+     - "Update Quick Test sample chips in Part Time index.html"
+     - "Update modal heading to Scholar Monthly Progress Report in Part Time index.html"
+     - "Replace Outlook OTP authentication with direct registration number lookup and database check in PHD Part Time Scholar Tracking index.html"
+
+3. [PHD Part Time Scholar Tracking\js\api.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\api.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update Part Time API client with dedicated part-time endpoints"
+
+4. [PHD Part Time Scholar Tracking\js\config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\config.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Update local storage keys for Part-Time PhD tracking"
+     - "Update part time config.js with scholar registration lookup elements and backward-compatible aliases"
+
+5. [PHD Part Time Scholar Tracking\js\dynamicCards.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\dynamicCards.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update DC Meeting label and text field for number input, change Last DC Attended to DC Attended Date, and remove Final-DC recommendation option in Part Time dynamicCards.js"
+
+6. [PHD Part Time Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\portal.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update portal.js with part-time-phd-tracking portal identifier and session key"
+
+7. [PHD Part Time Scholar Tracking\js\report.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\report.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Customize report header and badges for Part-Time scholars"
+     - "Change Part-Time Scholar Monthly Clearance & Progress Report to Part-Time Scholar Monthly Progress Report in report.js"
+     - "Update report DC table headers to DC Meeting and DC Attended Date, and format cell output in Part Time report.js"
+
+
+-------------------------------------------------------------------------------
+### 2. Ph.D Full-Time Scholars Tracking Application (8 files)
+-------------------------------------------------------------------------------
+
+1. [PHD Scholar Tracking\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\app.js
+   Total Edits:   9
+   Summary of Modifications:
+     - "Bypass separate login modal and enable direct Super Admin SSO for PhD Scholar Tracking admin dashboard"
+     - "Remove unused logout button handlers and references in app.js"
+     - "Remove btnAdminLogout listeners from app.js"
+     - "Remove redundant btnAdminLogout listener from app.js"
+     - "Remove btnHeaderLogout from showScholarPage"
+     - "Attach input event listeners for portalDcCount and dcCountInput in app.js"
+     - "Use printCurrentReport for dynamic PDF filename and clean printing"
+     - "Import and initialize initScholarAuth in PHD Scholar Tracking app.js"
+     - "Wire initScholarAuth in setupEventListeners in app.js"
+
+2. [PHD Scholar Tracking\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\index.html
+   Total Edits:   8
+   Summary of Modifications:
+     - "Remove btnAdminLogout from dashboard toolbar in index.html"
+     - "Remove btnHeaderLogout from header in index.html"
+     - "Add DC meetings attended sections to scholar portal and admin modal in index.html"
+     - "Add CAP option to RA category dropdowns and add 4 new admin metric cards"
+     - "Integrate University Outlook OTP authentication gateway and verified scholar banner into PHD Scholar Tracking index.html"
+     - "Add portalLookupBanner into portalFormBody in index.html"
+     - "Update modal heading to Scholar Monthly Progress Report in PHD Scholar Tracking index.html"
+     - "Replace Outlook OTP authentication with direct scholar registration number lookup and database verification in PHD Scholar Tracking index.html"
+
+3. [PHD Scholar Tracking\js\admin.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\admin.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Integrate DC meetings in admin modal and CSV export"
+     - "Update renderMetrics with 4 new metrics and CAP counting, and update badge rendering for CAP"
+
+4. [PHD Scholar Tracking\js\config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\config.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Remove btnHeaderLogout and btnAdminLogout from DOM config cache"
+     - "Export DC inputs and containers in DOM object"
+     - "Add DOM references for 4 new stats in config.js"
+     - "Add scholar OTP verification DOM element references in config.js"
+     - "Update config.js with scholar registration lookup elements and backward-compatible aliases"
+
+5. [PHD Scholar Tracking\js\dynamicCards.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\dynamicCards.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Add DC scraping to updateDynamicCards in dynamicCards.js"
+     - "Add dc card creation logic to dynamicCards.js"
+     - "Update DC Meeting label and text field for number input, change Last DC Attended to DC Attended Date, and remove Final-DC recommendation option"
+
+6. [PHD Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\portal.js
+   Total Edits:   8
+   Summary of Modifications:
+     - "Collect and reset dcMeetings in portal.js"
+     - "Add initScholarAuth and OTP management functions in portal.js"
+     - "Add null-safety to handleRegNoLookup and resetPortalForm in portal.js"
+     - "Ensure portalFormBody is displayed in showScholarVerifiedBanner"
+     - "Replace OTP authentication with direct registration number database check and form display in PHD Scholar Tracking portal.js"
+     - "Replace OTP authentication flow with direct registration number database check and form display in PHD Scholar Tracking portal.js"
+     - "Update showScholarVerifiedBanner and clearScholarSession for registration lookup"
+     - "Replace initScholarAuth with direct registration lookup and DB verification logic in PHD Scholar Tracking portal.js"
+
+7. [PHD Scholar Tracking\js\report.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\report.js
+   Total Edits:   9
+   Summary of Modifications:
+     - "Add DC meetings table to viewReport in report.js"
+     - "Append Doctoral Committee Meetings section to reportModalContent in report.js"
+     - "Updated report.js with A4 print formatting, exact section names, and dynamic PDF file name generation"
+     - "Streamline report.js with inline ERA and Month badges on right side, and compact spacing so signatures fit on same page"
+     - "Place Report Month on right side in same line as ERA, and compact section spacing so signatures block fits on same page"
+     - "Update RA Category badge and title strings for CAP, TRA, and ERA in report.js"
+     - "Add space between report and signature lines with adequate signing room in report.js"
+     - "Change Scholar Monthly Clearance & Progress Report to Scholar Monthly Progress Report in PHD Scholar Tracking report.js"
+     - "Update report DC table headers to DC Meeting and DC Attended Date, and format cell output"
+
+8. [PHD Scholar Tracking\styles.css]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\styles.css
+   Total Edits:   6
+   Summary of Modifications:
+     - "Add report-dc-table styling to styles.css"
+     - "Format report print for A4 paper and hide all extraneous background elements and modals"
+     - "Update print styles with tight margins, compact section spacing, and header badge alignment"
+     - "Add badge-cap and stat-icon color variants in styles.css"
+     - "Add orange, teal, indigo, cyan stat-icon color classes in styles.css"
+     - "Add comfortable space between the report and signature lines in print styles"
+
+
+-------------------------------------------------------------------------------
+### 3. Central Front Landing Page (4 files)
+-------------------------------------------------------------------------------
+
+1. [fornt_landing_page\css\style.css]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\fornt_landing_page\css\style.css
+   Total Edits:   17
+   Summary of Modifications:
+     - "Add modern styles for password toggle eye, forgot password link, auth alerts, and view transitions"
+     - "Add styles for .univ-logo-img in style.css"
+     - "Add mobile style for univ-logo-img"
+     - "Update header brand bar CSS for centered VRD and 3-column layout"
+     - "Update responsive media queries for header brand bar"
+     - "Refine top-brand-bar colors, typography and divider to exactly match reference image styling"
+     - "Remove top header super login button CSS and streamline top-bar-right"
+     - "Add portal site footer styling and small Super Admin login button"
+     - "Fix duplicate media query and add responsive styling for footer"
+     - "Update btn-footer-login CSS for icon-only symbol display"
+     - "Add centered styles for user portal card footer and Open Portal button"
+     - "Add styling for centered admin card footer and admin launch button"
+     - "Reduce typography and sizing for hero section and update stats card banner styles to compact bottom matrix"
+     - "Reduce section-dual-grid max-width to 1140px"
+     - "Reduce portal card height, width, padding, typography, and container dimensions"
+     - "Reduce card footer padding and launch button size"
+     - "Refine hero typography in style.css"
+
+2. [fornt_landing_page\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\fornt_landing_page\index.html
+   Total Edits:   16
+   Summary of Modifications:
+     - "Update Super Admin modal with Employee ID login, Forgot Password, and Reset Password views"
+     - "Remove autofill credentials button from Super Admin login modal in index.html"
+     - "Update stat box in index.html to Ph.D Scholars"
+     - "Place vignan-logo.png beside VRD in the header of landing page"
+     - "Update top-brand-bar in index.html with centered VRD, left logo, and right accreditations"
+     - "Add Montserrat font to Google Fonts link for VRD institutional branding typography"
+     - "Remove login button from top brand bar"
+     - "Add site footer with small Super Admin login button"
+     - "Ensure section closing tag is present before footer"
+     - "Make footer login button icon-only with arrow symbol"
+     - "Relocate stats matrix from hero to bottom of application cards in both admin and user columns"
+     - "Move stats matrix outside the application card containers to the bottom of the section"
+     - "Remove old hero content, center Research & Development Portals heading, and remove metrics banner"
+     - "Update page title and meta description in index.html"
+     - "Remove Admin Control Gateway and Super Admin Single Sign-On Access header from adminColumn card in index.html"
+     - "Remove User / Scholar Gateway and Faculty, Research Scholars & Students header from userColumn in index.html"
+
+3. [fornt_landing_page\js\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\fornt_landing_page\js\app.js
+   Total Edits:   13
+   Summary of Modifications:
+     - "Update card IP badges to display local routes instead of 192.168.10.79 in app.js"
+     - "Update handleAdminLaunch and admin button label in central portal app.js"
+     - "Show Open Admin Console for deployed admin cards"
+     - "Update app.js state, initialization, server restart check, and modal view controllers"
+     - "Implement comprehensive event listeners for Super Admin login, forgot password, reset password, and autofill"
+     - "Remove demoFillBtn variable in app.js"
+     - "Remove autofill credentials event listener from app.js"
+     - "Bind superLoginBtn to footerSuperLoginBtn in app.js"
+     - "Refine updateAuthStateUI to handle footer button innerHTML cleanly"
+     - "Update updateAuthStateUI to render icon-only arrow symbol without text"
+     - "Remove route display and direct access tag, and center Open Portal button on user cards"
+     - "Remove routes and SSO badge and center Open Admin Console button in admin cards"
+     - "Keep title consistent across user and admin views, add guard in animateStatsCounters"
+
+4. [fornt_landing_page\js\portals-config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\fornt_landing_page\js\portals-config.js
+   Total Edits:   6
+   Summary of Modifications:
+     - "Update portal URLs to local sub-paths in portals-config.js"
+     - "Add trailing slashes to adminUrls in portals-config.js"
+     - "Register Ph.D Full-Time Scholars Tracking in Central Landing Portal configuration"
+     - "Remove Patents & IPR and Extramural Grants from PORTALS_CONFIG"
+     - "Update STATS_CONFIG in portals-config.js to reflect Ph.D Scholars instead of Patents"
+     - "Add Ph.D Part-Time Scholars Tracking portal to central landing page config"
+
+
+-------------------------------------------------------------------------------
+### 4. Backend Server, Routes, Models & Services (33 files)
+-------------------------------------------------------------------------------
+
+1. [src\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\app.js
+   Total Edits:   6
+   Summary of Modifications:
+     - "Create modular Express app instance with middleware, static mounts, and routes"
+     - "Add static route for student publication node_modules"
+     - "Update express-session with custom cookie name and bootId check in app.js"
+     - "Mount static route for PhD Scholar Tracking in src/app.js"
+     - "Ensure res.locals.admin is always available for Guideship templates"
+     - "Mount part-time PhD scholar tracking routes in app.js"
+
+2. [src\config\db.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\config\db.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Database connection pool and schema bootstrap module"
+
+3. [src\config\environment.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\config\environment.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Centralized environment and configuration module"
+     - "Add dynamic SERVER_INSTANCE_ID and bind JWT_SECRET and SESSION_SECRET to the server boot lifecycle"
+
+4. [src\controllers\auth.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\auth.controller.js
+   Total Edits:   4
+   Summary of Modifications:
+     - "Create AuthController handling all auth routes and responses"
+     - "Add getServerInstance method to AuthController"
+     - "Add central portal Super Admin auth methods to AuthController"
+     - "Add sendOtp and verifyOtp to auth.controller.js"
+
+5. [src\controllers\guideship.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\guideship.controller.js
+   Total Edits:   4
+   Summary of Modifications:
+     - "Create GuideshipController for rendering EJS views and handling Guideship administration actions"
+     - "Pass allocated_date in evaluateProposal controller"
+     - "Enforce bootId in Guideship session creation and validation, and clear cookie on logout"
+     - "Remove admin login and forgot password views and redirect to dashboard and central portal"
+
+6. [src\controllers\partTimePhd.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\partTimePhd.controller.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PartTimePhdController for part-time scholars"
+
+7. [src\controllers\phd.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\phd.controller.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Controller for PhD Full-Time Scholar Progress Tracking endpoints"
+     - "Update PhdController to use PhdService"
+
+8. [src\controllers\proposal.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\proposal.controller.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create ProposalController for ProjectPi proposals API endpoints"
+
+9. [src\controllers\publication.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\publication.controller.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PublicationController for publications and reimbursements CRUD endpoints"
+
+10. [src\middlewares\auth.middleware.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\middlewares\auth.middleware.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Authentication middlewares for JWT tokens and Guideship session guards"
+     - "Enforce SERVER_INSTANCE_ID bootId check across authenticateJWT, optionalAuthenticateJWT and requireGuideshipAdmin"
+     - "Make requireGuideshipAdmin grant direct access without login redirect"
+
+11. [src\middlewares\error.middleware.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\middlewares\error.middleware.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Global error and 404 middleware handlers"
+
+12. [src\models\guideship.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\guideship.model.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Data access model for Guideship Allotment Portal tables"
+     - "Ensure allocated_date is preserved and defaulted in createGuide, updateGuide, and evaluateApplication"
+
+13. [src\models\partTimePhd.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\partTimePhd.model.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PartTimePhdModel for part-time PhD scholars tracking"
+
+14. [src\models\phd.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\phd.model.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Model for PhD Full-Time Scholar Progress Tracking queries in MySQL vignan_rd"
+     - "Add dc_meetings_attended save and retrieve logic to PhdModel"
+     - "Insert dc_meetings_attended and retrieve them in getAllSubmissions"
+
+15. [src\models\portalLogin.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\portalLogin.model.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Model for portal_login table providing employee ID lookups, temp password assignment, and password updates"
+
+16. [src\models\proposal.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\proposal.model.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Data access model for ProjectPi Proposals tables"
+     - "Update ProposalModel getProposals and createProposalWithCoPIs to support all fields and filter flexibly"
+     - "Add scientist_name to INSERT INTO proposals in proposal.model.js"
+
+17. [src\models\publication.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\publication.model.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Data access model for Student Publication Tracker tables"
+
+18. [src\routes\auth.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\auth.routes.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Create AuthRoutes connecting auth endpoints to AuthController"
+     - "Add /api/auth/server-instance route"
+     - "Add portal login routes to auth.routes.js"
+     - "Add OTP routes to auth.routes.js"
+     - "Add part-time phd otp routes to auth.routes.js"
+
+19. [src\routes\guideship.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\guideship.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create GuideshipRoutes for guideship portal actions, views, and evaluation routes"
+
+20. [src\routes\index.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\index.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Create central route aggregator in src/routes/index.js"
+     - "Mount phdRoutes in routes aggregator"
+     - "Mount partTimePhd routes in routes index.js"
+
+21. [src\routes\partTimePhd.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\partTimePhd.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PartTimePhd router with routes for Part-Time scholar tracking"
+
+22. [src\routes\phd.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\phd.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Routes for PhD Scholar Tracking REST API endpoints"
+
+23. [src\routes\proposal.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\proposal.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create ProposalRoutes for ProjectPi proposals management API endpoints"
+
+24. [src\routes\publication.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\publication.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PublicationRoutes for student publication tracker APIs"
+
+25. [src\server.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\server.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create production server entry point in src/server.js"
+
+26. [src\services\auth.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\auth.service.js
+   Total Edits:   7
+   Summary of Modifications:
+     - "Authentication service for multi-application credential validation and session generation"
+     - "Embed bootId in JWT payloads and return serverBootId in getMe"
+     - "Add PortalLoginModel, mailer, logger and central portal super admin methods to auth.service.js"
+     - "Add central portal Super Admin methods to auth.service.js"
+     - "Dispatch email asynchronously in portalForgotPassword so HTTP response is instant"
+     - "Add generateUserOtp and verifyUserOtp to auth.service.js"
+     - "Add part-time phd portal names to auth.service.js"
+
+27. [src\services\guideship.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\guideship.service.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Create GuideshipService for handling guideship submissions, evaluations, analytics, and admin operations"
+     - "Accept allocatedDate in evaluateProposal service"
+     - "Connect mailer.sendApprovalEmail and mailer.sendRejectionEmail upon Dean evaluation in GuideshipService.evaluateProposal"
+
+28. [src\services\partTimePhd.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\partTimePhd.service.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PartTimePhdService for part-time scholars"
+
+29. [src\services\phd.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\phd.service.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PhdService to handle business logic for PhD Scholar Tracking"
+
+30. [src\services\proposal.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\proposal.service.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Create ProposalService for ProjectPi proposals CRUD and tracking operations"
+     - "Update ProposalService with formatProposal for dual camel/snake case and nice dates, tracking number support, and extra allowed update fields"
+     - "Add scientistName to formatProposal and allowed fields in proposal.service.js"
+
+31. [src\services\publication.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\publication.service.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create PublicationService with business logic for student publications and reimbursements"
+
+32. [src\utils\logger.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\utils\logger.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Structured console logging utility"
+
+33. [src\utils\mailer.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\utils\mailer.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Centralized mailer utility for email notifications and password resets"
+     - "Upgraded mailer.js with Microsoft 365 Outlook STARTTLS/TLS 1.2 configuration, official VFSTR Dean's office HTML email templates, and robust error handling"
+     - "Add high-visibility terminal printing for dispatched emails in dispatchMail"
+     - "Add sendOtpEmail to mailer.js"
+     - "Fix dispatchMail call and add text/html layout in sendOtpEmail"
+
+
+-------------------------------------------------------------------------------
+### 5. Database Schema & Reports (31 files)
+-------------------------------------------------------------------------------
+
+1. [.env]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\.env
+   Total Edits:   1
+   Summary of Modifications:
+     - "Root .env file for unified R&D platform"
+
+2. [generate_docs.py]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\generate_docs.py
+   Total Edits:   4
+   Summary of Modifications:
+     - "Script to generate comprehensive Word document for deployment architecture guide"
+     - "Fix backend_table rows count to include all 24 backend files"
+     - "Remove break statement in generate_docs backend table loop"
+     - "Move backend_data definition before doc.add_table call"
+
+3. [generate_security_report.py]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\generate_security_report.py
+   Total Edits:   2
+   Summary of Modifications:
+     - "Script to generate comprehensive 31-vulnerability assessment report in docx"
+     - "Fix raw string docstring in generate_security_report.py"
+
+4. [guideship_front_end\.env]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\.env
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update DB_NAME to vignan_rd in guideship .env"
+
+5. [guideship_front_end\views\admin_login.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\admin_login.html
+   Total Edits:   2
+   Summary of Modifications:
+     - "Update stylesheet, logo, and back link in admin_login.html"
+     - "Update logo src in admin_login.html"
+
+6. [guideship_front_end\views\apply_recognition.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\apply_recognition.html
+   Total Edits:   5
+   Summary of Modifications:
+     - "Update asset paths in apply_recognition.html"
+     - "Update logo image src in apply_recognition.html"
+     - "Add Portal Home link to apply_recognition.html navbar"
+     - "Point Dean button and #admin redirect directly to /guideship/dashboard"
+     - "Add University Outlook OTP Verification Gateway to apply_recognition.html"
+
+7. [guideship_front_end\views\demo_dashboard.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\demo_dashboard.html
+   Total Edits:   3
+   Summary of Modifications:
+     - "Update stylesheet, logo, and add portal link in demo_dashboard.html"
+     - "Add R&D Portal Home link to demo_dashboard.html sidebar"
+     - "Add Allocation Date to modal profile in demo_dashboard.html"
+
+8. [guideship_front_end\views\edit_guide.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\edit_guide.html
+   Total Edits:   3
+   Summary of Modifications:
+     - "Update stylesheet in edit_guide.html"
+     - "Update logo and nav menu in edit_guide.html"
+     - "Add allocation date input to edit_guide.html"
+
+9. [guideship_front_end\views\forgot_password.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\forgot_password.html
+   Total Edits:   2
+   Summary of Modifications:
+     - "Update stylesheet in forgot_password.html"
+     - "Add Central Portal back link in forgot_password.html"
+
+10. [guideship_front_end\views\proposals.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\proposals.html
+   Total Edits:   3
+   Summary of Modifications:
+     - "Update stylesheet in proposals.html"
+     - "Update logo and nav menu in proposals.html"
+     - "Add allocation date selection and submission to proposal evaluation modal"
+
+11. [guideship_front_end\views\rd_analytics.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\rd_analytics.html
+   Total Edits:   2
+   Summary of Modifications:
+     - "Update stylesheet in rd_analytics.html"
+     - "Update logo and nav menu in rd_analytics.html"
+
+12. [guideship_front_end\views\register_guide.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\register_guide.html
+   Total Edits:   3
+   Summary of Modifications:
+     - "Update stylesheet in register_guide.html"
+     - "Update logo and nav menu in register_guide.html"
+     - "Add allocated_date field to register_guide.html"
+
+13. [guideship_front_end\views\settings.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\settings.html
+   Total Edits:   4
+   Summary of Modifications:
+     - "Update stylesheet in settings.html"
+     - "Update logo and nav menu in settings.html"
+     - "Remove Security Credentials tab, panel, and password modals from settings.html"
+     - "Remove security credentials mention from settings header description"
+
+14. [implementation_plan.md]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\implementation_plan.md
+   Total Edits:   1
+   Summary of Modifications:
+     - "Detailed implementation plan for modularizing server.js into MVC/Service structure and auditing/pruning non-mandatory files"
+
+15. [merged_vignan_rd.sql]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\merged_vignan_rd.sql
+   Total Edits:   10
+   Summary of Modifications:
+     - "Consolidated MySQL schema script for vignan_rd containing all tables from student publication, guideship, and projectpi"
+     - "Add is_temp_password column to admin_users table in merged_vignan_rd.sql"
+     - "Add 1001 to seed admins in merged_vignan_rd.sql"
+     - "Add portal_login table schema and seed to merged_vignan_rd.sql"
+     - "Add PhD Scholar Tracking tables to merged_vignan_rd.sql"
+     - "Add courses_completed_details table to merged_vignan_rd.sql"
+     - "Add status_date column to journal_papers and conference_papers in merged_vignan_rd.sql"
+     - "Add scientist_name column to proposals table in merged_vignan_rd.sql"
+     - "Add user_email_otps table definition to merged_vignan_rd.sql"
+     - "Add Part-Time PhD Tracking table schemas to merged_vignan_rd.sql"
+
+16. [package.json]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\package.json
+   Total Edits:   3
+   Summary of Modifications:
+     - "Root package.json for unified R&D platform server"
+     - "Add test script to package.json"
+     - "Remove test script from package.json"
+
+17. [ProjectPi\.env]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\.env
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update DB_NAME to vignan_rd in ProjectPi .env"
+
+18. [ProjectPi\public\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+   Total Edits:   17
+   Summary of Modifications:
+     - "Support #admin hash and headerAdminLoginBtn in ProjectPi app.js"
+     - "Update checkAdminState, handleHashRoute, and gatewayAdminLoginBtn in app.js"
+     - "Update openLoginModal and closeLoginModal with focus and admin route support"
+     - "Fix isAdmin check in openExportModal"
+     - "Fix adminToggle.checked in CSV export"
+     - "Guard savedPiCode restore with !isAdminRoute"
+     - "Directly show Admin Dashboard on #admin without login modal"
+     - "Hide controls-section, portal home button and logout button in admin mode in app.js"
+     - "Keep navbar buttons hidden in user view in ProjectPi app.js"
+     - "Add normalizeProposal and defensive camel/snake-case field handling across ProjectPi app.js"
+     - "Add syncServerBootLifecycle in ProjectPi app.js to clear sessions on server restart"
+     - "Add scientistName, update section dropdown handling and modal display across app.js"
+     - "Add matchesScientist to openExportModal search filter in app.js"
+     - "Update personal proposals table cell to show submissionEndDate matching the column header"
+     - "Add selectors for University Outlook OTP verification in ProjectPi app.js"
+     - "Implement University Outlook OTP authentication handlers for ProjectPi"
+     - "Show verified PI banner upon session restoration"
+
+19. [ProjectPi\public\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\index.html
+   Total Edits:   10
+   Summary of Modifications:
+     - "Add Central R&D Portal link to ProjectPi index.html header"
+     - "Add Admin Login button in ProjectPi header"
+     - "Apply .portal-home-btn, .header-admin-login-btn, and .header-admin-logout-btn in index.html"
+     - "Add Admin Gateway Card to index.html"
+     - "Remove adminGatewayCard from index.html"
+     - "Remove Central Portal and Admin Login buttons from ProjectPi navbar"
+     - "Swap proposedAmount and projectScheme, and update submittedPanel fields in index.html"
+     - "Update modalSubmittedSection and updateSubmittedGroup in index.html"
+     - "Change modalTitle text color to black and modalProposedAmount to dark slate in index.html"
+     - "Upgrade ProjectPi gatekeeper to 2-step University Outlook OTP authentication and add verified PI banner"
+
+20. [ProjectPi\public\styles.css]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\styles.css
+   Total Edits:   6
+   Summary of Modifications:
+     - "Add high-contrast styling for Portal Home and Admin Login buttons in styles.css"
+     - "Fix header logout button visibility and add admin gateway styling"
+     - "Hide Central Portal and Logout buttons in Admin Mode in styles.css"
+     - "Hide portal-home-btn and header-admin-login-btn completely via CSS"
+     - "Clean up css rules in styles.css"
+     - "Remove orphan css lines"
+
+21. [server.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\server.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Master unified Express server for VFSTR R&D Platform running all 3 applications on port 3000"
+     - "Add auto-reconnect retry mechanism to database connection in server.js"
+     - "Add full forgot-password, change-password, and temp-password handling for Guideship in server.js"
+     - "Make sendResetEmail non-blocking in server.js"
+     - "Refactor root server.js from 997-line monolith to clean forwarder into src/server.js"
+
+22. [student publication\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\student publication\index.html
+   Total Edits:   2
+   Summary of Modifications:
+     - "Add Central Portal button to student publication index.html navbar"
+     - "Add CDN and local fallback links for remixicon, amazon-ember font, chart.js and xlsx"
+
+23. [student publication\js\api.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\student publication\js\api.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Defensively guard updateClaimStatus and addPublication against UI rendering exceptions"
+     - "Update initLocalMySQL to detect server restart and clear sessions immediately"
+
+24. [student publication\js\main.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\student publication\js\main.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Store serverBootId in sessionStorage on login in main.js"
+
+25. [student publication\js\ui.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\student publication\js\ui.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Add defensive checks to chart rendering methods and approval state cleanup"
+     - "Ensure State.filters is always an object in applyFilters"
+
+26. [tests\comprehensive_check.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\tests\comprehensive_check.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create comprehensive check script inspecting all pages, buttons, and keys"
+
+27. [tests\find_ids.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\tests\find_ids.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Find all IDs in student publication index.html"
+
+28. [tests\server.test.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\tests\server.test.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create automated integration test suite for Central R&D platform routes"
+
+29. [tests\simulate_approval.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\tests\simulate_approval.js
+   Total Edits:   7
+   Summary of Modifications:
+     - "Create simulation script to trace exact failure inside submitApprovePublication"
+     - "Add global.App in simulate_approval.js"
+     - "Provide value property on input mock in simulate_approval.js"
+     - "Add createElement to document in simulate_approval.js"
+     - "Add requestAnimationFrame to mock in simulate_approval.js"
+     - "Add addEventListener to elements mock"
+     - "Add database verification to simulate_approval.js"
+
+30. [tests\test_guideship_allocation.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\tests\test_guideship_allocation.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Automated test suite verifying allocation date functionality in Guideship roster"
+
+31. [tests\verify_project_pi_details.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\tests\verify_project_pi_details.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Create test script to verify ProjectPi details in tables and modal card"
+
+32. [merged_vignan_rd.sql]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\merged_vignan_rd.sql
+   Total Edits:   2
+   Summary of Modifications:
+     - "Add UNIQUE KEY uq_scholar_month (reg_no, current_month) on monthly_submissions table"
+     - "Add UNIQUE KEY uq_pt_scholar_month (reg_no, current_month) on part_time_monthly_submissions table"
+
+33. [src\models\phd.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\phd.model.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add duplicate check in saveMonthlySubmission, retrieve and record database log timestamp created_at, and add getSubmissionsByScholar"
+
+34. [src\models\partTimePhd.model.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\models\partTimePhd.model.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add duplicate check in saveMonthlySubmission, retrieve and record database log timestamp created_at, and add getSubmissionsByScholar for part-time scholars"
+
+35. [src\services\phd.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\phd.service.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add getScholarSubmissions service method for full-time scholars"
+
+36. [src\services\partTimePhd.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\partTimePhd.service.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add getScholarSubmissions service method for part-time scholars"
+
+37. [src\controllers\phd.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\phd.controller.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add getScholarSubmissions endpoint handler and return HTTP 409 DUPLICATE_SUBMISSION on duplicate monthly entries"
+
+38. [src\controllers\partTimePhd.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\partTimePhd.controller.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add getScholarSubmissions endpoint handler and return HTTP 409 DUPLICATE_SUBMISSION on duplicate monthly entries for part-time"
+
+39. [src\routes\phd.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\phd.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add GET /api/scholar-submissions/:regNo and aliases for scholar submission history"
+
+40. [src\routes\partTimePhd.routes.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\routes\partTimePhd.routes.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add GET /api/part-time-scholar-submissions/:regNo and aliases for part-time scholar submission history"
+
+41. [PHD Scholar Tracking\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\index.html
+   Total Edits:   3
+   Summary of Modifications:
+     - "Add History button with count badge in verified banner and Scholar History Modal"
+     - "Completely remove the duplicate submission alert banner and View Report button from the page as reports are viewed directly via History modal"
+
+42. [PHD Scholar Tracking\styles.css]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\styles.css
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add z-index and card styling for scholarHistoryModal and scholar-history-item"
+
+43. [PHD Scholar Tracking\js\config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\config.js
+   Total Edits:   4
+   Summary of Modifications:
+     - "Add DOM references for History button, count badge, and scholarHistoryModal"
+     - "Remove alreadySubmittedAlert, submittedMonthText, and btnViewCurrentSubmittedReport references from DOM config"
+
+44. [PHD Scholar Tracking\js\api.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\api.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add fetchScholarSubmissionsAPI and update saveScholarSubmission to propagate HTTP 409 duplicate errors"
+
+45. [PHD Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\portal.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Add checkExistingSubmissionForMonth, renderScholarHistoryList, updateScholarHistory, openScholarHistoryModal, closeScholarHistoryModal, and enforce duplicate prevention on submit"
+     - "Remove duplicate alert banner DOM operations and directly lock submit button when already submitted"
+
+46. [PHD Scholar Tracking\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\app.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add scholarHistoryModal to global Escape key dismiss handler"
+
+47. [PHD Part Time Scholar Tracking\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\index.html
+   Total Edits:   3
+   Summary of Modifications:
+     - "Add History button with count badge in verified banner and Scholar History Modal for part-time scholars"
+     - "Completely remove the duplicate submission alert banner and View Report button from the page as reports are viewed directly via History modal"
+
+48. [PHD Part Time Scholar Tracking\styles.css]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\styles.css
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add z-index and card styling for scholarHistoryModal and scholar-history-item in part-time tracking"
+
+49. [PHD Part Time Scholar Tracking\js\config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\config.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Add DOM references for part-time History button, count badge, and scholarHistoryModal"
+     - "Remove alreadySubmittedAlert, submittedMonthText, and btnViewCurrentSubmittedReport references from DOM config"
+
+50. [PHD Part Time Scholar Tracking\js\api.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\api.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add fetchScholarSubmissionsAPI and update saveScholarSubmission for part-time tracking"
+
+51. [PHD Part Time Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\portal.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Add checkExistingSubmissionForMonth, renderScholarHistoryList, updateScholarHistory, openScholarHistoryModal, closeScholarHistoryModal, and enforce duplicate prevention on submit for part-time tracking"
+     - "Remove duplicate alert banner DOM operations and directly lock submit button when already submitted"
+
+52. [PHD Part Time Scholar Tracking\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\app.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add scholarHistoryModal to global Escape key dismiss handler for part-time tracking"
+
+53. [scratch\deduplicate_and_add_unique.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\scratch\deduplicate_and_add_unique.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Cleanup older duplicate rows in monthly_submissions and add UNIQUE KEY uq_scholar_month (reg_no, current_month)"
+
+54. [scratch\verify_tasks.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\scratch\verify_tasks.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Automated end-to-end test suite verifying duplicate prevention, log timestamp retrieval in DB, scholar history modal APIs, and absence of removed duplicate alert banner in HTML"
+
+55. [merged_vignan_rd.sql]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\merged_vignan_rd.sql
+   Total Edits:   3
+   Summary of Modifications:
+     - "Update user_email_otps table schema with mobile column and idx_emp_mobile_portal index"
+
+56. [src\controllers\auth.controller.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\auth.controller.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Support mobile parameter in sendOtp and verifyOtp controller methods"
+
+57. [src\services\auth.service.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\services\auth.service.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update generateUserOtp and verifyUserOtp with mobile number validation, registration checks for full-time and part-time scholars, and prominent terminal stdout OTP printing"
+
+58. [guideship_front_end\views\apply_recognition.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\guideship_front_end\views\apply_recognition.html
+   Total Edits:   1
+   Summary of Modifications:
+     - "Convert Outlook email verification to Faculty Mobile Verification with Employee ID and 10-digit mobile number"
+
+59. [ProjectPi\public\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\index.html
+   Total Edits:   1
+   Summary of Modifications:
+     - "Convert gatekeeper card to Faculty Mobile Verification Gateway with Employee Code and 10-digit mobile number"
+
+60. [ProjectPi\public\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Wire mobile OTP generation, verification, and countdown timer in ProjectPi gatekeeper handlers"
+
+61. [PHD Scholar Tracking\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\index.html
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update gatekeeper to Scholar Mobile Verification with Registration Number and 10-digit mobile number"
+
+62. [PHD Scholar Tracking\js\config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\config.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add DOM element selectors for Scholar Mobile OTP gatekeeper"
+
+63. [PHD Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\portal.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Implement Mobile OTP send, verify, countdown timer, resend, quick chips, and session persistence in PHD Scholar Tracking"
+
+64. [PHD Part Time Scholar Tracking\index.html]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\index.html
+   Total Edits:   1
+   Summary of Modifications:
+     - "Update gatekeeper to Part-Time Scholar Mobile Verification with Registration Number and 10-digit mobile number"
+
+65. [PHD Part Time Scholar Tracking\js\config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\config.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Add DOM element selectors for Part-Time Scholar Mobile OTP gatekeeper"
+
+66. [PHD Part Time Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\portal.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Implement Mobile OTP send, verify, countdown timer, resend, quick chips, and session persistence in PHD Part Time Scholar Tracking"
+
+67. [scratch\test_mobile_otp.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\scratch\test_mobile_otp.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Automated integration test verifying Mobile OTP generation, verification, invalid registration rejection, and terminal output across all 4 applications"
+
+68. [PHD Scholar Tracking\js\dynamicCards.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\dynamicCards.js
+   Total Edits:   4
+   Summary of Modifications:
+     - "Add Synopsis, In Progress, Thesis Submission to Recommendations dropdown; change CRP dropdown label to CRP (0 - 12) with values 0 to 12 and format 0 / 12, 1 / 12, ..., 12 / 12; enable Formative and Summative score inputs and auto-calculation for NPTEL courses"
+
+69. [PHD Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\portal.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Collect formativeMarks and summativeMarks for NPTEL courses on form submit"
+
+70. [PHD Scholar Tracking\js\admin.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\admin.js
+   Total Edits:   3
+   Summary of Modifications:
+     - "Collect formativeMarks and summativeMarks for NPTEL courses in admin modal"
+
+71. [PHD Scholar Tracking\js\report.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\report.js
+   Total Edits:   10
+   Summary of Modifications:
+     - "Display formative/summative marks for NPTEL courses and handle CRP 0 in rating display"
+
+72. [PHD Part Time Scholar Tracking\js\dynamicCards.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\dynamicCards.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Add Synopsis, In Progress, Thesis Submission to Recommendations dropdown; change CRP dropdown label to CRP (0 - 12) with values 0 to 12 and format 0 / 12, 1 / 12, ..., 12 / 12; enable Formative and Summative score inputs and auto-calculation for NPTEL courses"
+
+73. [PHD Part Time Scholar Tracking\js\portal.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\portal.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Collect formativeMarks and summativeMarks for NPTEL courses on form submit"
+
+74. [PHD Part Time Scholar Tracking\js\admin.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\admin.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Collect formativeMarks and summativeMarks for NPTEL courses in admin modal"
+
+75. [PHD Part Time Scholar Tracking\js\report.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking\js\report.js
+   Total Edits:   5
+   Summary of Modifications:
+     - "Display formative/summative marks for NPTEL courses and handle CRP 0 in rating display"
+     - "Update Part-Time report view to match required columns in Scholar Permanent Profile and Monthly Progress"
+
+76. [merged_vignan_rd.sql]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\merged_vignan_rd.sql
+   Total Edits:   6
+   Summary of Modifications:
+     - "Add dc_meetings_attended table schema definition for Full-Time PhD tracking"
+     - "Add demo data inserts for part_time_scholar_profiles and part_time_monthly_submissions with child tables"
+     - "Update ra_type to Industry and Academic for Part-Time scholar demo profiles and submissions"
+
+77. [scratch\test_dc_and_nptel_updates.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\scratch\test_dc_and_nptel_updates.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Automated test suite verifying DC Recommendations dropdown options, CRP 0-12 dropdown, and NPTEL formative/summative scoring across Full-Time and Part-Time portals"
+
+78. [scratch\seed_part_time_demo_data.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\scratch\seed_part_time_demo_data.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Database seeder script populating 8 master scholar profiles and 5 monthly submissions with coursework, journals, conferences, workshops, and DC reviews for Part-Time Ph.D Scholars Tracking"
+     - "Update ra_type values to Industry and Academic"
+
+79. [scratch\test_part_time_form_updates.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\scratch\test_part_time_form_updates.js
+   Total Edits:   1
+   Summary of Modifications:
+     - "Automated test verifying Part-Time scholar user form fields and API submission flow"
+
+80. [fornt_landing_page\js\portals-config.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\fornt_landing_page\js\portals-config.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Remove Ph.D Part-Time Tracking application from internal portal landing page and update active portals count to 4"
+
+81. [src\app.js]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src\app.js
+   Total Edits:   2
+   Summary of Modifications:
+     - "Unmount /phd-part-time-tracking and /part-time-phd-tracking routes from internal university server for external deployment"
+
+82. [phd-part-time-portal\supabase_schema.sql]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\phd-part-time-portal\supabase_schema.sql
+   Total Edits:   1
+   Summary of Modifications:
+     - "Complete Supabase PostgreSQL DDL migration script with 8 tables, indexes, RLS policies, and seed data"
+
+83. [phd-part-time-portal\package.json & vercel.json]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\phd-part-time-portal\package.json
+   Total Edits:   1
+   Summary of Modifications:
+     - "Vercel serverless configuration and dependencies setup for @supabase/supabase-js"
+
+84. [phd-part-time-portal\api\ (Vercel Serverless Functions)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\phd-part-time-portal\api
+   Total Edits:   1
+   Summary of Modifications:
+     - "Built serverless functions for OTP generation/verification, profile lookup, monthly submissions, and Dean R&D admin login"
+
+85. [phd-part-time-portal\public\ (Frontend Assets)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\phd-part-time-portal\public
+   Total Edits:   1
+   Summary of Modifications:
+     - "Standalone frontend bundle with Supabase client integration and cleaned 7-column profile form"
+
+86. [PHD Part Time Scholar Tracking\ (Directory Deleted)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Part Time Scholar Tracking
+   Status: DELETED
+   Summary of Modifications:
+     - "Removed deprecated embedded application directory from internal university portal after successful Vercel deployment"
+
+87. [phd-part-time-portal\ (Files Purged)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\phd-part-time-portal
+   Status: PURGED / PUSHED TO GITHUB
+   Summary of Modifications:
+     - "Cleaned local working copy after repository push to GitHub (Vignan-RnD-part_time_scholars_tracking) and deployment to Vercel"
+
+88. [src\ (Backend Cleanup for Part-Time PhD)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\src
+   Status: CLEANED
+   Summary of Modifications:
+     - "Deleted partTimePhd.routes.js, partTimePhd.controller.js, partTimePhd.service.js, and partTimePhd.model.js from src/"
+     - "Removed partTimePhdRoutes from src/routes/index.js and unmounted aliases from src/routes/auth.routes.js and src/app.js"
+
+89. [Project Proposals Management (ProjectPi)\public\ (index.html, styles.css, app.js, fonts/)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Removed user-side OTP verification step (Step 2 passcode, timer, resend button) from Project Proposals Management"
+     - "Transformed gatekeeper into direct faculty & PI gateway enabling instantaneous proposal submission and dashboard access upon entering employee credentials"
+     - "Implemented automatic .doc application form download immediately after project proposal form submission"
+     - "Added 'Download Doc' action buttons for each entry in the admin portal proposals table, personal investigator dashboard, and proposal detailed view modal"
+     - "Formatted Word document layout to match the official VFSTR Project Details Application Form line-by-line (Investigator Details, Project Metadata, Funding & Schemes, Project Status) without signatures"
+     - "Switched entire application typography to Amazon Ember (Amazon Amber), installing local WOFF2 font assets and @font-face rules with CDN fallbacks"
+
+90. [Ph.D Full-Time Scholars Tracking (PHD Scholar Tracking)\ (index.html, portal.js, config.js, app.js)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Removed user-side OTP verification login from Ph.D Full-Time Scholars Tracking"
+     - "Equipped scholar portal with direct Registration Number verification lookup, sample test chips, and instant form unlocking"
+
+91. [Project Proposals Management (ProjectPi)\public\ (index.html, styles.css, app.js)]
+   Absolute Path: c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Separated Project Status workflow as per Dean R&D directives:"
+     - "User Panel (Proposal Form): Streamlined registration so faculty investigators submit projects directly under 'Submitted' status without access to evaluation/sanction dropdowns or rejection feedback."
+     - "Admin Panel (Dean R&D): Fixed status update controls visibility (resolved inverted admin check), added dedicated '✏️ Update Status' action button for every proposal entry in the admin table, and styled Dean R&D Status Update section with status transitions (Submitted, Invite for Presentation, Not Recommended, Sanctioned)."
+
+92. [Project Proposals Management (ProjectPi) & Backend Server (src/)]
+   Absolute Paths:
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\config\db.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\app.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\models\proposal.model.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\services\proposal.service.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\proposal.controller.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\routes\proposal.routes.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\index.html
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\styles.css
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Implemented comprehensive status proof document upload and database storage system:"
+     - "Database Schema: Added proof_file_name (VARCHAR 255), proof_file_type (VARCHAR 100), and proof_file_data (LONGTEXT base64) columns to the proposals table in MySQL vignan_rd database, with self-healing migration in db.js."
+     - "Backend Architecture: Configured Express 50MB body-parser limits in src/app.js; updated ProposalModel and ProposalService to persist and format proof metadata and data; created GET /api/proposals/:id/proof binary streaming endpoint in ProposalController with automatic Base64 decoding, MIME headers, and inline Content-Disposition."
+     - "Dean / Admin UI: Integrated interactive drag-and-drop file upload zone into the Dean Status Update form supporting PDF (.pdf), Word (.doc, .docx), and Image (.jpg, .jpeg, .png) formats up to 50MB with instant preview, file size/type badges, and remove button."
+     - "Investigation & Admin Portals: Added dedicated proof badges ('📎 Proof') with quick-view and download actions across Admin Proposals table, Investigator Dashboard, and Detailed View Modal."
+     - "Word Application Document: Updated exported .doc file to record attached status proof filename in Section 4 (Project Status)."
+
+93. [Project Proposals Management (ProjectPi)\public\ (index.html, styles.css, app.js)]
+   Absolute Paths:
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\index.html
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\styles.css
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Task 1 (Remove Switch PI Button): Removed the 'Switch PI Profile' button from the Investigator Dashboard header; updated active investigator session banner logout button to 'Logout'."
+     - "Task 2 (User Panel Project Details Form Status Dropdown & Proof Upload):"
+     - "Restored Project Status dropdown (<select id=\"projectStatus\">) in Section 4 of the user panel Project Details Form with options: Submitted, Invite for Presentation, Not Recommended, and Sanctioned."
+     - "For 'Submitted': Removed Scientist Name, Section Number, and Project Tracking Number fields."
+     - "For 'Invite for Presentation': Removed Date of Presentation field."
+     - "For 'Not Recommended': Added required Comments / Review Feedback textarea (Reviewer Comments / Reasons for Not Recommended)."
+     - "For 'Sanctioned': Removed Sanctioned Amount and Sanction Order Number fields."
+     - "Added interactive Status Proof Document drag-and-drop upload zone in the user panel proposal form for all dropdown options, supporting PDF, Word (.doc, .docx), and Images (.jpg, .jpeg, .png) up to 50MB, saving the files directly into MySQL database (proof_file_name, proof_file_type, proof_file_data) on proposal creation."
+     - "Fixed 'formatBytes is not defined' runtime ReferenceError in app.js on file selection, enabling smooth client-side rendering of proof cards and file size indicators across user and admin upload interfaces."
+     - "Resolved 'read ECONNRESET' (MySQL ER_NET_PACKET_TOO_LARGE) error: Configured MySQL max_allowed_packet to 64MB in db.js, and implemented client-side high-resolution image optimization in processProofFile, ensuring reliable proposal submission and database storage for documents and scans up to 50MB."
+
+94. [Admin Panel - Submitted Project Proposals View Modal (ProjectPi\public\index.html, app.js)]
+   Absolute Paths:
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\index.html
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Admin View Modal Section Removal: Removed the 'Upload Status Proof Document (PDF, DOC, DOCX, JPG, PNG)' section, dropzone, and existing proof card from the Dean status update form inside #detailsModal in index.html and app.js."
+     - "Modal Proof Content Cleanup: Removed inline <img> preview rendering from #modalProofContent in openDetailsModal, keeping the display neat with the verified document details bar, 'Open Proof' in new tab, and 'Download' action buttons."
+     - "Database Proof Cleanup: Cleared uploaded test image data (proof_file_name, proof_file_type, proof_file_data set to NULL) for proposal ID 8 ('6-Day AI Workshop Schedule.png') in the MySQL database."
+
+95. [ProjectPi Database Verification & Demo Data Cleanup (ProjectPi\public\app.js, MySQL vignan_rd)]
+   Absolute Paths:
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+     - Database: vignan_rd (tables: proposals, copis, admins)
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Database Architecture & Tables Audit: Verified ProjectPi connection to MySQL database vignan_rd via src/config/db.js. Documented complete schema with 3 relational tables: `proposals` (32 columns storing metadata, status, and longtext proof document blobs), `copis` (3 columns linked to proposals via FOREIGN KEY ON DELETE CASCADE), and `admins` (8 columns managing credentials and password resets)."
+     - "Admin Panel Demo Data Purge: Removed 6 automated test/demo proposals (IDs 3, 4, 5, 6, 7, 8) from the MySQL `proposals` table, clearing out dummy proposals (Drone Swarm, Quantum SCADA, Railway Track, Test Large, Office Work test, and samodabicbn) from the admin panel table view."
+     - "Codebase Seed Array Cleanup: Removed the legacy `seedProposals` dummy dataset (lines 180-247) from ProjectPi\public\app.js to ensure zero hardcoded demo data remains in client scripts."
+
+96. [Proposals Table Actions & Status Column Streamlining (ProjectPi\public\app.js)]
+   Absolute Paths:
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Actions Column Streamlining: Removed the separate 'Download Doc', 'Proof', and 'Update Status' buttons from the table row Actions cell in both `renderProposalsTable` (Submitted Project Proposals) and `renderPersonalProposals` (Investigator Dashboard). Retained solely the '👁️ View' button, through which document download, proof viewing/downloading, and status editing are all centrally available inside the modal."
+     - "Status Column Cleanup: Removed the separate '📎 Proof' badge/link adjacent to the status badge in both proposals tables, keeping the Status column clean with only the status pill."
+97. [Admin Record Cleanup - Deleted ADMIN01 (MySQL vignan_rd.admins)]
+   Absolute Paths:
+     - Database: vignan_rd (table: admins)
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Admin Account Purge: Executed SQL query `DELETE FROM admins WHERE emp_code = 'ADMIN01'` to remove the legacy 'ADMIN01' account (deanrd@vignan.ac.in). Active admin account retained: `1001` (dean.rd@vignan.ac.in)."
+
+98. [Uploaded Proof Image Purge - Proposal ID 1 (MySQL vignan_rd.proposals)]
+   Absolute Paths:
+     - Database: vignan_rd (table: proposals)
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Uploaded Image Content Purge: Cleared uploaded proof image and feedback document data from Proposal ID 1 (`proof_file_name = NULL`, `proof_file_type = NULL`, `proof_file_data = NULL`, `feedback_file_name = NULL`), completely removing the 3.75MB test image ('AI for Administrative Excellence Workshop Poster.png') from the database and eliminating any proof image display in the Admin Submitted Project Proposals View modal."
+
+
+99. [Disk Drive Storage Migration for Proof Documents (src/config, src/routes, src/controllers, src/models, src/services, ProjectPi/public/app.js, MySQL)]
+   Absolute Paths:
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\config\environment.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\routes\proposal.routes.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\proposal.controller.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\models\proposal.model.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\src\services\proposal.service.js
+     - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+     - Database: vignan_rd (table: proposals)
+   Status: MODIFIED
+   Summary of Modifications:
+     - "Disk Drive Storage Architecture: Migrated proof document storage from database BLOB/LongText to dedicated Disk Drive / Filesystem storage (`uploads/proofs/` with dynamic support for `D:\rd_uploads\proofs` or custom `UPLOAD_DIR` in `.env`)."
+     - "Database Optimization: Added `proof_file_path` (VARCHAR(500)) and `proof_file_size` (BIGINT) columns to MySQL `proposals` table, keeping the database light, fast, and 100% BLOB-free."
+     - "Streaming Upload Route: Implemented `POST /api/proposals/upload-proof` using Multer streaming disk storage supporting PDF, Word (.doc, .docx), and Image files up to 50MB."
+     - "Zero-Memory Serving: Configured `GET /api/proposals/:id/proof` using Express `res.sendFile()` with OS-level streaming, zero-copy file transfer, and automatic headers."
+     - "Client-Side Integration: Updated ProjectPi proposal form file selection to upload directly via FormData, avoiding client-side Base64 RAM bloat and eliminating MySQL packet timeouts."
+
+100. [Project PI Gateway Email Restriction, Label Updates & Funding Agency Custom Option]
+    Absolute Paths:
+      - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\index.html
+      - c:\Users\mahen\OneDrive\Desktop\rd\ProjectPi\public\app.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\src\services\proposal.service.js
+    Status: MODIFIED
+    Summary of Modifications:
+      - "Gateway PI Email Domain Enforcement: Restricted PI email strictly to '@vignan.ac.in' at the verification gateway level (HTML5 pattern + JS validation rejecting @gmail.com, @yahoo.com, etc.), and enforced domain check in backend `ProposalService.createProposal`."
+      - "Duration Label Alignment: Updated the label of 'Duration of Project' to 'Duration of the Project' in the Project Details Form and the Word document export template."
+      - "Funding Agency 'Other' Option: Added 'Other' option to the Funding Agency dropdown list. When selected, an input field dynamically appears allowing the user to specify their custom funding agency name, which seamlessly submits to the database."
+      - "Scheme Label Renaming: Renamed 'Project Scheme' to 'Scheme' across the Project Details Form, Word document export, details modal, and admin column listings."
+
+===============================================================================
+End of Modified Files Audit Record.
+===============================================================================

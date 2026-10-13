@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="amberGlowTop" cx="20%" cy="10%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#d97706" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#080d1a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="indigoGlowBot" cx="80%" cy="90%" r="60%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.12"/>
+      <stop offset="50%" stop-color="#1d4ed8" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#080d1a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bgSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070b14"/>
+      <stop offset="40%" stop-color="#0d1527"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+    <linearGradient id="buildingGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162238" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0a101d" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="buildingGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e2e4a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0d1627" stop-opacity="0.9"/>
+    </linearGradient>
+    <pattern id="campusGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(245, 158, 11, 0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Deep Atmosphere Base -->
+  <rect width="100%" height="100%" fill="url(#bgSky)"/>
+  <rect width="100%" height="100%" fill="url(#campusGrid)"/>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="380" cy="180" r="450" fill="url(#amberGlowTop)"/>
+  <circle cx="1600" cy="850" r="600" fill="url(#indigoGlowBot)"/>
+
+  <!-- Geometric Architectural Campus Silhouettes (Vignan Tech & Research Centers) -->
+  <g opacity="0.35">
+    <!-- Distant Academic Blocks -->
+    <polygon points="120,680 280,620 420,680 420,1080 120,1080" fill="url(#buildingGrad2)"/>
+    <polygon points="450,580 620,540 780,580 780,1080 450,1080" fill="url(#buildingGrad2)"/>
+    <polygon points="1100,560 1350,510 1520,560 1520,1080 1100,1080" fill="url(#buildingGrad2)"/>
+    <polygon points="1560,620 1780,570 1920,610 1920,1080 1560,1080" fill="url(#buildingGrad2)"/>
+
+    <!-- Grand Central Research Tower & Dome / Modern Canopy -->
+    <path d="M 750 1080 L 750 480 Q 960 380 1170 480 L 1170 1080 Z" fill="url(#buildingGrad1)"/>
+    <!-- Glass Atrium Lines with Amber Glow -->
+    <line x1="960" y1="390" x2="960" y2="1080" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.25"/>
+    <line x1="850" y1="440" x2="850" y2="1080" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.15"/>
+    <line x1="1070" y1="440" x2="1070" y2="1080" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.15"/>
+
+    <!-- Lit Window Arrays -->
+    <g fill="#fbbf24" opacity="0.2">
+      <rect x="800" y="520" width="8" height="12" rx="1"/>
+      <rect x="830" y="520" width="8" height="12" rx="1"/>
+      <rect x="890" y="520" width="8" height="12" rx="1"/>
+      <rect x="920" y="520" width="8" height="12" rx="1"/>
+      <rect x="1000" y="520" width="8" height="12" rx="1"/>
+      <rect x="1030" y="520" width="8" height="12" rx="1"/>
+      <rect x="1090" y="520" width="8" height="12" rx="1"/>
+      <rect x="1120" y="520" width="8" height="12" rx="1"/>
+
+      <rect x="800" y="560" width="8" height="12" rx="1"/>
+      <rect x="830" y="560" width="8" height="12" rx="1"/>
+      <rect x="890" y="560" width="8" height="12" rx="1"/>
+      <rect x="920" y="560" width="8" height="12" rx="1"/>
+      <rect x="1000" y="560" width="8" height="12" rx="1"/>
+      <rect x="1030" y="560" width="8" height="12" rx="1"/>
+      <rect x="1090" y="560" width="8" height="12" rx="1"/>
+      <rect x="1120" y="560" width="8" height="12" rx="1"/>
+
+      <rect x="800" y="600" width="8" height="12" rx="1"/>
+      <rect x="830" y="600" width="8" height="12" rx="1"/>
+      <rect x="890" y="600" width="8" height="12" rx="1"/>
+      <rect x="920" y="600" width="8" height="12" rx="1"/>
+      <rect x="1000" y="600" width="8" height="12" rx="1"/>
+      <rect x="1030" y="600" width="8" height="12" rx="1"/>
+      <rect x="1090" y="600" width="8" height="12" rx="1"/>
+      <rect x="1120" y="600" width="8" height="12" rx="1"/>
+    </g>
+
+    <!-- Contemporary Campus Gateway Pillars -->
+    <rect x="300" y="700" width="24" height="380" fill="#1b2a45"/>
+    <rect x="360" y="680" width="24" height="400" fill="#1e2e4a"/>
+    <rect x="1560" y="680" width="24" height="400" fill="#1e2e4a"/>
+    <rect x="1620" y="700" width="24" height="380" fill="#1b2a45"/>
+  </g>
+
+  <!-- Ambient Amber Horizon Beam -->
+  <path d="M 0 1080 Q 960 920 1920 1080 L 1920 1080 L 0 1080 Z" fill="#f59e0b" opacity="0.04"/>
+</svg>

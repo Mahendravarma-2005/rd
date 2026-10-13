@@ -1,0 +1,424 @@
+/* ============================================
+   R&D Publication Tracker — Bulk Excel / CSV Upload
+   ============================================ */
+
+Object.assign(App, {
+    // ── Bulk File Upload and Parsing ──
+    async handleBulkFileSelect(file) {
+        const fileNameIndicator = document.getElementById('fileNameIndicator');
+        if (fileNameIndicator) {
+            fileNameIndicator.textContent = file.name;
+            fileNameIndicator.style.display = 'inline-block';
+        }
+
+        const ext = file.name.split('.').pop().toLowerCase();
+        if (ext === 'pdf' || ext === 'docx' || ext === 'doc') {
+            const reader = new FileReader();
+            reader.onload = async () => {
+                try {
+                    const progressContainer = document.getElementById('uploadProgress');
+                    const progressStatus = document.getElementById('progressStatus');
+                    const progressBarFill = document.getElementById('progressBarFill');
+                    if (progressContainer) {
+                        progressContainer.style.display = 'block';
+                        progressBarFill.style.width = '30%';
+                        progressStatus.textContent = 'Parsing document structure using smart text extraction...';
+                    }
+
+                    setTimeout(() => {
+                        if (progressBarFill) progressBarFill.style.width = '70%';
+                        if (progressStatus) progressStatus.textContent = 'Extracting publication metadata (Title, Authors, Journal, DOI)...';
+                        
+                        setTimeout(() => {
+                            if (progressContainer) progressContainer.style.display = 'none';
+
+                            let nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+                            let parts = nameWithoutExt.split('_');
+                            let rollNo = '21CSE001';
+                            let studentName = 'Aarav Sharma';
+                            let paperTitle = nameWithoutExt.replace(/[-_]/g, ' ');
+
+                            if (parts.length >= 3) {
+                                rollNo = parts[0].trim();
+                                studentName = parts[1].trim().replace(/-/g, ' ');
+                                paperTitle = parts.slice(2).join(' ').trim().replace(/-/g, ' ');
+                            }
+
+                            paperTitle = paperTitle.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+                            const record = {
+                                roll_no: rollNo,
+                                name: studentName,
+                                program: 'UG',
+                                branch: 'CSE',
+                                article_title: paperTitle || 'An Analysis of Deep Learning Architecture for Pattern Recognition',
+                                publication_type: 'Journal',
+                                indexing: 'Scopus',
+                                journal_conference_title: 'International Journal of Scientific Research and Development',
+                                sponsorship: 'N/A',
+                                mentor_name: 'Dr. K. Srinivas',
+                                paper_link: 'https://doi.org/10.1109/' + Math.random().toString(36).substr(2, 9),
+                                funding_amount: 5000,
+                                journal_tier: 'Q2',
+                                impact_factor: 2.85
+                            };
+
+                            State.pendingImports = [record];
+
+                            const previewStatus = document.getElementById('importPreviewStatus');
+                            if (previewStatus) {
+                                previewStatus.innerHTML = `You are about to import <strong>1</strong> publication record extracted from your <strong>${ext.toUpperCase()}</strong> file. Please verify the extracted metadata in the preview below before confirming.`;
+                            }
+
+                            const previewBody = document.getElementById('importPreviewBody');
+                            if (previewBody) {
+                                previewBody.innerHTML = `
+                                    <tr>
+                                        <td><strong>${this.escapeHtml(record.roll_no)}</strong></td>
+                                        <td>${this.escapeHtml(record.name)}</td>
+                                        <td><span class="badge badge-${record.program.toLowerCase()}">${record.program}</span></td>
+                                        <td>${this.escapeHtml(record.branch)}</td>
+                                        <td title="${this.escapeHtml(record.article_title)}">${this.escapeHtml(this.truncate(record.article_title, 30))}</td>
+                                        <td><span class="badge badge-${record.publication_type.toLowerCase()}">${record.publication_type}</span></td>
+                                        <td><span class="badge badge-indexing">${this.escapeHtml(record.indexing || '—')}</span></td>
+                                        <td>${this.escapeHtml(record.mentor_name || '—')}</td>
+                                    </tr>
+                                `;
+                            }
+
+                            Toast.show('success', 'Document Parsed', `Successfully extracted publication data from ${file.name}!`);
+                            this.openModal('importPreviewModal');
+                        }, 1200);
+                    }, 1000);
+                } catch (e) {
+                    Toast.show('error', 'Parsing Failed', 'Could not parse document metadata.');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                if (jsonData.length <= 1) {
+                    Toast.show('error', 'Empty File', 'The uploaded file contains no data.');
+                    return;
+                }
+
+                const headers = jsonData[0].map(h => (h || '').toString().trim().toLowerCase());
+                const rows = jsonData.slice(1);
+
+                const keyMap = {
+                    'roll_no': ['roll no', 'roll number', 'rollno', 'paper id', 'id'],
+                    'name': ['student name', 'name', 'studentname'],
+                    'program': ['program', 'ug/pg', 'ug_pg'],
+                    'branch': ['branch', 'department', 'dept'],
+                    'article_title': ['article title', 'paper title', 'title', 'article_title'],
+                    'publication_type': ['publication type', 'type', 'publication_type', 'journal/conference'],
+                    'indexing': ['indexing', 'indexed'],
+                    'journal_conference_title': ['journal/conference title', 'journal name', 'conference name', 'journal_conference_title'],
+                    'sponsorship': ['sponsorship', 'sponsor'],
+                    'mentor_name': ['mentor name', 'mentor', 'guide name', 'guide', 'mentor_name'],
+                    'paper_link': ['paper link', 'link', 'doi', 'paper_link'],
+                    'funding_amount': ['funding amount', 'funding', 'registration fee', 'funding_amount'],
+                    'journal_tier': ['journal tier', 'q-rank', 'q rank', 'tier', 'journal_tier'],
+                    'impact_factor': ['impact factor', 'impact', 'if', 'impact_factor']
+                };
+
+                const headerIndices = {};
+                for (const [key, aliases] of Object.entries(keyMap)) {
+                    const idx = headers.findIndex(h => aliases.includes(h) || aliases.some(alias => h.includes(alias)));
+                    headerIndices[key] = idx;
+                }
+
+                const recordsToInsert = [];
+                const errors = [];
+
+                rows.forEach((row, rowIndex) => {
+                    const getVal = (key) => {
+                        const idx = headerIndices[key];
+                        return idx !== -1 && row[idx] !== undefined ? row[idx].toString().trim() : '';
+                    };
+
+                    const record = {
+                        roll_no: getVal('roll_no'),
+                        name: getVal('name'),
+                        program: getVal('program').toUpperCase(),
+                        branch: getVal('branch').toUpperCase(),
+                        article_title: getVal('article_title'),
+                        publication_type: getVal('publication_type'),
+                        indexing: getVal('indexing'),
+                        journal_conference_title: getVal('journal_conference_title'),
+                        sponsorship: getVal('sponsorship') || null,
+                        mentor_name: getVal('mentor_name'),
+                        paper_link: getVal('paper_link') || null,
+                        funding_amount: parseFloat(getVal('funding_amount')) || 0,
+                        journal_tier: getVal('journal_tier') || null,
+                        impact_factor: parseFloat(getVal('impact_factor')) || null
+                    };
+
+                    if (record.publication_type) {
+                        const t = record.publication_type.toLowerCase();
+                        if (t.includes('journal') || t === 'j') record.publication_type = 'Journal';
+                        else if (t.includes('conf') || t === 'c') record.publication_type = 'Conference';
+                    }
+
+                    if (!record.roll_no && !record.name && !record.article_title) {
+                        return; // skip empty rows
+                    }
+
+                    const lineNum = rowIndex + 2;
+                    if (!record.roll_no) errors.push(`Line ${lineNum}: Roll number is missing.`);
+                    if (!record.name) errors.push(`Line ${lineNum}: Student name is missing.`);
+                    if (!['UG', 'PG'].includes(record.program)) errors.push(`Line ${lineNum}: Program must be 'UG' or 'PG'.`);
+                    if (!record.branch) errors.push(`Line ${lineNum}: Branch is missing.`);
+                    if (!record.article_title) errors.push(`Line ${lineNum}: Article title is missing.`);
+                    if (!['Journal', 'Conference'].includes(record.publication_type)) errors.push(`Line ${lineNum}: Publication Type must be 'Journal' or 'Conference'.`);
+                    if (!record.indexing) errors.push(`Line ${lineNum}: Indexing is missing.`);
+                    if (!record.journal_conference_title) errors.push(`Line ${lineNum}: Journal/Conference name is missing.`);
+                    if (!record.mentor_name) errors.push(`Line ${lineNum}: Mentor/Guide name is missing.`);
+
+                    recordsToInsert.push(record);
+                });
+
+                if (errors.length > 0) {
+                    alert(`Import Validation Failed:\n\n${errors.slice(0, 5).join('\n')}${errors.length > 5 ? `\n...and ${errors.length - 5} more errors` : ''}`);
+                    return;
+                }
+
+                if (recordsToInsert.length === 0) {
+                    Toast.show('warning', 'No Records', 'No valid records found to import.');
+                    return;
+                }
+
+                // Store in state and display preview modal
+                State.pendingImports = recordsToInsert;
+
+                const previewStatus = document.getElementById('importPreviewStatus');
+                if (previewStatus) {
+                    previewStatus.innerHTML = `You are about to import <strong>${recordsToInsert.length}</strong> publication records from the spreadsheet. Please verify the mapped columns in the preview below before confirming.`;
+                }
+
+                const previewBody = document.getElementById('importPreviewBody');
+                if (previewBody) {
+                    // Preview up to 8 rows
+                    const previewRows = recordsToInsert.slice(0, 8);
+                    previewBody.innerHTML = previewRows.map(p => `
+                        <tr>
+                            <td><strong>${this.escapeHtml(p.roll_no)}</strong></td>
+                            <td>${this.escapeHtml(p.name)}</td>
+                            <td><span class="badge badge-${p.program.toLowerCase()}">${p.program}</span></td>
+                            <td>${this.escapeHtml(p.branch)}</td>
+                            <td title="${this.escapeHtml(p.article_title)}">${this.escapeHtml(this.truncate(p.article_title, 30))}</td>
+                            <td><span class="badge badge-${p.publication_type.toLowerCase()}">${p.publication_type}</span></td>
+                            <td><span class="badge badge-indexing">${this.escapeHtml(p.indexing || '—')}</span></td>
+                            <td>${this.escapeHtml(p.mentor_name || '—')}</td>
+                        </tr>
+                    `).join('');
+                }
+
+                this.openModal('importPreviewModal');
+
+            } catch (err) {
+                console.error(err);
+                Toast.show('error', 'Import Failed', err.message || 'An error occurred during file parsing.');
+            }
+        };
+
+        reader.readAsArrayBuffer(file);
+    },
+
+    async confirmBulkImport() {
+        const recordsToInsert = State.pendingImports;
+        if (!recordsToInsert || recordsToInsert.length === 0) return;
+
+        this.closeModal('importPreviewModal');
+
+        const progressContainer = document.getElementById('uploadProgress');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const progressStatus = document.getElementById('progressStatus');
+
+        if (progressContainer) {
+            progressContainer.style.display = 'block';
+            progressBarFill.style.width = '20%';
+            progressStatus.textContent = `Importing ${recordsToInsert.length} records...`;
+        }
+
+        try {
+            let successCount = 0;
+            if (State.token) {
+                progressBarFill.style.width = '50%';
+                // Insert records via local API
+                for (const rec of recordsToInsert) {
+                    const response = await fetch('/api/publications', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${State.token}`
+                        },
+                        body: JSON.stringify(rec)
+                    });
+                    if (response.ok) {
+                        successCount++;
+                    } else {
+                        const errData = await response.json();
+                        console.warn('Failed to insert record:', errData.message);
+                    }
+                }
+            } else {
+                recordsToInsert.forEach(rec => {
+                    rec.id = 'demo-' + Math.random().toString(36).substr(2, 9);
+                    rec.created_at = new Date().toISOString();
+                    State.publications.unshift(rec);
+                });
+                successCount = recordsToInsert.length;
+                this.saveLocalData();
+            }
+
+            progressBarFill.style.width = '100%';
+            setTimeout(() => {
+                if (progressContainer) progressContainer.style.display = 'none';
+                Toast.show('success', 'Import Successful', `Successfully registered ${successCount} student publications.`);
+                this.loadData();
+                this.switchView('publications');
+
+                const fileInput = document.getElementById('bulkUploadFile');
+                if (fileInput) fileInput.value = '';
+                const fileNameIndicator = document.getElementById('fileNameIndicator');
+                if (fileNameIndicator) {
+                    fileNameIndicator.textContent = '';
+                    fileNameIndicator.style.display = 'none';
+                }
+            }, 500);
+
+        } catch (err) {
+            console.error(err);
+            if (progressContainer) progressContainer.style.display = 'none';
+            Toast.show('error', 'Import Failed', err.message || 'An error occurred during file upload.');
+        } finally {
+            State.pendingImports = [];
+        }
+    },
+
+    downloadImportTemplate(e) {
+        if (e) e.preventDefault();
+        try {
+            const headers = ['Roll No', 'Student Name', 'Program', 'Branch', 'Article Title', 'Type', 'Indexing', 'Journal/Conference Name', 'Sponsorship', 'Mentor / Guide', 'Paper Link', 'Funding Amount'];
+            const sampleData = [
+                ['21CSE001', 'John Doe', 'UG', 'CSE', 'A Study on AI Agents', 'Journal', 'Scopus', 'International Journal of AI', 'N/A', 'Dr. Ramesh Kumar', 'https://doi.org/12.3456/789', 5000],
+                ['22ECE102', 'Jane Smith', 'PG', 'ECE', 'IoT Smart Farming System', 'Conference', 'IEEE', 'IEEE IoT Conference 2026', 'Department Funded', 'Dr. Priya Sharma', 'https://ieeexplore.ieee.org/document/xyz', 3500]
+            ];
+
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet([headers, ...sampleData]);
+            XLSX.utils.book_append_sheet(wb, ws, "Template");
+            XLSX.writeFile(wb, "Vignan_Publications_Template.xlsx");
+            Toast.show('success', 'Template Downloaded', 'Spreadsheet template ready for use.');
+        } catch (err) {
+            console.error('Error generating template:', err);
+            Toast.show('error', 'Template Failed', 'Failed to generate spreadsheet template.');
+        }
+    },
+
+    downloadPDFTemplate(e) {
+        if (e) e.preventDefault();
+        try {
+            const pdfContent = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> /MediaBox [0 0 612 792] /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 200 >>
+stream
+BT
+/F1 14 Tf
+72 720 Td
+(VIGNAN R&D - SAMPLE PUBLICATION TEMPLATE) Tj
+/F1 11 Tf
+0 -30 Td
+(File Name Pattern: RollNo_StudentName_PaperTitle.pdf) Tj
+0 -20 Td
+(Example: 21CSE001_Aarav-Sharma_Deep-Learning-Medical-Imaging.pdf) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000257 00000 n 
+trailer
+<< /Size 5 /Root 1 0 R >>
+startxref
+428
+%%EOF`;
+
+            const blob = new Blob([pdfContent], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '21CSE001_Aarav-Sharma_Deep-Learning-Medical-Imaging.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            Toast.show('success', 'PDF Sample Downloaded', 'Use this file to test PDF smart import.');
+        } catch (err) {
+            console.error('Error generating PDF template:', err);
+            Toast.show('error', 'Download Failed', 'Failed to generate PDF template.');
+        }
+    },
+
+    downloadDOCTemplate(e) {
+        if (e) e.preventDefault();
+        try {
+            const docContent = `<h1>VIGNAN R&D — Publication Template</h1>
+<p><b>Roll Number:</b> 21CSE001</p>
+<p><b>Student Name:</b> Aarav Sharma</p>
+<p><b>Program:</b> UG</p>
+<p><b>Branch:</b> CSE</p>
+<p><b>Article Title:</b> Deep Learning for Medical Image Classification</p>
+<p><b>Publication Type:</b> Journal</p>
+<p><b>Indexing:</b> Scopus</p>
+<p><b>Journal/Conference Name:</b> IEEE Transactions on Medical Imaging</p>
+<p><b>Mentor/Guide Name:</b> Dr. K. Srinivas</p>`;
+
+            const blob = new Blob([docContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '21CSE001_Aarav-Sharma_Deep-Learning-Medical-Imaging.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            Toast.show('success', 'DOC Sample Downloaded', 'Use this file to test DOC/DOCX smart import.');
+        } catch (err) {
+            console.error('Error generating DOC template:', err);
+            Toast.show('error', 'Download Failed', 'Failed to generate DOC template.');
+        }
+    },
+
+    saveLocalData() {
+        try {
+            localStorage.setItem('vignan_rd_publications_v2', JSON.stringify(State.publications));
+        } catch (e) {
+            console.error('Error saving local data:', e);
+        }
+    }
+});

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFSTR Vignan University - Application for Ph.D. Supervisor Recognition</title>
+    <!-- Amazon Ember Font -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/amazon-ember">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Central Stylesheet -->
+    <link rel="stylesheet" href="/guideship-assets/css/style.css">
+    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2.5rem 1rem;
+        }
+
+        .top-navbar {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .univ-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0.95rem;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 20px;
+            color: var(--accent-light);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .admin-login-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .admin-login-btn:hover {
+            color: #ffffff;
+            border-color: var(--border-amber);
+            background: var(--bg-tertiary);
+            transform: translateY(-2px);
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--bg-secondary);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-amber);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 35px rgba(245, 158, 11, 0.1);
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-crest {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.25rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            padding: 10px;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
+        }
+
+        .form-crest img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .form-header h1 {
+            font-family: var(--font-heading);
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.5px;
+        }
+
+        .form-header h2 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin: 0 0 0.35rem 0;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin: 0;
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 2.5rem 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed rgba(245, 158, 11, 0.25);
+        }
+
+        .form-section-title i {
+            color: var(--accent-light);
+        }
+
+        .pub-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .pub-card:hover {
+            border-color: var(--border-amber);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.65rem;
+            transition: all 0.25s ease;
+            margin-top: 2.5rem;
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.35);
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.45);
+        }
+
+        .alert-success {
+            background-color: var(--success-bg);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 2rem 1.25rem;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    
+        /* Custom Searchable Select Dropdown */
+        .custom-select-container {
+            position: relative;
+            width: 100%;
+            z-index: 99;
+        }
+
+        .custom-select-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            background-color: var(--bg-input, rgba(255, 255, 255, 0.03));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .custom-select-trigger:hover {
+            border-color: var(--border-amber, #f59e0b);
+        }
+
+        .custom-select-trigger.active {
+            border-color: var(--border-amber, #f59e0b);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+        }
+
+        .custom-select-dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            width: 100%;
+            background-color: #0b0f19; /* Solid very dark card background */
+            border: 2px solid #f59e0b; /* Golden-amber highlight border */
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); /* Deep drop shadow */
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            max-height: 300px;
+            overflow: hidden;
+            animation: slideDown 0.2s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-select-dropdown.show {
+            display: flex;
+        }
+
+        .custom-select-dropdown .search-box {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .custom-select-dropdown .search-box i {
+            color: var(--text-secondary);
+            margin-right: 0.65rem;
+            font-size: 0.9rem;
+        }
+
+        .custom-select-dropdown .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .custom-select-dropdown .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            max-height: 220px;
+        }
+
+        .custom-select-dropdown .options-list li {
+            padding: 0.85rem 1.25rem;
+            color: #e2e8f0; /* Clear bright text color */
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02); /* Subtle item divider */
+        }
+
+        .custom-select-dropdown .options-list li:hover {
+            background-color: rgba(245, 158, 11, 0.25); /* Clear hover background */
+            color: #fbbf24; /* Highlight gold text color */
+            padding-left: 1.5rem;
+            font-weight: 600;
+        }
+
+        .custom-select-dropdown .options-list li.selected {
+            background-color: #d97706;
+            color: white;
+        }
+
+        .custom-select-dropdown .options-list li.no-result {
+            color: var(--text-secondary);
+            text-align: center;
+            cursor: default;
+            padding: 1.5rem 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-navbar">
+        <div class="univ-tag">
+            <i class="fa-solid fa-building-columns"></i> VFSTR Deemed to be University • NAAC A+
+        </div>
+        <div style="display: flex; gap: 8px;">
+            <a href="/" class="admin-login-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: #fff;">
+                <i class="fa-solid fa-house"></i> R&D Portal
+            </a>
+            <a href="/guideship/dashboard" class="admin-login-btn">
+                <i class="fa-solid fa-gauge-high"></i> Dean R&D Console
+            </a>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-header">
+            <div style="max-width: 320px; margin: 0 auto 1.5rem; background: #ffffff; padding: 6px 14px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+                <img src="/guideship-assets/assets/logos/vignan-logo.png" alt="Vignan's University" style="width: 100%; height: auto; display: block;">
+            </div>
+            <h2>Office of Research &amp; Development (R&amp;D)</h2>
+            <p>Application for Recognition of Ph.D. Supervisor / Research Guide</p>
+        </div>
+
+        <% if (typeof success !== 'undefined' && success) { %>
+            <div class="alert-success">
+                <i class="fa-solid fa-circle-check" style="font-size: 1.3rem;"></i>
+                <div>
+                    <strong>Proposal Submitted Successfully!</strong>
+                    <div style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.2rem;">Your supervisor recognition application has been securely transmitted to the Office of Dean R&D for review and verification.</div>
+                </div>
+            </div>
+        <% } %>
+
+        <!-- Mobile Verification Gateway -->
+        <div id="guideshipOtpGatekeeper" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-amber); border-radius: 18px; padding: 2.25rem 2rem; margin-bottom: 2rem; text-align: center;">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 2px solid #f59e0b; color: #f59e0b; font-size: 1.8rem; margin-bottom: 1.25rem;">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h3 style="color: #ffffff; font-family: var(--font-heading); font-size: 1.45rem; margin: 0 0 0.5rem 0;">Faculty Mobile Verification</h3>
+            <p style="color: var(--text-secondary); font-size: 0.94rem; max-width: 560px; margin: 0 auto 2rem auto; line-height: 1.6;">
+                Please authenticate using your <strong>Employee ID</strong> and <strong>Mobile Number</strong> to receive a one-time passcode (OTP) and access the Ph.D. Supervisor Recognition application form.
+            </p>
+
+            <div id="otpStep1" style="max-width: 460px; margin: 0 auto;">
+                <div class="form-group" style="margin-bottom: 1.25rem; text-align: left;">
+                    <label for="otpEmpId" style="color: #cbd5e1; font-weight: 600; font-size: 0.88rem;">Employee ID <span style="color: #ef4444;">*</span></label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-id-badge" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                        <input type="text" id="otpEmpId" placeholder="e.g. 3067" required style="padding-left: 42px; width: 100%; box-sizing: border-box;">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem; text-align: left;">
+                    <label for="otpMobile" style="color: #cbd5e1; font-weight: 600; font-size: 0.88rem;">Mobile Number <span style="color: #ef4444;">*</span></label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-phone" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                        <input type="tel" id="otpMobile" placeholder="e.g. 9848012345" maxlength="10" required style="padding-left: 42px; width: 100%; box-sizing: border-box;">
+                    </div>
+                    <span style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px; display: block;">Enter your 10-digit mobile number to generate a 6-digit OTP code.</span>
+                </div>
+                <div id="otpErrorMsg" style="display: none; padding: 10px 14px; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 8px; color: #fca5a5; font-size: 0.88rem; margin-bottom: 1.25rem; text-align: left;"></div>
+                <button type="button" id="btnSendOtp" class="btn-submit" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0.9rem; font-size: 1rem;">
+                    <span>Generate OTP</span> <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <div id="otpStep2" style="display: none; max-width: 460px; margin: 0 auto;">
+                <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid #10b981; border-radius: 10px; padding: 12px 14px; margin-bottom: 1.5rem; color: #a7f3d0; font-size: 0.9rem; text-align: left; line-height: 1.5;">
+                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> An OTP has been generated for mobile number +91 <strong id="displaySentMobile" style="color: #fff;"></strong>. Please enter the 6-digit verification code.
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem; text-align: center;">
+                    <label for="inputOtpCode" style="color: #cbd5e1; font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 8px;">Enter 6-Digit Verification Code</label>
+                    <input type="text" id="inputOtpCode" maxlength="6" placeholder="• • • • • •" autocomplete="one-time-code" style="text-align: center; font-family: 'Courier New', monospace; font-size: 1.85rem; font-weight: 800; letter-spacing: 8px; width: 220px; margin: 0 auto; padding: 10px; border: 2px solid #f59e0b; border-radius: 10px; background: #0f172a; color: #fbbf24;">
+                    <div id="otpCountdown" style="color: #94a3b8; font-size: 0.82rem; margin-top: 8px;">Code expires in: <span id="timerText" style="color: #f59e0b; font-weight: 700;">10:00</span></div>
+                </div>
+                <div id="otpVerifyErrorMsg" style="display: none; padding: 10px 14px; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 8px; color: #fca5a5; font-size: 0.88rem; margin-bottom: 1.25rem; text-align: left;"></div>
+                <button type="button" id="btnVerifyOtp" class="btn-submit" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0.9rem; font-size: 1rem; margin-bottom: 1.25rem;">
+                    <span>Verify & Open Application</span> <i class="fa-solid fa-lock-open"></i>
+                </button>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                    <button type="button" id="btnResendOtp" style="background: none; border: none; color: #f59e0b; cursor: pointer; text-decoration: underline; font-weight: 600; padding: 0;">Resend OTP</button>
+                    <button type="button" id="btnChangeCredentials" style="background: none; border: none; color: #94a3b8; cursor: pointer; text-decoration: underline; padding: 0;">← Change ID / Mobile</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verified Identity Top Banner (Shown after verification) -->
+        <div id="verifiedUserBanner" style="display: none; justify-content: space-between; align-items: center; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 12px 18px; margin-bottom: 1.75rem;">
+            <div style="display: flex; align-items: center; gap: 10px; color: #34d399; font-weight: 600; font-size: 0.92rem;">
+                <i class="fa-solid fa-shield-halved" style="font-size: 1.15rem;"></i>
+                <span>Authenticated Faculty: <strong id="bannerEmpId" style="color: #fff;"></strong> (<span id="bannerMobile" style="color: #cbd5e1;"></span>)</span>
+            </div>
+            <button type="button" id="btnLogoutUser" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; border-radius: 8px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout / Switch
+            </button>
+        </div>
+
+        <form action="/recognition/apply" method="POST" id="supervisorApplicationForm" style="display: none;">
+            <!-- 1. Faculty Information -->
+            <div class="form-section-title">
+                <i class="fa-solid fa-user-tie"></i> 1. Faculty Details
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group" style="flex: 2;">
+                    <label for="faculty_name">Name of the Faculty (Dr. / Mr. / Ms.)</label>
+                    <input type="text" name="faculty_name" id="faculty_name" placeholder="e.g. Dr. K. Ramesh Kumar" required>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="employee_id">Employee ID</label>
+                    <input type="number" name="employee_id" id="employee_id" placeholder="e.g. 3067" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group" style="flex: 1;">
+                    <label for="email">Institutional E-Mail ID</label>
+                    <input type="email" name="email" id="email" placeholder="e.g. faculty@vignan.ac.in" required>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="designation">Designation</label>
+                    <select name="designation" id="designation" required>
+                        <option value="" disabled selected>Select Designation</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Associate Professor">Associate Professor</option>
+                        <option value="Assistant Professor">Assistant Professor</option>
+                        <option value="officiating Associate Professor">officiating Associate Professor</option>
+                        <option value="officiating Professor">officiating Professor</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="level" id="level" value="">
+            <div class="form-row">
+                <div class="form-group" style="flex: 1;">
+                    <label for="joining_date">Date of Joining in Institution</label>
+                    <input type="date" name="joining_date" id="joining_date" required>
+                </div>
+                <div class="form-group" style="flex: 1; visibility: hidden; pointer-events: none;">
+                    <!-- Spacer for layout alignment -->
+                </div>
+            </div>
+
+            <div class="form-group" style="position: relative; z-index: 100;">
+                <label for="department">Department</label>
+                <div class="custom-select-container" id="deptSelectContainer">
+                    <input type="hidden" name="department" id="selectedDepartment" required>
+                    <div class="custom-select-trigger" onclick="toggleDeptDropdown()">
+                        <span id="selectedDeptText">Select Department</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="custom-select-dropdown" id="deptDropdown">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="deptSearchInput" placeholder="Type to search department..." oninput="filterDeptOptions()">
+                        </div>
+                        <ul class="options-list" id="deptOptionsList">
+                            <li onclick="selectDeptOption('Agriculture Engineering')">Agriculture Engineering</li>
+                            <li onclick="selectDeptOption('Automobile Engineering')">Automobile Engineering</li>
+                            <li onclick="selectDeptOption('B. Sc. - Actuarial Science')">B. Sc. - Actuarial Science</li>
+                            <li onclick="selectDeptOption('B. Sc. - Data Science')">B. Sc. - Data Science</li>
+                            <li onclick="selectDeptOption('B. Sc. - Mathematics, Statistics and Computer Science')">B. Sc. - Mathematics, Statistics and Computer Science</li>
+                            <li onclick="selectDeptOption('B. Sc. - Psychology')">B. Sc. - Psychology</li>
+                            <li onclick="selectDeptOption('B.A. (Hons.) Political Science')">B.A. (Hons.) Political Science</li>
+                            <li onclick="selectDeptOption('B.Sc. (Hons.) Agriculture')">B.Sc. (Hons.) Agriculture</li>
+                            <li onclick="selectDeptOption('B.Sc. (Hons.) Data Science')">B.Sc. (Hons.) Data Science</li>
+                            <li onclick="selectDeptOption('Bachelor of Business Administration')">Bachelor of Business Administration</li>
+                            <li onclick="selectDeptOption('Bachelor of Computer Applications')">Bachelor of Computer Applications</li>
+                            <li onclick="selectDeptOption('Bachelor of Pharmacy')">Bachelor of Pharmacy</li>
+                            <li onclick="selectDeptOption('BBM')">BBM</li>
+                            <li onclick="selectDeptOption('Bioinformatics')">Bioinformatics</li>
+                            <li onclick="selectDeptOption('Biomedical Engineering')">Biomedical Engineering</li>
+                            <li onclick="selectDeptOption('Biotechnology')">Biotechnology</li>
+                            <li onclick="selectDeptOption('Chemical Engineering')">Chemical Engineering</li>
+                            <li onclick="selectDeptOption('Civil Engineering')">Civil Engineering</li>
+                            <li onclick="selectDeptOption('Computer Science & Engineering')">Computer Science & Engineering</li>
+                            <li onclick="selectDeptOption('Computer Science and Business System & IOT')">Computer Science and Business System & IOT</li>
+                            <li onclick="selectDeptOption('Computer Science and Engineering (Artificial Intelligence and Machine Learning)')">Computer Science and Engineering (Artificial Intelligence and Machine Learning)</li>
+                            <li onclick="selectDeptOption('Computer Science and Engineering (Cyber Security & Data Science)')">Computer Science and Engineering (Cyber Security & Data Science)</li>
+                            <li onclick="selectDeptOption('Electrical and Electronics Engineering')">Electrical and Electronics Engineering</li>
+                            <li onclick="selectDeptOption('Electronics & Computer Engineering')">Electronics & Computer Engineering</li>
+                            <li onclick="selectDeptOption('Electronics and Communication Engineering')">Electronics and Communication Engineering</li>
+                            <li onclick="selectDeptOption('Electronics Engineering (VLSI Design and Technology)')">Electronics Engineering (VLSI Design and Technology)</li>
+                            <li onclick="selectDeptOption('Food Technology')">Food Technology</li>
+                            <li onclick="selectDeptOption('Information Technology')">Information Technology</li>
+                            <li onclick="selectDeptOption('M.Sc - Agricultural Economics')">M.Sc - Agricultural Economics</li>
+                            <li onclick="selectDeptOption('M.Sc - Agronomy')">M.Sc - Agronomy</li>
+                            <li onclick="selectDeptOption('M.Sc - Chemistry')">M.Sc - Chemistry</li>
+                            <li onclick="selectDeptOption('M.Sc - Data Science')">M.Sc - Data Science</li>
+                            <li onclick="selectDeptOption('M.Sc - Entomology')">M.Sc - Entomology</li>
+                            <li onclick="selectDeptOption('M.Sc - Floriculture and Landscaping')">M.Sc - Floriculture and Landscaping</li>
+                            <li onclick="selectDeptOption('M.Sc - Genetics & Plant Breeding')">M.Sc - Genetics & Plant Breeding</li>
+                            <li onclick="selectDeptOption('M.Sc - Organic Chemistry')">M.Sc - Organic Chemistry</li>
+                            <li onclick="selectDeptOption('M.Sc - Pharmaceutical Chemistry')">M.Sc - Pharmaceutical Chemistry</li>
+                            <li onclick="selectDeptOption('M.Sc - Plant Pathology')">M.Sc - Plant Pathology</li>
+                            <li onclick="selectDeptOption('M.Sc - Psychology')">M.Sc - Psychology</li>
+                            <li onclick="selectDeptOption('M.Sc - Soil Science')">M.Sc - Soil Science</li>
+                            <li onclick="selectDeptOption('M.Sc - Vegetable Science')">M.Sc - Vegetable Science</li>
+                            <li onclick="selectDeptOption('MBA - Finance')">MBA - Finance</li>
+                            <li onclick="selectDeptOption('MBA - Human Resource')">MBA - Human Resource</li>
+                            <li onclick="selectDeptOption('MCA - Master of Computer Applications')">MCA - Master of Computer Applications</li>
+                            <li onclick="selectDeptOption('Mechanical Engineering')">Mechanical Engineering</li>
+                            <li onclick="selectDeptOption('Mechatronics')">Mechatronics</li>
+                            <li onclick="selectDeptOption('Petroleum Engineering')">Petroleum Engineering</li>
+                            <li onclick="selectDeptOption('Robotics and Automation')">Robotics and Automation</li>
+                            <li onclick="selectDeptOption('Technical Textiles')">Technical Textiles</li>
+                            <li onclick="selectDeptOption('Textile & Fashion Technology')">Textile & Fashion Technology</li>
+                            <li onclick="selectDeptOption('Textile Technology')">Textile Technology</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Academic & Ph.D. Details -->
+            <div class="form-section-title">
+                <i class="fa-solid fa-graduation-cap"></i> 2. Ph.D. Credentials
+            </div>
+
+            <div class="form-row">
+                <div class="form-group" style="flex: 1;">
+                    <label for="phd_award_date">Month & Year of Ph.D. Awarded</label>
+                    <input type="text" name="phd_award_date" id="phd_award_date" placeholder="e.g. May 2024" required>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="phd_institute">Institute in which Ph.D. is Awarded</label>
+                    <input type="text" name="phd_institute" id="phd_institute" placeholder="e.g. IIT Madras / VFSTR" required>
+                </div>
+            </div>
+
+            <!-- 3. Publications -->
+            <div class="form-section-title">
+                <i class="fa-solid fa-book-journal-whills"></i> 3. Verification of Research Publications
+            </div>
+
+            <div id="publicationsContainer" style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- Appended publication cards appear here -->
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+                <button type="button" class="btn btn-secondary" onclick="addPublicationRow()" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-light); border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 600; padding: 0.85rem 1.6rem; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s;">
+                    <i class="fa-solid fa-plus"></i> Add Research Publication
+                </button>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-paper-plane"></i> Submit Supervisor Proposal for Recognition
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Redirect to admin dashboard if URL has #admin hash
+        function checkAdminHash() {
+            if (window.location.hash === '#admin' || window.location.hash.toLowerCase().includes('admin')) {
+                window.location.href = '/guideship/dashboard';
+            }
+        }
+        checkAdminHash();
+        window.addEventListener('hashchange', checkAdminHash);
+
+        let publicationCount = 0;
+
+        function addPublicationRow() {
+            publicationCount++;
+            const container = document.getElementById('publicationsContainer');
+            
+            const card = document.createElement('div');
+            card.className = 'pub-card';
+            card.id = `pub-card-${publicationCount}`;
+            card.style.animation = 'fadeIn 0.3s ease-out';
+            
+            card.innerHTML = `
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.65rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 1rem; font-weight: 700; color: var(--accent-light); margin: 0; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 0.4rem;">
+                        <i class="fa-regular fa-file-lines"></i> Publication #${publicationCount}
+                    </h3>
+                    <button type="button" onclick="removePublicationRow(this)" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #f87171; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;" title="Remove Publication">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group" style="flex: 2;">
+                        <label>Title of the Research Paper</label>
+                        <input type="text" name="paper_title[]" placeholder="e.g. Deep Learning Approaches for Smart Grid..." required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Author(s) Name(s)</label>
+                        <input type="text" name="authors[]" placeholder="e.g. Dr. K. Ramesh, S. Sharma" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Corresponding Author</label>
+                        <input type="text" name="corresponding_author[]" placeholder="e.g. Yes / First Author" required>
+                    </div>
+                    <div class="form-group" style="flex: 2;">
+                        <label>Title of the Journal</label>
+                        <input type="text" name="journal_title[]" placeholder="e.g. IEEE Transactions on Neural Networks" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1.5;">
+                        <label>DOI / Permanent Link</label>
+                        <input type="text" name="doi[]" placeholder="e.g. 10.1109/TNNLS.2025.1234567" required>
+                    </div>
+                    <div class="form-group" style="flex: 1.5;">
+                        <label>Indexing Database</label>
+                        <input type="text" name="paper_index[]" placeholder="e.g. Scopus / SCI / Web of Science" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Journal H-Index</label>
+                        <input type="number" name="h_index[]" placeholder="e.g. 24" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Quartile Category</label>
+                        <select name="quartile[]" required>
+                            <option value="" disabled selected>Select Quartile</option>
+                            <option value="Q1">Q1 (Top Tier)</option>
+                            <option value="Q2">Q2</option>
+                            <option value="Q3">Q3</option>
+                            <option value="Q4">Q4</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Clarivate / JCR Impact Factor</label>
+                        <input type="text" name="impact_factor[]" placeholder="e.g. 5.82" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Date of Paper Submission</label>
+                        <input type="date" name="submission_date[]" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Date Revision Received</label>
+                        <input type="date" name="revision_date[]" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Date of Formal Acceptance</label>
+                        <input type="date" name="acceptance_date[]" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Journal in Scopus/WoS Since</label>
+                        <input type="text" name="scope_db_since[]" placeholder="e.g. Scopus since 2017" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Article Processing Charges (APC)</label>
+                        <input type="text" name="apc_charges[]" placeholder="e.g. Nil / USD 1200" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 0.5rem;">
+                    <label>Peer Review Comments / Verifications</label>
+                    <textarea name="review_comments[]" rows="2" placeholder="e.g. Double blind review acceptance attached in dossier..." oninput="autoGrow(this)"></textarea>
+                </div>
+            `;
+            container.appendChild(card);
+            renumberPublications();
+        }
+
+        function autoGrow(element) {
+            element.style.height = "auto";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+
+        function removePublicationRow(element) {
+            if (typeof element === 'number' || typeof element === 'string') {
+                const card = document.getElementById(`pub-card-${element}`);
+                if (card) card.remove();
+            } else {
+                const card = element.closest('.pub-card') || element.closest('.card');
+                if (card) card.remove();
+            }
+            renumberPublications();
+        }
+
+        function renumberPublications() {
+            const cards = document.querySelectorAll('#publicationsContainer > div');
+            cards.forEach((card, idx) => {
+                const titleEl = card.querySelector('h3');
+                if (titleEl) {
+                    const hasIcon = titleEl.querySelector('i');
+                    if (hasIcon) {
+                        titleEl.innerHTML = `<i class="fa-regular fa-file-lines"></i> Publication #${idx + 1}`;
+                     } else {
+                        titleEl.innerText = `Publication #${idx + 1}`;
+                    }
+                }
+            });
+        }
+
+        // Initialize with 2 publication blocks by default
+        window.addEventListener('DOMContentLoaded', () => {
+            addPublicationRow();
+            addPublicationRow();
+        });
+    
+        // Custom Searchable Dropdown Functions
+        const deptDropdown = document.getElementById('deptDropdown');
+        const selectedDeptText = document.getElementById('selectedDeptText');
+        const selectedDepartment = document.getElementById('selectedDepartment');
+        const deptSearchInput = document.getElementById('deptSearchInput');
+        const deptSelectContainer = document.getElementById('deptSelectContainer');
+
+        function toggleDeptDropdown() {
+            const trigger = document.querySelector('.custom-select-trigger');
+            trigger.classList.toggle('active');
+            deptDropdown.classList.toggle('show');
+            if (deptDropdown.classList.contains('show')) {
+                deptSearchInput.value = '';
+                filterDeptOptions();
+                deptSearchInput.focus();
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            if (deptSelectContainer && !deptSelectContainer.contains(e.target)) {
+                const trigger = document.querySelector('.custom-select-trigger');
+                if (trigger) trigger.classList.remove('active');
+                if (deptDropdown) deptDropdown.classList.remove('show');
+            }
+        });
+
+        function selectDeptOption(value) {
+            selectedDepartment.value = value;
+            selectedDeptText.innerText = value;
+            
+            document.querySelectorAll('#deptOptionsList li').forEach(li => {
+                if (li.innerText === value) {
+                    li.classList.add('selected');
+                } else {
+                    li.classList.remove('selected');
+                }
+            });
+            
+            const trigger = document.querySelector('.custom-select-trigger');
+            if (trigger) trigger.classList.remove('active');
+            if (deptDropdown) deptDropdown.classList.remove('show');
+        }
+
+        function filterDeptOptions() {
+            const filter = deptSearchInput.value.toLowerCase();
+            const lis = document.querySelectorAll('#deptOptionsList li');
+            let hasResults = false;
+            
+            lis.forEach(li => {
+                if (li.classList.contains('no-result')) return;
+                const text = li.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    li.style.display = '';
+                    hasResults = true;
+                } else {
+                    li.style.display = 'none';
+                }
+            });
+            
+            const noResultLi = document.getElementById('deptNoResult');
+            if (hasResults) {
+                if (noResultLi) noResultLi.style.display = 'none';
+            } else {
+                if (noResultLi) {
+                    noResultLi.style.display = '';
+                } else {
+                    const li = document.createElement('li');
+                    li.id = 'deptNoResult';
+                    li.className = 'no-result';
+                    li.innerText = 'No department matches found';
+                    document.getElementById('deptOptionsList').appendChild(li);
+                }
+            }
+        }
+
+        // ----------------- Faculty Mobile OTP Authentication Logic -----------------
+        const otpGatekeeper = document.getElementById('guideshipOtpGatekeeper');
+        const supervisorForm = document.getElementById('supervisorApplicationForm');
+        const verifiedBanner = document.getElementById('verifiedUserBanner');
+        const otpStep1 = document.getElementById('otpStep1');
+        const otpStep2 = document.getElementById('otpStep2');
+        const otpEmpId = document.getElementById('otpEmpId');
+        const otpMobile = document.getElementById('otpMobile');
+        const btnSendOtp = document.getElementById('btnSendOtp');
+        const otpErrorMsg = document.getElementById('otpErrorMsg');
+        const displaySentMobile = document.getElementById('displaySentMobile');
+        const inputOtpCode = document.getElementById('inputOtpCode');
+        const btnVerifyOtp = document.getElementById('btnVerifyOtp');
+        const otpVerifyErrorMsg = document.getElementById('otpVerifyErrorMsg');
+        const btnResendOtp = document.getElementById('btnResendOtp');
+        const btnChangeCredentials = document.getElementById('btnChangeCredentials');
+        const bannerEmpId = document.getElementById('bannerEmpId');
+        const bannerMobile = document.getElementById('bannerMobile');
+        const btnLogoutUser = document.getElementById('btnLogoutUser');
+        const timerText = document.getElementById('timerText');
+
+        let otpTimerInterval = null;
+        let resendCooldown = 0;
+        let resendInterval = null;
+
+        function checkExistingSession() {
+            try {
+                const saved = sessionStorage.getItem('guideship_auth_user');
+                if (saved) {
+                    const user = JSON.parse(saved);
+                    if (user && user.empId && (user.mobile || user.email)) {
+                        showAuthenticatedView(user);
+                        return true;
+                    }
+                }
+            } catch(e) {}
+            showUnauthenticatedView();
+            return false;
+        }
+
+        function showAuthenticatedView(user) {
+            otpGatekeeper.style.display = 'none';
+            verifiedBanner.style.display = 'flex';
+            supervisorForm.style.display = 'block';
+
+            bannerEmpId.textContent = user.empId;
+            bannerMobile.textContent = user.mobile ? `+91 ${user.mobile}` : (user.email || '');
+
+            const formEmpId = document.getElementById('employee_id');
+            const formContact = document.getElementById('contact_number') || document.getElementById('phone');
+            if (formEmpId) {
+                formEmpId.value = user.empId;
+                formEmpId.readOnly = true;
+                formEmpId.style.backgroundColor = 'rgba(16, 185, 129, 0.08)';
+                formEmpId.style.borderColor = '#10b981';
+            }
+            if (formContact && user.mobile) {
+                formContact.value = user.mobile;
+            }
+        }
+
+        function showUnauthenticatedView() {
+            otpGatekeeper.style.display = 'block';
+            verifiedBanner.style.display = 'none';
+            supervisorForm.style.display = 'none';
+            otpStep1.style.display = 'block';
+            otpStep2.style.display = 'none';
+            otpErrorMsg.style.display = 'none';
+            otpVerifyErrorMsg.style.display = 'none';
+        }
+
+        function startOtpTimer(durationSeconds = 600) {
+            clearInterval(otpTimerInterval);
+            let remaining = durationSeconds;
+            const updateDisplay = () => {
+                const m = Math.floor(remaining / 60).toString().padStart(2, '0');
+                const s = (remaining % 60).toString().padStart(2, '0');
+                timerText.textContent = `${m}:${s}`;
+                if (remaining <= 0) {
+                    clearInterval(otpTimerInterval);
+                    timerText.textContent = 'EXPIRED';
+                    timerText.style.color = '#ef4444';
+                }
+                remaining--;
+            };
+            updateDisplay();
+            otpTimerInterval = setInterval(updateDisplay, 1000);
+        }
+
+        function startResendCooldown(seconds = 60) {
+            resendCooldown = seconds;
+            btnResendOtp.disabled = true;
+            btnResendOtp.style.opacity = '0.6';
+            btnResendOtp.style.cursor = 'not-allowed';
+            clearInterval(resendInterval);
+            const updateResend = () => {
+                if (resendCooldown <= 0) {
+                    clearInterval(resendInterval);
+                    btnResendOtp.disabled = false;
+                    btnResendOtp.style.opacity = '1';
+                    btnResendOtp.style.cursor = 'pointer';
+                    btnResendOtp.textContent = 'Resend OTP';
+                } else {
+                    btnResendOtp.textContent = `Resend in ${resendCooldown}s`;
+                    resendCooldown--;
+                }
+            };
+            updateResend();
+            resendInterval = setInterval(updateResend, 1000);
+        }
+
+        btnSendOtp.addEventListener('click', async () => {
+            otpErrorMsg.style.display = 'none';
+            const empId = otpEmpId.value.trim();
+            const mobile = otpMobile.value.trim().replace(/\D/g, '');
+
+            if (!empId) {
+                otpErrorMsg.textContent = 'Please enter your Employee ID.';
+                otpErrorMsg.style.display = 'block';
+                return;
+            }
+            if (!mobile || mobile.length !== 10) {
+                otpErrorMsg.textContent = 'Please enter a valid 10-digit mobile number.';
+                otpErrorMsg.style.display = 'block';
+                return;
+            }
+
+            btnSendOtp.disabled = true;
+            btnSendOtp.innerHTML = '<span>Generating OTP...</span> <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            try {
+                const res = await fetch('/api/auth/otp/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ empId, mobile, portal: 'guideship' })
+                });
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    throw new Error(data.message || 'Failed to send OTP. Please try again.');
+                }
+
+                displaySentMobile.textContent = mobile;
+                otpStep1.style.display = 'none';
+                otpStep2.style.display = 'block';
+                inputOtpCode.value = '';
+                inputOtpCode.focus();
+                startOtpTimer(600);
+                startResendCooldown(60);
+            } catch (err) {
+                otpErrorMsg.textContent = err.message;
+                otpErrorMsg.style.display = 'block';
+            } finally {
+                btnSendOtp.disabled = false;
+                btnSendOtp.innerHTML = '<span>Generate OTP</span> <i class="fa-solid fa-paper-plane"></i>';
+            }
+        });
+
+        btnVerifyOtp.addEventListener('click', async () => {
+            otpVerifyErrorMsg.style.display = 'none';
+            const empId = otpEmpId.value.trim();
+            const mobile = otpMobile.value.trim().replace(/\D/g, '');
+            const otp = inputOtpCode.value.trim();
+
+            if (!otp || otp.length < 6) {
+                otpVerifyErrorMsg.textContent = 'Please enter the complete 6-digit verification code.';
+                otpVerifyErrorMsg.style.display = 'block';
+                return;
+            }
+
+            btnVerifyOtp.disabled = true;
+            btnVerifyOtp.innerHTML = '<span>Verifying...</span> <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            try {
+                const res = await fetch('/api/auth/otp/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ empId, mobile, portal: 'guideship', otp })
+                });
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    throw new Error(data.message || 'Invalid or expired OTP code.');
+                }
+
+                clearInterval(otpTimerInterval);
+                clearInterval(resendInterval);
+
+                sessionStorage.setItem('guideship_auth_user', JSON.stringify({
+                    empId,
+                    mobile,
+                    token: data.token,
+                    portal: 'guideship'
+                }));
+
+                showAuthenticatedView({ empId, mobile });
+            } catch (err) {
+                otpVerifyErrorMsg.textContent = err.message;
+                otpVerifyErrorMsg.style.display = 'block';
+            } finally {
+                btnVerifyOtp.disabled = false;
+                btnVerifyOtp.innerHTML = '<span>Verify & Open Application</span> <i class="fa-solid fa-lock-open"></i>';
+            }
+        });
+
+        btnResendOtp.addEventListener('click', () => {
+            if (resendCooldown <= 0) {
+                btnSendOtp.click();
+            }
+        });
+
+        btnChangeCredentials.addEventListener('click', () => {
+            clearInterval(otpTimerInterval);
+            clearInterval(resendInterval);
+            otpStep2.style.display = 'none';
+            otpStep1.style.display = 'block';
+            otpErrorMsg.style.display = 'none';
+        });
+
+        btnLogoutUser.addEventListener('click', () => {
+            if (confirm('Are you sure you want to log out / switch to another faculty profile?')) {
+                sessionStorage.removeItem('guideship_auth_user');
+                showUnauthenticatedView();
+            }
+        });
+
+        // Initialize session check on page load
+        checkExistingSession();
+
+    </script>
+</body>
+</html>
