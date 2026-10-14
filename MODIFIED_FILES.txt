@@ -1228,6 +1228,20 @@
       - "Funding Agency 'Other' Option: Added 'Other' option to the Funding Agency dropdown list. When selected, an input field dynamically appears allowing the user to specify their custom funding agency name, which seamlessly submits to the database."
       - "Scheme Label Renaming: Renamed 'Project Scheme' to 'Scheme' across the Project Details Form, Word document export, details modal, and admin column listings."
 
+101. [Dedicated C:\rd_uploads Proof Storage Directory Configuration & Bugfix]
+    Absolute Paths:
+      - c:\Users\mahen\OneDrive\Desktop\rd\.env
+      - c:\Users\mahen\OneDrive\Desktop\rd\.env.example
+      - c:\Users\mahen\OneDrive\Desktop\rd\src\config\environment.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\src\controllers\proposal.controller.js
+      - Filesystem: C:\rd_uploads
+    Status: MODIFIED
+    Summary of Modifications:
+      - "Escape Sequence Bugfix: Resolved the terminal warning `Could not create UPLOAD_DIR at ...Desktd_uploads` caused by unescaped `\r` (carriage return) in string literals `'C:\rd_uploads'` by using properly escaped `'C:\\rd_uploads'` and adding `UPLOAD_DIR=C:\rd_uploads` in `.env` and `.env.example`."
+      - "Centralized Architecture Confirmation: All upload handling (Multer disk storage in `proposal.routes.js`, disk writes in `proposal.service.js`, and file streaming in `proposal.controller.js`) strictly references `config.UPLOAD_DIR` as the single source of truth, requiring no dispersed code edits."
+      - "Resilient Proof Lookup: Enhanced `ProposalController.getProposalProof` to seamlessly look up files in `C:\rd_uploads` via filename basename even if historical database records point to previous upload paths."
+      - "Filesystem Synchronization: Synchronized existing proposal proof files from `uploads/proofs/` directly into `C:\rd_uploads`."
+
 ===============================================================================
 End of Modified Files Audit Record.
 ===============================================================================

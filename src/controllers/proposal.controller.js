@@ -68,6 +68,19 @@ const ProposalController = {
         return res.sendFile(path.resolve(proposal.proof_file_path));
       }
 
+      // Check if file is stored in current UPLOAD_DIR (e.g. C:\rd_uploads) by basename
+      if (proposal.proof_file_path) {
+        const storedBaseName = path.basename(proposal.proof_file_path);
+        const uploadDirPath = path.join(config.UPLOAD_DIR, storedBaseName);
+        if (fs.existsSync(uploadDirPath)) {
+          if (proposal.proof_file_type) {
+            res.setHeader('Content-Type', proposal.proof_file_type);
+          }
+          res.setHeader('Content-Disposition', `inline; filename="${encodeURIComponent(fileName)}"`);
+          return res.sendFile(path.resolve(uploadDirPath));
+        }
+      }
+
       // Check if file is stored in UPLOAD_DIR by filename
       if (proposal.proof_file_name) {
         const potentialPath = path.join(config.UPLOAD_DIR, proposal.proof_file_name);

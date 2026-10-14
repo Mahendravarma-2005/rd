@@ -6,9 +6,9 @@ require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 // Storage Directory for Uploaded Proof Documents & Attachments (Disk / Drive)
 const resolvedUploadDir = process.env.UPLOAD_DIR 
   ? path.resolve(process.env.UPLOAD_DIR)
-  : (fs.existsSync('D:\\') 
-      ? path.resolve('C:\rd_uploads')
-      : path.resolve(__dirname, 'C:\rd_uploads'));
+  : (fs.existsSync('C:\\') 
+      ? 'C:\\rd_uploads'
+      : path.resolve(__dirname, '../../uploads/proofs'));
 
 try {
   if (!fs.existsSync(resolvedUploadDir)) {
