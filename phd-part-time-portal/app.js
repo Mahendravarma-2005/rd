@@ -1,9 +1,9 @@
 // Research Scholar Tracking System - Main Application Orchestrator
 import { DOM, AUTH_KEY, STORAGE_KEY, PROFILES_KEY, state } from './js/config.js';
 import { updateRemainingTenureDisplay, showToast } from './js/utils.js';
-import { fetchAllScholars, fetchProfileByRegNo, adminLoginAPI, fetchAllProfilesAPI } from './js/api.js';
+import { fetchAllScholars, fetchProfileByRegNo, fetchAllProfilesAPI } from './js/api.js';
 import { updateDynamicCards } from './js/dynamicCards.js';
-import { handleRegNoLookup, handlePortalFormSubmit, resetPortalForm, setPortalStaticFieldsReadOnly, initScholarAuth } from './js/portal.js';
+import { handleRegNoLookup, handlePortalFormSubmit, resetPortalForm, setPortalStaticFieldsReadOnly, initScholarLookup, initScholarAuth } from './js/portal.js';
 import {
   render,
   openModalForNew,
@@ -18,36 +18,24 @@ import {
 } from './js/admin.js';
 import { viewReport, closeReportModal, printCurrentReport } from './js/report.js';
 
-// Admin Modal & Authentication Handling (Unified Central Super Admin SSO)
+// Admin Access (Direct Access - No Login Required)
 export function isAdminAuthenticated() {
-  // Directly authenticated via Central Landing Portal Super Admin SSO
   return true;
 }
 
 export function openAdminLoginModal() {
-  // No separate login page required - directly access admin dashboard
   showAdminDashboardPage();
 }
 
 export function closeAdminLoginModal() {
-  if (!DOM.adminLoginModal) return;
-  DOM.adminLoginModal.classList.remove('active');
-  if (!document.querySelector('.modal-overlay.active')) {
-    document.body.classList.remove('modal-open');
-  }
+  // Maintained for backward compatibility
 }
 
 export function handleAdminLogout() {
-  sessionStorage.removeItem(AUTH_KEY);
-  sessionStorage.removeItem('pt_rs_admin_user');
-  showToast('Returning to Central R&D Portal...', 'info');
-  setTimeout(() => {
-    window.location.href = '/';
-  }, 400);
+  showScholarPage();
 }
 
 export function showScholarPage() {
-  closeAdminLoginModal();
   if (DOM.routeScholarForm) DOM.routeScholarForm.style.display = 'block';
   if (DOM.routeAdminDashboard) DOM.routeAdminDashboard.style.display = 'none';
   if (DOM.btnOpenAdminPortal) DOM.btnOpenAdminPortal.style.display = 'inline-flex';
@@ -63,12 +51,11 @@ export function showScholarPage() {
 }
 
 export function showAdminDashboardPage() {
-  closeAdminLoginModal();
   if (DOM.routeScholarForm) DOM.routeScholarForm.style.display = 'none';
   if (DOM.routeAdminDashboard) DOM.routeAdminDashboard.style.display = 'block';
   if (DOM.btnOpenAdminPortal) DOM.btnOpenAdminPortal.style.display = 'none';
   if (DOM.headerMainTitle) DOM.headerMainTitle.textContent = 'Admin Portal: Part-Time Scholar Tracking';
-  if (DOM.headerSubTitle) DOM.headerSubTitle.innerHTML = 'Dean R&D Administrative Dashboard &bull; Part-Time Scholars &bull; <span class="admin-badge-indicator">Super Admin SSO Active</span>';
+  if (DOM.headerSubTitle) DOM.headerSubTitle.innerHTML = 'Dean R&D Administrative Dashboard &bull; Part-Time Scholars &bull; <span class="admin-badge-indicator">Direct Admin Access</span>';
   if (window.location.hash !== '#admin') {
     window.location.hash = '#admin';
   }
@@ -97,27 +84,6 @@ function setupEventListeners() {
     });
   }
 
-  // Admin Login Modal Controls
-  if (DOM.btnCloseAdminLogin) {
-    DOM.btnCloseAdminLogin.addEventListener('click', () => {
-      closeAdminLoginModal();
-    });
-  }
-
-  if (DOM.btnCancelAdminLogin) {
-    DOM.btnCancelAdminLogin.addEventListener('click', () => {
-      closeAdminLoginModal();
-    });
-  }
-
-  if (DOM.adminLoginModal) {
-    DOM.adminLoginModal.addEventListener('click', (e) => {
-      if (e.target === DOM.adminLoginModal) {
-        closeAdminLoginModal();
-      }
-    });
-  }
-
   // Global Escape key handler for all modals
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -130,8 +96,6 @@ function setupEventListeners() {
       } else if (DOM.rndContactModal && DOM.rndContactModal.classList.contains('active')) {
         DOM.rndContactModal.classList.remove('active');
         if (!document.querySelector('.modal-overlay.active')) document.body.classList.remove('modal-open');
-      } else if (DOM.adminLoginModal && DOM.adminLoginModal.classList.contains('active')) {
-        closeAdminLoginModal();
       }
     }
 
@@ -145,28 +109,8 @@ function setupEventListeners() {
     }
   });
 
-  // Admin Login
-  if (DOM.adminLoginForm) {
-    DOM.adminLoginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = DOM.adminUsernameInput.value.trim();
-      const password = DOM.adminPasswordInput.value;
-
-      const ok = await adminLoginAPI(username, password);
-      if (ok) {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-        if (DOM.loginErrorMessage) DOM.loginErrorMessage.style.display = 'none';
-        showToast('Welcome, Administrator!');
-        showAdminDashboardPage();
-      } else {
-        if (DOM.loginErrorMessage) DOM.loginErrorMessage.style.display = 'block';
-        if (DOM.adminPasswordInput) DOM.adminPasswordInput.select();
-      }
-    });
-  }
-
-  // Scholar University Outlook OTP Authentication setup
-  initScholarAuth();
+  // Scholar Direct Registration Lookup setup (No OTP)
+  initScholarLookup();
 
   // Admin Modal Reg No Lookup
   DOM.regNoInput.addEventListener('change', async () => {

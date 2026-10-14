@@ -24,7 +24,7 @@ Built for **Vercel** serverless hosting and powered by **Supabase PostgreSQL**.
    - **Conference Papers Progress**: National & International conference presentations.
    - **Conferences / Workshops / FDPs**: Event attendance logging.
    - **Doctoral Committee (DC) Meetings**: Includes recommendations (`Synopsis`, `In Progress`, `Thesis Submission`).
-4. **Mobile OTP Verification Gateway**: Secure 6-digit passcode authentication to prevent unauthorized submissions.
+4. **Direct Registration Number Auto-Lookup**: Instant profile fetching and verification without mandatory SMS/OTP barriers.
 5. **Dean R&D Administration Console**: Complete overview of submissions, defaulter tracking, printable monthly appraisal reports, and CSV/Excel export.
 
 ---

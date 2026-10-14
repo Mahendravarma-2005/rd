@@ -16,7 +16,10 @@
     "ws": "^8.22.0"
   },
   "devDependencies": {
-    "serve": "^14.2.3"
+    "serve": "^14.2.4"
+  },
+  "overrides": {
+    "compression": "^1.8.2"
   },
   "engines": {
     "node": ">=18.x"

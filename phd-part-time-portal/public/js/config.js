@@ -24,21 +24,12 @@ export const state = {
 
 // DOM References Cache
 export const DOM = {
-  // Routing, Header & Admin Login Modal
+  // Routing & Header
   headerMainTitle: document.getElementById('headerMainTitle'),
   headerSubTitle: document.getElementById('headerSubTitle'),
   btnOpenAdminPortal: document.getElementById('btnOpenAdminPortal'),
-  adminLoginModal: document.getElementById('adminLoginModal'),
-  btnCloseAdminLogin: document.getElementById('btnCloseAdminLogin'),
-  btnCancelAdminLogin: document.getElementById('btnCancelAdminLogin'),
   routeScholarForm: document.getElementById('routeScholarForm'),
   routeAdminDashboard: document.getElementById('routeAdminDashboard'),
-
-  // Admin Authentication
-  adminLoginForm: document.getElementById('adminLoginForm'),
-  adminUsernameInput: document.getElementById('adminUsername'),
-  adminPasswordInput: document.getElementById('adminPassword'),
-  loginErrorMessage: document.getElementById('loginErrorMessage'),
 
   // Admin Dashboard Key Metrics
   statTotalScholars: document.getElementById('statTotalScholars'),
@@ -133,7 +124,7 @@ export const DOM = {
   portalLookupBannerText: document.getElementById('portalLookupBannerText'),
   portalFormBody: document.getElementById('portalFormBody'),
 
-  // Scholar Registration Lookup & Mobile OTP Verification
+  // Scholar Registration Lookup (Direct Access - No OTP)
   scholarVerifiedBanner: document.getElementById('scholarVerifiedBanner'),
   bannerScholarName: document.getElementById('bannerScholarName'),
   bannerScholarRegNo: document.getElementById('bannerScholarRegNo'),
@@ -141,21 +132,9 @@ export const DOM = {
   bannerScholarEmail: document.getElementById('bannerScholarEmail'),
   bannerScholarMobile: document.getElementById('bannerScholarMobile'),
   btnScholarLogout: document.getElementById('btnScholarLogout'),
-  scholarRegGatekeeper: document.getElementById('scholarRegGatekeeper'),
-  scholarOtpGatekeeper: document.getElementById('scholarRegGatekeeper'),
-  portalRegNo: document.getElementById('portalRegNo'),
-  portalMobile: document.getElementById('portalMobile'),
-  btnSendScholarOtp: document.getElementById('btnSendScholarOtp'),
+  scholarLookupCard: document.getElementById('scholarLookupCard'),
+  btnLookupScholarReg: document.getElementById('btnLookupScholarReg'),
   scholarRegLookupMsg: document.getElementById('scholarRegLookupMsg'),
-  scholarOtpStep1: document.getElementById('scholarOtpStep1'),
-  scholarOtpStep2: document.getElementById('scholarOtpStep2'),
-  scholarSentPhoneDisplay: document.getElementById('scholarSentPhoneDisplay'),
-  inputScholarOtpCode: document.getElementById('inputScholarOtpCode'),
-  scholarOtpTimerText: document.getElementById('scholarOtpTimerText'),
-  scholarOtpVerifyErrorMsg: document.getElementById('scholarOtpVerifyErrorMsg'),
-  btnVerifyScholarOtp: document.getElementById('btnVerifyScholarOtp'),
-  btnResendScholarOtp: document.getElementById('btnResendScholarOtp'),
-  btnChangeScholarCreds: document.getElementById('btnChangeScholarCreds'),
   portalStaticCardHeading: document.getElementById('portalStaticCardHeading'),
   btnToggleEditStatic: document.getElementById('btnToggleEditStatic'), // Deprecated/fallback
   btnContactRnd: document.getElementById('btnContactRnd'),

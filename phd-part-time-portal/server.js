@@ -234,6 +234,6 @@ server.listen(PORT, () => {
   console.log(` 📂 Serving static files:  ${PUBLIC_DIR}`);
   console.log(` ⚡ API endpoints:         Mounted at /api/*`);
   console.log(` 🗄️  Supabase Database:     ${supabaseConfigured ? 'Connected (via .env)' : 'Offline / Demo fallback'}`);
-  console.log(` 🔑 Admin Credentials:     ${process.env.ADMIN_EMAIL || 'dean_rd@vignan.ac.in'} / ${process.env.ADMIN_PASSWORD || 'passowrd123'}`);
+  console.log(` 🔑 Admin Access:          Direct Access (No Login Required)`);
   console.log('='.repeat(60) + '\n');
 });

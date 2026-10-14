@@ -7,7 +7,7 @@ import {
   showToast,
   evaluateCourseResult
 } from './utils.js';
-import { fetchProfileByRegNo, saveScholarSubmission, fetchScholarSubmissionsAPI, sendOtpAPI, verifyOtpAPI } from './api.js';
+import { fetchProfileByRegNo, saveScholarSubmission, fetchScholarSubmissionsAPI } from './api.js';
 import { updateDynamicCards } from './dynamicCards.js';
 import { viewReport } from './report.js';
 
@@ -514,30 +514,6 @@ export function closeScholarHistoryModal() {
   }
 }
 
-let scholarOtpTimer = null;
-let pendingScholarAuth = null;
-
-function startScholarOtpTimer(durationSeconds = 600) {
-  if (scholarOtpTimer) clearInterval(scholarOtpTimer);
-  let remaining = durationSeconds;
-  const timerElem = DOM.scholarOtpTimerText || document.getElementById('scholarOtpTimerText');
-  const updateTimer = () => {
-    const m = Math.floor(remaining / 60).toString().padStart(2, '0');
-    const s = (remaining % 60).toString().padStart(2, '0');
-    if (timerElem) timerElem.textContent = `${m}:${s}`;
-    if (remaining <= 0) {
-      clearInterval(scholarOtpTimer);
-      if (timerElem) {
-        timerElem.textContent = 'EXPIRED';
-        timerElem.style.color = '#ef4444';
-      }
-    }
-    remaining--;
-  };
-  updateTimer();
-  scholarOtpTimer = setInterval(updateTimer, 1000);
-}
-
 export function showScholarVerifiedBanner(regNo, scholarName, dept, mobile) {
   if (DOM.bannerScholarName) DOM.bannerScholarName.textContent = scholarName || 'Research Scholar';
   if (DOM.bannerScholarRegNo) DOM.bannerScholarRegNo.textContent = regNo;
@@ -545,70 +521,57 @@ export function showScholarVerifiedBanner(regNo, scholarName, dept, mobile) {
   if (DOM.bannerScholarMobile) DOM.bannerScholarMobile.textContent = mobile ? `+91 ${mobile}` : '-';
   if (DOM.scholarVerifiedBanner) DOM.scholarVerifiedBanner.style.display = 'block';
 
-  const gatekeeper = DOM.scholarRegGatekeeper || document.getElementById('scholarRegGatekeeper');
-  if (gatekeeper) gatekeeper.style.display = 'none';
+  const lookupCard = DOM.scholarLookupCard || document.getElementById('scholarLookupCard') || DOM.scholarRegGatekeeper || document.getElementById('scholarRegGatekeeper');
+  if (lookupCard) lookupCard.style.display = 'none';
   if (DOM.portalFormBody) DOM.portalFormBody.style.display = 'block';
 }
 
 export function clearScholarSession() {
   sessionStorage.removeItem('part_time_phd_scholar_session');
-  if (scholarOtpTimer) clearInterval(scholarOtpTimer);
-  pendingScholarAuth = null;
+  localStorage.removeItem('part_time_phd_last_reg');
 
   if (DOM.scholarVerifiedBanner) DOM.scholarVerifiedBanner.style.display = 'none';
   if (DOM.portalFormBody) DOM.portalFormBody.style.display = 'none';
   if (DOM.scholarHistoryBadge) DOM.scholarHistoryBadge.textContent = '0';
   closeScholarHistoryModal();
 
-  const gatekeeper = DOM.scholarRegGatekeeper || document.getElementById('scholarRegGatekeeper');
-  if (gatekeeper) gatekeeper.style.display = 'block';
+  const lookupCard = DOM.scholarLookupCard || document.getElementById('scholarLookupCard') || DOM.scholarRegGatekeeper || document.getElementById('scholarRegGatekeeper');
+  if (lookupCard) lookupCard.style.display = 'block';
 
-  const step1 = DOM.scholarOtpStep1 || document.getElementById('scholarOtpStep1');
-  const step2 = DOM.scholarOtpStep2 || document.getElementById('scholarOtpStep2');
-  if (step1) step1.style.display = 'block';
-  if (step2) step2.style.display = 'none';
+  const regInput = DOM.portalRegNo || document.getElementById('portalRegNo');
+  if (regInput) {
+    regInput.value = '';
+    regInput.focus();
+  }
 
   const msgBox = DOM.scholarRegLookupMsg || document.getElementById('scholarRegLookupMsg');
   if (msgBox) {
     msgBox.style.display = 'none';
     msgBox.innerHTML = '';
   }
-  const verifyMsg = DOM.scholarOtpVerifyErrorMsg || document.getElementById('scholarOtpVerifyErrorMsg');
-  if (verifyMsg) {
-    verifyMsg.style.display = 'none';
-    verifyMsg.innerHTML = '';
-  }
-  const otpInput = DOM.inputScholarOtpCode || document.getElementById('inputScholarOtpCode');
-  if (otpInput) otpInput.value = '';
 
   if (DOM.publicScholarForm) DOM.publicScholarForm.reset();
   resetPortalForm();
 }
 
-export function initScholarAuth() {
+/**
+ * Direct Registration Number Lookup initialization (Zero OTP / Direct Access)
+ */
+export function initScholarLookup() {
   const regInput = DOM.portalRegNo || document.getElementById('portalRegNo');
-  const mobileInput = DOM.portalMobile || document.getElementById('portalMobile');
-  const btnSendOtp = DOM.btnSendScholarOtp || document.getElementById('btnSendScholarOtp');
-  const btnVerifyOtp = DOM.btnVerifyScholarOtp || document.getElementById('btnVerifyScholarOtp');
-  const btnResendOtp = DOM.btnResendScholarOtp || document.getElementById('btnResendScholarOtp');
-  const btnChangeCreds = DOM.btnChangeScholarCreds || document.getElementById('btnChangeScholarCreds');
-  const step1 = DOM.scholarOtpStep1 || document.getElementById('scholarOtpStep1');
-  const step2 = DOM.scholarOtpStep2 || document.getElementById('scholarOtpStep2');
+  const btnLookup = DOM.btnLookupScholarReg || document.getElementById('btnLookupScholarReg');
   const msgBox = DOM.scholarRegLookupMsg || document.getElementById('scholarRegLookupMsg');
-  const verifyMsg = DOM.scholarOtpVerifyErrorMsg || document.getElementById('scholarOtpVerifyErrorMsg');
-  const phoneDisplay = DOM.scholarSentPhoneDisplay || document.getElementById('scholarSentPhoneDisplay');
-  const otpInput = DOM.inputScholarOtpCode || document.getElementById('inputScholarOtpCode');
 
-  async function handleSendOtp() {
-    const regNo = (regInput?.value || '').trim().toUpperCase();
-    const mobile = (mobileInput?.value || '').trim().replace(/\D/g, '');
+  async function performLookup(targetReg) {
+    const rawReg = targetReg !== undefined ? targetReg : (regInput?.value || '');
+    const cleanReg = String(rawReg).trim().toUpperCase();
 
     if (msgBox) {
       msgBox.style.display = 'none';
       msgBox.innerHTML = '';
     }
 
-    if (!regNo) {
+    if (!cleanReg) {
       if (msgBox) {
         msgBox.style.display = 'block';
         msgBox.style.background = '#fef2f2';
@@ -620,172 +583,53 @@ export function initScholarAuth() {
       return;
     }
 
-    if (!mobile || mobile.length !== 10) {
-      if (msgBox) {
-        msgBox.style.display = 'block';
-        msgBox.style.background = '#fef2f2';
-        msgBox.style.border = '1px solid #f87171';
-        msgBox.style.color = '#b91c1c';
-        msgBox.innerHTML = '⚠️ Please enter a valid 10-digit mobile number.';
-      }
-      if (mobileInput) mobileInput.focus();
-      return;
-    }
+    if (regInput) regInput.value = cleanReg;
 
-    if (btnSendOtp) {
-      btnSendOtp.disabled = true;
-      btnSendOtp.innerHTML = '<span>Generating OTP... ⏳</span>';
+    if (btnLookup) {
+      btnLookup.disabled = true;
+      btnLookup.innerHTML = '<span>Loading... ⏳</span>';
     }
 
     try {
-      const data = await sendOtpAPI({
-        regNo,
-        mobile,
-        portal: 'part-time-phd'
-      });
-
-      pendingScholarAuth = { regNo, mobile };
-      if (phoneDisplay) phoneDisplay.textContent = mobile;
-      if (step1) step1.style.display = 'none';
-      if (step2) step2.style.display = 'block';
-      if (otpInput) {
-        otpInput.value = '';
-        otpInput.focus();
-      }
-
-      startScholarOtpTimer(600);
-      showToast(`Verification passcode generated for +91 ${mobile}`, 'success');
-    } catch (err) {
-      console.error(err);
-      if (msgBox) {
-        msgBox.style.display = 'block';
-        msgBox.style.background = '#fef2f2';
-        msgBox.style.border = '1px solid #f87171';
-        msgBox.style.color = '#b91c1c';
-        msgBox.innerHTML = `❌ ${escapeHtml(err.message || 'Failed to generate OTP.')}`;
-      }
-    } finally {
-      if (btnSendOtp) {
-        btnSendOtp.disabled = false;
-        btnSendOtp.innerHTML = `<span>Generate OTP</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
-      }
-    }
-  }
-
-  async function handleVerifyOtp() {
-    if (verifyMsg) {
-      verifyMsg.style.display = 'none';
-      verifyMsg.innerHTML = '';
-    }
-
-    const otp = (otpInput?.value || '').trim();
-    if (!otp || otp.length < 6) {
-      if (verifyMsg) {
-        verifyMsg.style.display = 'block';
-        verifyMsg.innerHTML = '⚠️ Please enter the complete 6-digit verification code.';
-      }
-      if (otpInput) otpInput.focus();
-      return;
-    }
-
-    if (!pendingScholarAuth) {
-      if (verifyMsg) {
-        verifyMsg.style.display = 'block';
-        verifyMsg.innerHTML = '⚠️ Session expired. Please return to Step 1 and enter your details.';
-      }
-      return;
-    }
-
-    if (btnVerifyOtp) {
-      btnVerifyOtp.disabled = true;
-      btnVerifyOtp.innerHTML = '<span>Verifying Code... ⏳</span>';
-    }
-
-    try {
-      const data = await verifyOtpAPI({
-        regNo: pendingScholarAuth.regNo,
-        mobile: pendingScholarAuth.mobile,
-        otp,
-        portal: 'part-time-phd'
-      });
-
-      if (scholarOtpTimer) clearInterval(scholarOtpTimer);
-
-      const regNo = pendingScholarAuth.regNo;
-      const mobile = pendingScholarAuth.mobile;
-
-      await handleRegNoLookup(regNo);
-
-      const profile = data.profile || await fetchProfileByRegNo(regNo) || {};
-      const scholarName = profile.scholar_name || profile.scholarName || DOM.portalScholarName?.value || regNo;
+      await handleRegNoLookup(cleanReg);
+      const profile = await fetchProfileByRegNo(cleanReg) || {};
+      const scholarName = profile.scholarName || DOM.portalScholarName?.value || cleanReg;
       const dept = profile.department || DOM.portalDepartment?.value || '';
-
-      if (DOM.portalScholarContact && mobile) {
-        DOM.portalScholarContact.value = mobile;
-      }
+      const mobile = profile.scholarContact || DOM.portalScholarContact?.value || '';
 
       sessionStorage.setItem('part_time_phd_scholar_session', JSON.stringify({
-        regNo,
-        mobile,
+        regNo: cleanReg,
         scholarName,
         dept,
-        token: data.token
+        mobile
       }));
+      localStorage.setItem('part_time_phd_last_reg', cleanReg);
 
-      showScholarVerifiedBanner(regNo, scholarName, dept, mobile);
-      await updateScholarHistory(regNo);
-      showToast(`Welcome, ${scholarName}! Verified successfully.`, 'success');
+      showScholarVerifiedBanner(cleanReg, scholarName, dept, mobile);
+      await updateScholarHistory(cleanReg);
+      checkExistingSubmissionForMonth(null, cleanReg);
+      showToast(`Loaded details for ${scholarName} (${cleanReg})`, 'success');
     } catch (err) {
       console.error(err);
-      if (verifyMsg) {
-        verifyMsg.style.display = 'block';
-        verifyMsg.innerHTML = `❌ ${escapeHtml(err.message || 'Invalid or expired OTP.')}`;
+      if (msgBox) {
+        msgBox.style.display = 'block';
+        msgBox.style.background = '#fef2f2';
+        msgBox.style.border = '1px solid #f87171';
+        msgBox.style.color = '#b91c1c';
+        msgBox.innerHTML = `❌ ${escapeHtml(err.message || 'Failed to load scholar details.')}`;
       }
     } finally {
-      if (btnVerifyOtp) {
-        btnVerifyOtp.disabled = false;
-        btnVerifyOtp.innerHTML = `<span>Verify & Access Portal</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>`;
+      if (btnLookup) {
+        btnLookup.disabled = false;
+        btnLookup.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><span>Load Details</span>`;
       }
     }
   }
 
-  if (btnSendOtp) {
-    btnSendOtp.addEventListener('click', (e) => {
+  if (btnLookup) {
+    btnLookup.addEventListener('click', (e) => {
       e.preventDefault();
-      handleSendOtp();
-    });
-  }
-
-  if (btnVerifyOtp) {
-    btnVerifyOtp.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleVerifyOtp();
-    });
-  }
-
-  if (btnResendOtp) {
-    btnResendOtp.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleSendOtp();
-    });
-  }
-
-  if (btnChangeCreds) {
-    btnChangeCreds.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (scholarOtpTimer) clearInterval(scholarOtpTimer);
-      if (step1) step1.style.display = 'block';
-      if (step2) step2.style.display = 'none';
-      if (regInput) regInput.focus();
-    });
-  }
-
-  if (otpInput) {
-    otpInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleVerifyOtp();
-      }
+      performLookup();
     });
   }
 
@@ -793,20 +637,7 @@ export function initScholarAuth() {
     regInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        if (mobileInput && !mobileInput.value) {
-          mobileInput.focus();
-        } else {
-          handleSendOtp();
-        }
-      }
-    });
-  }
-
-  if (mobileInput) {
-    mobileInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleSendOtp();
+        performLookup();
       }
     });
   }
@@ -815,10 +646,9 @@ export function initScholarAuth() {
   document.querySelectorAll('.sample-reg-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       const reg = chip.getAttribute('data-reg');
-      const phone = chip.getAttribute('data-phone') || '9848012345';
-      if (regInput) regInput.value = reg;
-      if (mobileInput) mobileInput.value = phone;
-      handleSendOtp();
+      if (reg) {
+        performLookup(reg);
+      }
     });
   });
 
@@ -827,11 +657,6 @@ export function initScholarAuth() {
   if (btnLogout) {
     btnLogout.addEventListener('click', () => {
       clearScholarSession();
-      if (regInput) {
-        regInput.value = '';
-        regInput.focus();
-      }
-      if (mobileInput) mobileInput.value = '';
     });
   }
 
@@ -860,31 +685,35 @@ export function initScholarAuth() {
     });
   }
 
-  // Month change listener to check duplicate for changed month
+  // Month change listener
   if (DOM.portalCurrentMonth) {
     DOM.portalCurrentMonth.addEventListener('change', () => {
       const activeReg = DOM.bannerScholarRegNo?.textContent || regInput?.value || '';
-      checkExistingSubmissionForMonth(null, activeReg);
+      if (activeReg && activeReg !== '-') {
+        checkExistingSubmissionForMonth(null, activeReg);
+      }
     });
   }
 
-  // Restore authenticated session if present
+  // Restore authenticated/saved session if present
   try {
     const raw = sessionStorage.getItem('part_time_phd_scholar_session');
+    let regToRestore = null;
     if (raw) {
       const session = JSON.parse(raw);
-      if (session && session.regNo) {
-        if (regInput) regInput.value = session.regNo;
-        if (mobileInput && session.mobile) mobileInput.value = session.mobile;
-        handleRegNoLookup(session.regNo).then(() => {
-          showScholarVerifiedBanner(session.regNo, session.scholarName, session.dept, session.mobile);
-          updateScholarHistory(session.regNo);
-        }).catch(err => {
-          console.warn('Session restore lookup failed:', err);
-        });
-      }
+      if (session && session.regNo) regToRestore = session.regNo;
+    }
+    if (!regToRestore) {
+      regToRestore = localStorage.getItem('part_time_phd_last_reg');
+    }
+    if (regToRestore) {
+      if (regInput) regInput.value = regToRestore;
+      performLookup(regToRestore);
     }
   } catch (e) {
-    console.warn('Failed to restore part time scholar session:', e);
+    console.warn('Failed to restore scholar session:', e);
   }
 }
+
+// Backward-compatible alias
+export const initScholarAuth = initScholarLookup;
