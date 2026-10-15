@@ -181,6 +181,29 @@
                   <label for="portalSupervisorContact">Contact No of Supervisor <span class="required">*</span> <span id="badgeSupervisorContact" class="badge-lock-status"></span></label>
                   <input type="tel" id="portalSupervisorContact" required readonly placeholder="e.g. +91 94480 55120">
                 </div>
+                <div class="form-group">
+                  <label for="portalQualifyingDegree">Last Studied (UG / PG) <span class="required">*</span> <span id="badgeQualifyingDegree" class="badge-lock-status"></span></label>
+                  <select id="portalQualifyingDegree" required readonly class="input-locked">
+                    <option value="" disabled selected>-- Select UG / PG --</option>
+                    <option value="UG">UG (Undergraduate)</option>
+                    <option value="PG">PG (Postgraduate)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="portalDegreePercentage">Percentage / CGPA <span class="required">*</span> <span id="badgeDegreePercentage" class="badge-lock-status"></span></label>
+                  <input type="text" id="portalDegreePercentage" required readonly placeholder="e.g. 82.5% or 8.25 CGPA">
+                </div>
+                <div class="form-group">
+                  <label for="portalDegreeClass">Class / Division Passed <span class="required">*</span> <span id="badgeDegreeClass" class="badge-lock-status"></span></label>
+                  <select id="portalDegreeClass" required readonly class="input-locked">
+                    <option value="" disabled selected>-- Select Class / Division --</option>
+                    <option value="First Class with Distinction">First Class with Distinction</option>
+                    <option value="First Class">First Class</option>
+                    <option value="Second Class">Second Class</option>
+                    <option value="Pass Class">Pass Class</option>
+                    <option value="Exemplary">Exemplary</option>
+                  </select>
+                </div>
                 <div class="form-group" style="grid-column: 1 / -1;">
                   <label style="color: var(--text-primary); font-weight: 600;">End of research assistantship</label>
                   <div id="portalRemainingTenure" style="padding: 0.65rem 0.9rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; font-weight: 600; color: #166534; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
@@ -735,6 +758,29 @@
               <div class="form-group">
                 <label for="supervisorContact">Contact No of Supervisor <span class="required">*</span></label>
                 <input type="tel" id="supervisorContact" required placeholder="e.g. +91 91234 56789">
+              </div>
+              <div class="form-group">
+                <label for="qualifyingDegree">Last Studied (UG / PG) <span class="required">*</span></label>
+                <select id="qualifyingDegree" required>
+                  <option value="" disabled selected>-- Select UG / PG --</option>
+                  <option value="UG">UG (Undergraduate)</option>
+                  <option value="PG">PG (Postgraduate)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="degreePercentage">Percentage / CGPA <span class="required">*</span></label>
+                <input type="text" id="degreePercentage" required placeholder="e.g. 82.5% or 8.25 CGPA">
+              </div>
+              <div class="form-group">
+                <label for="degreeClass">Class / Division Passed <span class="required">*</span></label>
+                <select id="degreeClass" required>
+                  <option value="" disabled selected>-- Select Class / Division --</option>
+                  <option value="First Class with Distinction">First Class with Distinction</option>
+                  <option value="First Class">First Class</option>
+                  <option value="Second Class">Second Class</option>
+                  <option value="Pass Class">Pass Class</option>
+                  <option value="Exemplary">Exemplary</option>
+                </select>
               </div>
               <div class="form-group" style="grid-column: 1 / -1;">
                 <label style="color: var(--text-primary); font-weight: 600;">End of research assistantship</label>

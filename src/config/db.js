@@ -80,14 +80,20 @@ async function autoBootstrapTables() {
     }
     
     // Ensure all 5 proof columns exist in proposals table (Self-Healing Migration)
-    const proofColumns = [
+    const selfHealingQueries = [
       "ALTER TABLE proposals ADD COLUMN proof_file_name VARCHAR(255) NULL",
       "ALTER TABLE proposals ADD COLUMN proof_file_type VARCHAR(100) NULL",
       "ALTER TABLE proposals ADD COLUMN proof_file_path VARCHAR(500) NULL",
       "ALTER TABLE proposals ADD COLUMN proof_file_size BIGINT NULL",
-      "ALTER TABLE proposals ADD COLUMN proof_file_data LONGTEXT NULL"
+      "ALTER TABLE proposals ADD COLUMN proof_file_data LONGTEXT NULL",
+      "ALTER TABLE scholar_profiles ADD COLUMN qualifying_degree VARCHAR(20) NULL",
+      "ALTER TABLE scholar_profiles ADD COLUMN degree_percentage VARCHAR(30) NULL",
+      "ALTER TABLE scholar_profiles ADD COLUMN degree_class VARCHAR(100) NULL",
+      "ALTER TABLE monthly_submissions ADD COLUMN qualifying_degree VARCHAR(20) NULL",
+      "ALTER TABLE monthly_submissions ADD COLUMN degree_percentage VARCHAR(30) NULL",
+      "ALTER TABLE monthly_submissions ADD COLUMN degree_class VARCHAR(100) NULL"
     ];
-    for (const alterQuery of proofColumns) {
+    for (const alterQuery of selfHealingQueries) {
       try {
         await pool.query(alterQuery);
       } catch (e) {

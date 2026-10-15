@@ -72,6 +72,9 @@ export async function fetchProfileByRegNo(regNo) {
       endOfRA: match.endOfRA,
       scholarContact: match.scholarContact,
       supervisorContact: match.supervisorContact,
+      qualifyingDegree: match.qualifyingDegree || '',
+      degreePercentage: match.degreePercentage || '',
+      degreeClass: match.degreeClass || '',
       coursesCompleted: match.coursesCompleted || 4,
       courseDetails: match.courseDetails || []
     };

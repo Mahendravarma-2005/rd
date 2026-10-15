@@ -25,6 +25,9 @@ export function openModalForNew() {
   DOM.bankNameInput.value = '';
   DOM.bankAccountNoInput.value = '';
   DOM.ifscCodeInput.value = '';
+  if (DOM.qualifyingDegreeInput) DOM.qualifyingDegreeInput.value = '';
+  if (DOM.degreePercentageInput) DOM.degreePercentageInput.value = '';
+  if (DOM.degreeClassInput) DOM.degreeClassInput.value = '';
 
   DOM.coursesCompletedInput.value = '0';
   updateDynamicCards(DOM.courseItemsContainer, 0, 'course');
@@ -63,6 +66,9 @@ export function openModalForEdit(id) {
   updateRemainingTenureDisplay(DOM.adminRemainingTenureText, record.endOfRA);
   DOM.scholarContactInput.value = record.scholarContact;
   DOM.supervisorContactInput.value = record.supervisorContact;
+  if (DOM.qualifyingDegreeInput) DOM.qualifyingDegreeInput.value = record.qualifyingDegree || '';
+  if (DOM.degreePercentageInput) DOM.degreePercentageInput.value = record.degreePercentage || '';
+  if (DOM.degreeClassInput) DOM.degreeClassInput.value = record.degreeClass || '';
   DOM.currentMonthInput.value = record.currentMonth || getCurrentYearMonth();
   DOM.forgetThumbsInput.value = record.forgetThumbs;
 
@@ -197,6 +203,9 @@ export async function handleAdminFormSubmit(e) {
   const endOfRA = DOM.endOfRAInput.value;
   const scholarContact = DOM.scholarContactInput.value.trim();
   const supervisorContact = DOM.supervisorContactInput.value.trim();
+  const qualifyingDegree = DOM.qualifyingDegreeInput?.value || '';
+  const degreePercentage = DOM.degreePercentageInput?.value.trim() || '';
+  const degreeClass = DOM.degreeClassInput?.value || '';
 
   const payload = {
     id: recordId || 'rec_' + Date.now(),
@@ -212,6 +221,9 @@ export async function handleAdminFormSubmit(e) {
     endOfRA,
     scholarContact,
     supervisorContact,
+    qualifyingDegree,
+    degreePercentage,
+    degreeClass,
     currentMonth: DOM.currentMonthInput.value || getCurrentYearMonth(),
     forgetThumbs: parseInt(DOM.forgetThumbsInput.value, 10) || 0,
     coursesCompleted: parseInt(DOM.coursesCompletedInput.value, 10) || courseDetails.length,
@@ -766,6 +778,7 @@ function renderMasterProfilesView(searchTerm, selectedRAType, selectedDept) {
         <th>Enrolled Scholar Info</th>
         <th>Guide & Department</th>
         <th>RA Type</th>
+        <th>Prior Qualification</th>
         <th>Date of Joining</th>
         <th>3-Yr End of RA</th>
         <th>Bank A/C Details</th>
@@ -826,6 +839,17 @@ function renderMasterProfilesView(searchTerm, selectedRAType, selectedDept) {
           <span class="badge ${raType === 'CAP' ? 'badge-cap' : (raType === 'TRA' ? 'badge-tra' : 'badge-era')}">
             ${raType}
           </span>
+        </td>
+        <td>
+          <div style="font-size: 0.8rem;">
+            ${p.qualifyingDegree ? `
+              <span class="badge ${p.qualifyingDegree === 'PG' ? 'badge-blue' : 'badge-amber'}" style="font-weight: 700; font-size: 0.72rem;">
+                ${escapeHtml(p.qualifyingDegree)}
+              </span>
+            ` : `<span style="color: var(--text-muted); font-size: 0.75rem;">Pending</span>`}
+            ${p.degreePercentage ? `<div style="font-weight: 600; margin-top: 2px;">${escapeHtml(p.degreePercentage)}</div>` : ''}
+            ${p.degreeClass ? `<div style="font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(p.degreeClass)}</div>` : ''}
+          </div>
         </td>
         <td>
           <div style="font-size: 0.8rem;">
@@ -906,6 +930,9 @@ export function exportToCSV() {
     'Remaining Service Period',
     'Scholar Contact',
     'Supervisor Contact',
+    'Qualifying Degree (UG/PG)',
+    'Degree Percentage/CGPA',
+    'Degree Class/Division Passed',
     'Current Month',
     'Forget Thumbs',
     'Courses Completed Count',
@@ -960,6 +987,9 @@ export function exportToCSV() {
       `"${cleanCSV(calculateRemainingTenure(s.endOfRA))}"`,
       `"${cleanCSV(s.scholarContact)}"`,
       `"${cleanCSV(s.supervisorContact)}"`,
+      `"${cleanCSV(s.qualifyingDegree || '')}"`,
+      `"${cleanCSV(s.degreePercentage || '')}"`,
+      `"${cleanCSV(s.degreeClass || '')}"`,
       `"${cleanCSV(s.currentMonth)}"`,
       s.forgetThumbs || 0,
       s.coursesCompleted || (s.courseDetails ? s.courseDetails.length : 0),

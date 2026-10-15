@@ -1622,15 +1622,16 @@ body {
   border: 1px solid #fcd34d;
 }
 
-input.input-first-time {
+input.input-first-time, select.input-first-time {
   border-color: #f59e0b !important;
   background-color: #fffdf5 !important;
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15) !important;
 }
 
-input.input-locked {
+input.input-locked, select.input-locked {
   background-color: #f8fafc !important;
   color: #334155 !important;
   cursor: not-allowed !important;
+  pointer-events: none;
 }
 

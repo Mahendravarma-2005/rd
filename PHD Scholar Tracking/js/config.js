@@ -101,6 +101,9 @@ export const DOM = {
   adminRemainingTenureText: document.getElementById('adminRemainingTenureText'),
   scholarContactInput: document.getElementById('scholarContact'),
   supervisorContactInput: document.getElementById('supervisorContact'),
+  qualifyingDegreeInput: document.getElementById('qualifyingDegree'),
+  degreePercentageInput: document.getElementById('degreePercentage'),
+  degreeClassInput: document.getElementById('degreeClass'),
 
   currentMonthInput: document.getElementById('currentMonth'),
   forgetThumbsInput: document.getElementById('forgetThumbs'),
@@ -157,11 +160,17 @@ export const DOM = {
   portalRemainingTenureText: document.getElementById('portalRemainingTenureText'),
   portalScholarContact: document.getElementById('portalScholarContact'),
   portalSupervisorContact: document.getElementById('portalSupervisorContact'),
+  portalQualifyingDegree: document.getElementById('portalQualifyingDegree'),
+  portalDegreePercentage: document.getElementById('portalDegreePercentage'),
+  portalDegreeClass: document.getElementById('portalDegreeClass'),
 
   badgeBankName: document.getElementById('badgeBankName'),
   badgeBankAccountNo: document.getElementById('badgeBankAccountNo'),
   badgeIfscCode: document.getElementById('badgeIfscCode'),
   badgeSupervisorContact: document.getElementById('badgeSupervisorContact'),
+  badgeQualifyingDegree: document.getElementById('badgeQualifyingDegree'),
+  badgeDegreePercentage: document.getElementById('badgeDegreePercentage'),
+  badgeDegreeClass: document.getElementById('badgeDegreeClass'),
 
   // R&D Support Modal
   rndContactModal: document.getElementById('rndContactModal'),

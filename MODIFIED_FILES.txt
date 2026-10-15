@@ -1242,6 +1242,29 @@
       - "Resilient Proof Lookup: Enhanced `ProposalController.getProposalProof` to seamlessly look up files in `C:\rd_uploads` via filename basename even if historical database records point to previous upload paths."
       - "Filesystem Synchronization: Synchronized existing proposal proof files from `uploads/proofs/` directly into `C:\rd_uploads`."
 
+102. [PHD Scholar Tracking: Academic Qualification Fields (UG/PG, Percentage, Class/Division) & First-Time Lock]
+    Absolute Paths:
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\index.html
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\styles.css
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\config.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\portal.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\api.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\admin.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\PHD Scholar Tracking\js\report.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\src\models\phd.model.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\src\config\db.js
+      - c:\Users\mahen\OneDrive\Desktop\rd\merged_vignan_rd.sql
+      - Database: vignan_rd (tables: scholar_profiles, monthly_submissions)
+    Status: MODIFIED
+    Summary of Modifications:
+      - "Database Schema Evolution: Added `qualifying_degree` (VARCHAR(20)), `degree_percentage` (VARCHAR(30)), and `degree_class` (VARCHAR(100)) columns to both `scholar_profiles` (permanent master record) and `monthly_submissions` (monthly snapshot) tables with self-healing migration in `src/config/db.js` and schema update in `merged_vignan_rd.sql`."
+      - "User Panel Scholar Permanent Record: Integrated 'Last Studied (UG / PG)' dropdown, 'Percentage / CGPA' input, and 'Class / Division Passed' dropdown with dynamic status badges (`✏️ Enter Once` / `🔒 Locked`) into the Permanent Scholar Record section of `#portalStaticCard` in `index.html`."
+      - "First-Time Entry Permanent Locking: Configured `applyLockState` in `portal.js` and CSS pointer-event suppression in `styles.css`. First-time scholars can enter their qualification details; upon initial submission, these fields are permanently locked (`readonly`, `disabled`, `.input-locked`, `🔒 Locked` badge) alongside bank credentials and supervisor contact."
+      - "Backend Model & Snapshot Persistence: Updated `src/models/phd.model.js` (`getScholarProfile`, `saveScholarProfile`, `saveMonthlySubmission`, `getSubmissionsByScholar`, `getAllSubmissions`, `getAllMasterProfiles`) with `COALESCE(NULLIF(...))` protection to ensure qualification details are saved on initial submission and protected against accidental overwrites."
+      - "Admin Modal & Dashboard Integration: Hooked the 3 qualification fields into `scholarModal`, reset handlers, master profiles table view (`Prior Qualification` column with UG/PG badge), and CSV export in `admin.js`."
+      - "Printable Monthly Progress Report: Rendered Qualifying Degree (UG/PG badge), Percentage / CGPA, and Class / Division Passed in Section 1 ('Scholar Permanent Profile') of `report.js` for on-screen modal preview and A4 printable PDF generation."
+
 ===============================================================================
 End of Modified Files Audit Record.
 ===============================================================================
+

@@ -50,13 +50,17 @@ export function applyLockState(existing) {
     }
   }
 
-  // Check the 4 sensitive fields (Bank Name, Bank A/C, IFSC, Supervisor Contact)
+  // Check the sensitive permanent fields (Bank Name, Bank A/C, IFSC, Supervisor Contact, UG/PG, Percentage, Class/Division)
   const checkField = (inputEl, badgeEl, val, placeholderText) => {
     if (!inputEl) return false;
     const isPresent = Boolean(val && String(val).trim() !== '');
     if (isPresent) {
       inputEl.value = val;
       inputEl.setAttribute('readonly', 'true');
+      if (inputEl.tagName === 'SELECT') {
+        inputEl.style.pointerEvents = 'none';
+        inputEl.setAttribute('tabindex', '-1');
+      }
       inputEl.classList.add('input-locked');
       inputEl.classList.remove('input-first-time');
       if (badgeEl) {
@@ -66,11 +70,17 @@ export function applyLockState(existing) {
       }
       return true;
     } else {
-      inputEl.value = inputEl.value || '';
+      if (val !== undefined && val !== null) {
+        inputEl.value = val;
+      }
       inputEl.removeAttribute('readonly');
+      if (inputEl.tagName === 'SELECT') {
+        inputEl.style.pointerEvents = '';
+        inputEl.removeAttribute('tabindex');
+      }
       inputEl.classList.add('input-first-time');
       inputEl.classList.remove('input-locked');
-      if (placeholderText) inputEl.placeholder = placeholderText;
+      if (placeholderText && inputEl.tagName === 'INPUT') inputEl.placeholder = placeholderText;
       if (badgeEl) {
         badgeEl.className = 'badge-lock-status editable-once';
         badgeEl.innerHTML = '✏️ Enter Once';
@@ -84,18 +94,21 @@ export function applyLockState(existing) {
   const hasBankAcct = checkField(DOM.portalBankAccountNo, DOM.badgeBankAccountNo, existing?.bankAccountNo, 'e.g. 50100438921102 (First-time entry)');
   const hasIfsc = checkField(DOM.portalIfscCode, DOM.badgeIfscCode, existing?.ifscCode, 'e.g. SBIN0001234 (First-time entry)');
   const hasSupContact = checkField(DOM.portalSupervisorContact, DOM.badgeSupervisorContact, existing?.supervisorContact, 'e.g. +91 94480 55120 (First-time entry)');
+  const hasQualifyingDegree = checkField(DOM.portalQualifyingDegree, DOM.badgeQualifyingDegree, existing?.qualifyingDegree, '');
+  const hasDegreePercentage = checkField(DOM.portalDegreePercentage, DOM.badgeDegreePercentage, existing?.degreePercentage, 'e.g. 82.5% or 8.25 CGPA (First-time entry)');
+  const hasDegreeClass = checkField(DOM.portalDegreeClass, DOM.badgeDegreeClass, existing?.degreeClass, '');
 
-  const allBankLocked = hasBankName && hasBankAcct && hasIfsc && hasSupContact;
+  const allPermanentLocked = hasBankName && hasBankAcct && hasIfsc && hasSupContact && hasQualifyingDegree && hasDegreePercentage && hasDegreeClass;
 
   if (DOM.portalLockStatusNotice) {
-    if (allBankLocked) {
+    if (allPermanentLocked) {
       DOM.portalLockStatusNotice.style.display = 'flex';
       DOM.portalLockStatusNotice.className = 'portal-lock-notice locked';
       DOM.portalLockStatusNotice.innerHTML = `
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         <div>
-          <strong style="color: #0f172a;">Bank Credentials & Supervisor Contact Locked:</strong>
-          <span> Bank Account, IFSC, Bank Name, and Supervisor Contact are locked after initial submission. To request any edits or updates, please <a href="javascript:void(0)" class="link-open-rnd" style="color: var(--primary); font-weight: 700; text-decoration: underline;">contact the R&D Office</a>.</span>
+          <strong style="color: #0f172a;">Permanent Scholar Record Locked:</strong>
+          <span> Bank Account, IFSC, Supervisor Contact, and Academic Qualification (UG/PG, Percentage, Class/Division) are locked after initial submission. To request any edits or updates, please <a href="javascript:void(0)" class="link-open-rnd" style="color: var(--primary); font-weight: 700; text-decoration: underline;">contact the R&D Office</a>.</span>
         </div>
       `;
       if (DOM.btnContactRndText) DOM.btnContactRndText.textContent = '🔒 Locked (Contact R&D to Edit)';
@@ -106,7 +119,7 @@ export function applyLockState(existing) {
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
         <div>
           <strong style="color: #78350f;">First-Time Entry Required:</strong>
-          <span> Please fill in your Bank Name, Bank Account Number, IFSC Code, and Supervisor Contact Number. Once submitted, these details will be permanently saved and locked for all future months.</span>
+          <span> Please fill in your Bank Details, Supervisor Contact, and Prior Academic Record (UG/PG last studied, Percentage/CGPA, and Class/Division passed). Once submitted, these details will be permanently saved and locked for all future months.</span>
         </div>
       `;
       if (DOM.btnContactRndText) DOM.btnContactRndText.textContent = '✏️ First-Time Entry Active';
@@ -317,6 +330,9 @@ export async function handlePortalFormSubmit(e) {
   const endOfRA = DOM.portalEndOfRA.value;
   const scholarContact = DOM.portalScholarContact.value.trim();
   const supervisorContact = DOM.portalSupervisorContact.value.trim();
+  const qualifyingDegree = DOM.portalQualifyingDegree?.value?.trim() || '';
+  const degreePercentage = DOM.portalDegreePercentage?.value?.trim() || '';
+  const degreeClass = DOM.portalDegreeClass?.value?.trim() || '';
   const currentMonth = DOM.portalCurrentMonth?.value || getCurrentYearMonth();
   const cleanRegNo = regNo.trim().toUpperCase();
 
@@ -330,12 +346,15 @@ export async function handlePortalFormSubmit(e) {
     return;
   }
 
-  if (!bankName || !bankAccountNo || !ifscCode || !supervisorContact) {
-    showToast('Please provide Bank Name, Bank A/C No, IFSC Code, and Supervisor Contact Number.', 'warning');
+  if (!bankName || !bankAccountNo || !ifscCode || !supervisorContact || !qualifyingDegree || !degreePercentage || !degreeClass) {
+    showToast('Please provide Bank Details, Supervisor Contact, and Academic Qualification (UG/PG, Percentage/CGPA, Class/Division).', 'warning');
     if (!bankName && DOM.portalBankName) DOM.portalBankName.focus();
     else if (!bankAccountNo && DOM.portalBankAccountNo) DOM.portalBankAccountNo.focus();
     else if (!ifscCode && DOM.portalIfscCode) DOM.portalIfscCode.focus();
     else if (!supervisorContact && DOM.portalSupervisorContact) DOM.portalSupervisorContact.focus();
+    else if (!qualifyingDegree && DOM.portalQualifyingDegree) DOM.portalQualifyingDegree.focus();
+    else if (!degreePercentage && DOM.portalDegreePercentage) DOM.portalDegreePercentage.focus();
+    else if (!degreeClass && DOM.portalDegreeClass) DOM.portalDegreeClass.focus();
     return;
   }
 
@@ -353,6 +372,9 @@ export async function handlePortalFormSubmit(e) {
     endOfRA,
     scholarContact,
     supervisorContact,
+    qualifyingDegree,
+    degreePercentage,
+    degreeClass,
     currentMonth,
     forgetThumbs: parseInt(DOM.portalForgetThumbs.value, 10) || 0,
     coursesCompleted: parseInt(DOM.portalCoursesCompleted.value, 10) || courseDetails.length,
@@ -393,6 +415,9 @@ export async function handlePortalFormSubmit(e) {
     endOfRA,
     scholarContact,
     supervisorContact,
+    qualifyingDegree,
+    degreePercentage,
+    degreeClass,
     coursesCompleted: payload.coursesCompleted,
     courseDetails: courseDetails
   };

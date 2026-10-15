@@ -66,6 +66,9 @@ const PhdModel = {
         ),
         scholarContact: r.scholar_contact || '',
         supervisorContact: r.supervisor_contact || '',
+        qualifyingDegree: r.qualifying_degree || '',
+        degreePercentage: r.degree_percentage || '',
+        degreeClass: r.degree_class || '',
         coursesCompleted: r.courses_completed || 0,
         courseDetails: courseDetails
       };
@@ -79,8 +82,8 @@ const PhdModel = {
   saveScholarProfile: async (profile) => {
     await db.query(`
       INSERT INTO scholar_profiles 
-      (reg_no, scholar_name, guide_name, department, ra_type, bank_account_no, bank_name, ifsc_code, date_of_joining, end_of_ra, scholar_contact, supervisor_contact, courses_completed)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (reg_no, scholar_name, guide_name, department, ra_type, bank_account_no, bank_name, ifsc_code, date_of_joining, end_of_ra, scholar_contact, supervisor_contact, qualifying_degree, degree_percentage, degree_class, courses_completed)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE
         scholar_name = VALUES(scholar_name),
         guide_name = VALUES(guide_name),
@@ -93,6 +96,9 @@ const PhdModel = {
         end_of_ra = VALUES(end_of_ra),
         scholar_contact = VALUES(scholar_contact),
         supervisor_contact = VALUES(supervisor_contact),
+        qualifying_degree = COALESCE(NULLIF(VALUES(qualifying_degree), ''), qualifying_degree),
+        degree_percentage = COALESCE(NULLIF(VALUES(degree_percentage), ''), degree_percentage),
+        degree_class = COALESCE(NULLIF(VALUES(degree_class), ''), degree_class),
         courses_completed = VALUES(courses_completed)
     `, [
       profile.regNo,
@@ -107,6 +113,9 @@ const PhdModel = {
       profile.endOfRA || null,
       profile.scholarContact || '',
       profile.supervisorContact || '',
+      profile.qualifyingDegree || null,
+      profile.degreePercentage || null,
+      profile.degreeClass || null,
       profile.coursesCompleted || 0
     ]);
   },
@@ -147,8 +156,8 @@ const PhdModel = {
     // 2. Insert main submission
     await db.query(`
       INSERT INTO monthly_submissions
-      (id, reg_no, scholar_name, guide_name, department, ra_type, bank_account_no, bank_name, ifsc_code, date_of_joining, end_of_ra, scholar_contact, supervisor_contact, current_month, forget_thumbs, courses_completed, leaves_taken, avg_spent_stayed, academic_load)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (id, reg_no, scholar_name, guide_name, department, ra_type, bank_account_no, bank_name, ifsc_code, date_of_joining, end_of_ra, scholar_contact, supervisor_contact, qualifying_degree, degree_percentage, degree_class, current_month, forget_thumbs, courses_completed, leaves_taken, avg_spent_stayed, academic_load)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE
         scholar_name = VALUES(scholar_name),
         guide_name = VALUES(guide_name),
@@ -161,6 +170,9 @@ const PhdModel = {
         end_of_ra = VALUES(end_of_ra),
         scholar_contact = VALUES(scholar_contact),
         supervisor_contact = VALUES(supervisor_contact),
+        qualifying_degree = VALUES(qualifying_degree),
+        degree_percentage = VALUES(degree_percentage),
+        degree_class = VALUES(degree_class),
         current_month = VALUES(current_month),
         forget_thumbs = VALUES(forget_thumbs),
         courses_completed = VALUES(courses_completed),
@@ -181,6 +193,9 @@ const PhdModel = {
       record.endOfRA || null,
       record.scholarContact || '',
       record.supervisorContact || '',
+      record.qualifyingDegree || null,
+      record.degreePercentage || null,
+      record.degreeClass || null,
       record.currentMonth,
       record.forgetThumbs || 0,
       record.coursesCompleted || 0,
@@ -340,6 +355,9 @@ const PhdModel = {
         ),
         scholarContact: s.scholar_contact,
         supervisorContact: s.supervisor_contact,
+        qualifyingDegree: s.qualifying_degree || '',
+        degreePercentage: s.degree_percentage || '',
+        degreeClass: s.degree_class || '',
         currentMonth: s.current_month,
         forgetThumbs: s.forget_thumbs,
         coursesCompleted: s.courses_completed,
@@ -407,6 +425,9 @@ const PhdModel = {
         ),
         scholarContact: s.scholar_contact,
         supervisorContact: s.supervisor_contact,
+        qualifyingDegree: s.qualifying_degree || '',
+        degreePercentage: s.degree_percentage || '',
+        degreeClass: s.degree_class || '',
         currentMonth: s.current_month,
         forgetThumbs: s.forget_thumbs,
         coursesCompleted: s.courses_completed,
@@ -451,6 +472,9 @@ const PhdModel = {
         DATE_FORMAT(end_of_ra, '%Y-%m-%d') as endOfRA,
         scholar_contact as scholarContact,
         supervisor_contact as supervisorContact,
+        qualifying_degree as qualifyingDegree,
+        degree_percentage as degreePercentage,
+        degree_class as degreeClass,
         courses_completed as coursesCompleted
       FROM scholar_profiles
       ORDER BY reg_no ASC

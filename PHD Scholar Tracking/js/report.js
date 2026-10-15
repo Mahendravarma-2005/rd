@@ -352,6 +352,16 @@ export function viewReport(id) {
             <span class="report-val">${escapeHtml(record.supervisorContact)}</span>
           </div>
           <div class="report-key-value" style="padding: 0.08rem 0; font-size: 0.74rem;">
+            <span class="report-key">Last Studied (UG/PG):</span>
+            <span class="report-val">
+              ${record.qualifyingDegree ? `
+                <span class="badge ${record.qualifyingDegree === 'PG' ? 'badge-blue' : 'badge-amber'}" style="font-size: 0.68rem; padding: 0.08rem 0.35rem; font-weight: 700;">
+                  ${escapeHtml(record.qualifyingDegree)}
+                </span>
+              ` : '—'}
+            </span>
+          </div>
+          <div class="report-key-value" style="padding: 0.08rem 0; font-size: 0.74rem;">
             <span class="report-key">Remaining Service Period:</span>
             <span class="report-val">
               <span class="badge ${remainingTenure.includes('Completed') ? 'badge-rose' : 'badge-green'}" style="font-size: 0.68rem; padding: 0.08rem 0.3rem;">
@@ -372,6 +382,14 @@ export function viewReport(id) {
           <div class="report-key-value" style="padding: 0.08rem 0; font-size: 0.74rem;">
             <span class="report-key">IFSC Code:</span>
             <span class="report-val" style="font-family: monospace;">${escapeHtml(record.ifscCode || 'SBIN0001234')}</span>
+          </div>
+          <div class="report-key-value" style="padding: 0.08rem 0; font-size: 0.74rem;">
+            <span class="report-key">Percentage / CGPA:</span>
+            <span class="report-val" style="font-weight: 600;">${escapeHtml(record.degreePercentage || '—')}</span>
+          </div>
+          <div class="report-key-value" style="padding: 0.08rem 0; font-size: 0.74rem;">
+            <span class="report-key">Class / Division:</span>
+            <span class="report-val">${escapeHtml(record.degreeClass || '—')}</span>
           </div>
           <div class="report-key-value" style="padding: 0.08rem 0; font-size: 0.74rem;">
             <span class="report-key">Date of Joining:</span>
